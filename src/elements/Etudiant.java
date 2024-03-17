@@ -1,5 +1,7 @@
 package elements;
 
+import java.util.ArrayList;
+
 /*
  * This concerns the implementation of Moyenne (multiple note) Class
  * u have:
@@ -27,5 +29,32 @@ package elements;
 
 
 public class Etudiant {
-    
+    private String nom,prenom,dateDeNaiss;
+    private ArrayList<Note> notes ;
+
+    public Etudiant(String nom, String prenom, String dateDeNaiss, ArrayList<Note> notes) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateDeNaiss = dateDeNaiss;
+        notes = new ArrayList<>();
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getDateDeNaiss() {
+        return dateDeNaiss;
+    }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+    public String toString(){
+        return (nom + " " + prenom + " " + dateDeNaiss + " " + notes);
+    }
 }

@@ -26,18 +26,19 @@ public enum Note {
     GEOGRAPHIE(), 
     FRANCAIS(), 
     ANGLAIS(), 
-    ALLMAGNE();
+    ALLEMAND();
 
     private String Mat;
     private double Note;
     private double Coef;
 
     private Note(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Matière: " + this.name() + ": ");
-        System.out.println("Donner le Coefficient: ");
-        Coef = sc.nextDouble();
-        sc.close();
+        // Scanner sc = new Scanner(System.in);
+        // System.out.println("Matière: " + this.name() + ": ");
+        // System.out.println("Donner le Coefficient: ");
+        // Coef = sc.nextDouble();
+        // sc.close();
+        System.out.println("Here is the Note constructor ");
     }
 
     private Note(double Coef) {
@@ -49,4 +50,7 @@ public enum Note {
     public String getMat() {return this.name();} 
     public void setCoef(double coef) {Coef = coef;}
     public void setNote(double note) {Note = note;}
+    public String toString(){
+        return "Mat: " + this.getMat() + " Note: " + this.getNote() + " Coef: " + this.getCoef();
+    }
 }

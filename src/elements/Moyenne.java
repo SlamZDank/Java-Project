@@ -25,7 +25,7 @@ public class Moyenne {
                 Moy += note.getNote() * note.getCoef();
                 coef_all += note.getCoef();
             }
-            Moy /= coef_all;
+            Moy /= coef_all;// Moy /= TabMoy.size();
         }
         return Moy;
     }
@@ -54,7 +54,7 @@ public class Moyenne {
     private String status(){
         String mention = getMention();
         if (mention.equals("Refusée!")) {return "Refusé(e)";}
-        return "Admis(e)";
+        else{return "Admis(e)";}
     }
     
     public String toString(){
