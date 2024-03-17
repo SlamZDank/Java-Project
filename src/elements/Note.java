@@ -11,7 +11,10 @@ public class Note {
         this.Note = Note;
         this.Coef = Coef;
     }
+
+    public double getCoef(){return Coef;}
+    public double getNote() {return Note;}
+    public void setCoef(double coef) {Coef = coef;}
+    public void setMat(String mat) {Mat = mat;}
+
 }
-
-
-
