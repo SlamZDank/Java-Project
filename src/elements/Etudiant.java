@@ -6,7 +6,7 @@ package elements;
  *      Constructor: Moyenne()
  *                   Moyenne(ArrayList<Note> Tab)
  *      Methods: getMoy() bech ne3mlou l sort 7esb l moyenne
- *               toString() fiha l rapport mte3 l'étudiant
+ *               toString() fiha l report mte3 l'étudiant
  * 
  * in the Note (single note) Class you have:
  *      Constructor: Note(String Mat, double Note, double Coef)
@@ -17,9 +17,10 @@ package elements;
  *   
  * 
  *  Matières: Math / Physique / Litteraire / Chimie / SVT / Histoire / Geographie / Francais / Anglais / Allmagne
- *              May Hardcode them within the Note Class using enums and make it easier to implement
- *  Coef: 0.0 - 4.0 
- *  Note: 0.0 - 20.0
+ *              You can now hardcode their coefficient values
+ *              For more info -> Check the note class
+ *  Coef: 0.0 - 4.0      Arbitrary limit
+ *  Note: 0.0 - 20.0      Arbitrary limit
  *  Mention: Trés bien / Bien / Assez Bien / Refusée
  *  
  */

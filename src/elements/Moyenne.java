@@ -1,6 +1,8 @@
 package elements;
 import java.util.*;
 
+// May need modifications in order to work with enums.
+// Not sure about it... didnt get the time to check
 
 public class Moyenne {
     private ArrayList<Note> TabMoy = new ArrayList<>();
@@ -29,7 +31,7 @@ public class Moyenne {
     }
 
     private String getMention(){
-        if (mention != null) return mention;
+        if (mention != null) {return mention;}
 
         if (this.getMoy() < 10.0) { 
             mention = "Refusée!";
@@ -56,6 +58,10 @@ public class Moyenne {
     }
     
     public String toString(){
-        return (status() + " avec une mention de " + getMention() + " avec une moyenne de " + getMoy());
+        return (status() + 
+                " avec une mention de " 
+                + getMention() + 
+                " et avec une moyenne de " 
+                + getMoy()+ " !");
     }
 }

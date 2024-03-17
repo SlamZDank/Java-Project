@@ -4,25 +4,29 @@ import java.util.Scanner;
 
 public enum Note {
     /*
-     * Implemets method that requires you to type each note and each coefficient
+     * Implemets a cstor method that requires you to type each coefficient
      * You could change that so the coefficient become hardtyped
      * 
      * Added additional getters and setters to see what you need
+     * You will surely need the -> setNote(double note) 
+     * method.
      */
 
-// Example of implementation with hard coded coef value:
-    // Math(1.0),
+     // this.name() -> Treje3 Math walla SVT walla... 3ala 7asb l variant mte3 enum
+
+// Example of implementation with hardcoded coef value (RECOMMENDED):
+    // MATH(1.0),
     //       ^  Coefficient
-    Math(), 
-    Physique(), 
-    Litteraire(), 
-    Chimie(), 
+    MATH(), 
+    PHYSIQUE(), 
+    LITTERAIRE(), 
+    CHIMIE(), 
     SVT(), 
-    Histoire(), 
-    Geographie(), 
-    Francais(), 
-    Anglais(), 
-    Allmagne();
+    HISTOIRE(), 
+    GEOGRAPHIE(), 
+    FRANCAIS(), 
+    ANGLAIS(), 
+    ALLMAGNE();
 
     private String Mat;
     private double Note;
@@ -31,9 +35,7 @@ public enum Note {
     private Note(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Matière: " + this.name() + ": ");
-        System.out.println("Donner la note: ");
-        Note = sc.nextDouble();
-        System.out.println("Enter le Coefficient: ");
+        System.out.println("Donner le Coefficient: ");
         Coef = sc.nextDouble();
         sc.close();
     }
@@ -44,6 +46,7 @@ public enum Note {
 
     public double getCoef(){return Coef;}
     public double getNote() {return Note;}
+    public String getMat() {return this.name();} 
     public void setCoef(double coef) {Coef = coef;}
     public void setNote(double note) {Note = note;}
 }
