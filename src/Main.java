@@ -1,6 +1,5 @@
-import java.util.*;
-import java.applet.*;
-
+import elements.*;
+import ui.*;
 
 // This is a comment in Java yay!
 /*
@@ -10,7 +9,6 @@ import java.applet.*;
  * into java shenanigins.
  */
 
-// This is to test the capability of my understanding of git.
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");

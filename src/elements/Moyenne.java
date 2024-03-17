@@ -12,6 +12,10 @@ public class Moyenne {
         System.out.println("Pushed Note");
     }
 
+    public Moyenne(){}
+
+    public Moyenne(ArrayList<Note> Tab){this.TabMoy = Tab;}
+
     public double getMoy(){
         if (Moy == -1) {
             Moy = 0;
@@ -24,7 +28,7 @@ public class Moyenne {
         return Moy;
     }
 
-    public String getMention(){
+    private String getMention(){
         if (mention != null) return mention;
 
         if (this.getMoy() < 10.0) { 
@@ -45,7 +49,7 @@ public class Moyenne {
         mention = "Très Bien!";
         return mention;
     }
-    public String status(){
+    private String status(){
         String mention = getMention();
         if (mention.equals("Refusée!")) {return "Refusé(e)";}
         return "Admis(e)";
