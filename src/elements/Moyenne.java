@@ -42,7 +42,16 @@ public class Moyenne {
             return mention;
         }
 
-        mention = "Tres Bien!";
+        mention = "Très Bien!";
         return mention;
+    }
+    public String status(){
+        String mention = getMention();
+        if (mention.equals("Refusée!")) {return "Refusé(e)";}
+        return "Admis(e)";
+    }
+    
+    public String toString(){
+        return (status() + " avec une mention de " + getMention() + " avec une moyenne de " + getMoy());
     }
 }
