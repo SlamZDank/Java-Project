@@ -1,3 +1,4 @@
+
 package elements;
 
 public class Note {
@@ -10,8 +11,6 @@ public class Note {
         this.Note = Note;
         this.Coef = Coef;
     }
-
-    
 }
 
 
