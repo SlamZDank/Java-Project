@@ -1,5 +1,4 @@
 package elements;
-import java.util.Scanner;
 
 
 public enum Note {
@@ -28,7 +27,6 @@ public enum Note {
     ANGLAIS(2.0), 
     ALLEMAND(1.0);
 
-    private String Mat;
     private double Note;
     private double Coef;
 
