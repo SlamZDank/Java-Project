@@ -17,16 +17,16 @@ public enum Note {
 // Example of implementation with hardcoded coef value (RECOMMENDED):
     // MATH(1.0),
     //       ^  Coefficient
-    MATH(), 
-    PHYSIQUE(), 
-    LITTERAIRE(), 
-    CHIMIE(), 
-    SVT(), 
-    HISTOIRE(), 
-    GEOGRAPHIE(), 
-    FRANCAIS(), 
-    ANGLAIS(), 
-    ALLEMAND();
+    MATH(2.0), 
+    PHYSIQUE(3.5), 
+    LITTERAIRE(1.0), 
+    CHIMIE(1.5), 
+    SVT(4.0), 
+    HISTOIRE(1.0), 
+    GEOGRAPHIE(1.0), 
+    FRANCAIS(2.0), 
+    ANGLAIS(2.0), 
+    ALLEMAND(1.0);
 
     private String Mat;
     private double Note;
@@ -41,9 +41,7 @@ public enum Note {
         System.out.println("Here is the Note constructor ");
     }
 
-    private Note(double Coef) {
-        this.Coef = Coef;
-    }
+    private Note(double Coef) {this.Coef = Coef;}
 
     public double getCoef(){return Coef;}
     public double getNote() {return Note;}

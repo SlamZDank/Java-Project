@@ -1,6 +1,6 @@
 package elements;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /*
  * This concerns the implementation of Moyenne (multiple note) Class
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *                   setMat(String mat)
  *   
  * 
- *  Matières: Math / Physique / Litteraire / Chimie / SVT / Histoire / Geographie / Francais / Anglais / Allmagne
+ *  
  *              You can now hardcode their coefficient values
  *              For more info -> Check the note class
  *  Coef: 0.0 - 4.0      Arbitrary limit
@@ -30,31 +30,83 @@ import java.util.ArrayList;
 
 public class Etudiant {
     private String nom,prenom,dateDeNaiss;
-    private ArrayList<Note> notes ;
+    public Moyenne moy = null;
 
-    public Etudiant(String nom, String prenom, String dateDeNaiss, ArrayList<Note> notes) {
+    public Etudiant(String nom, String prenom, String dateDeNaiss) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaiss = dateDeNaiss;
-        notes = new ArrayList<>();
     }
 
-    public String getNom() {
-        return nom;
+    public void ajouteNotes(){
+        moy = new Moyenne();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Donner les notes: ");
+
+        System.out.println("Math: ");
+        Note noteMath = Note.MATH;
+        noteMath.setNote(sc.nextDouble());
+
+        System.out.println("Physique: ");
+        Note notePhy = Note.PHYSIQUE;
+        notePhy.setNote(sc.nextDouble());
+        
+        System.out.println("Litteraire: ");
+        Note noteLit = Note.LITTERAIRE;
+        noteLit.setNote(sc.nextDouble());
+
+        System.out.println("Svt: ");
+        Note noteSvt = Note.SVT;
+        noteSvt.setNote(sc.nextDouble());
+
+        System.out.println("Chimie: ");
+        Note noteChim = Note.CHIMIE;
+        noteChim.setNote(sc.nextDouble());
+
+        System.out.println("Histoire: ");
+        Note noteHis = Note.HISTOIRE;
+        noteSvt.setNote(sc.nextDouble());
+
+        System.out.println("Geographhie: ");
+        Note noteGeo = Note.GEOGRAPHIE;
+        noteSvt.setNote(sc.nextDouble());
+        
+        System.out.println("Français: ");
+        Note noteFr = Note.FRANCAIS;
+        noteSvt.setNote(sc.nextDouble());
+
+        System.out.println("Anglais: ");
+        Note noteAng = Note.ANGLAIS;
+        noteSvt.setNote(sc.nextDouble());
+
+        System.out.println("Allemand: ");
+        Note noteGer = Note.ALLEMAND;
+        noteSvt.setNote(sc.nextDouble());
+
+        //Matières: Math / Physique / Litteraire / Chimie / SVT / Histoire / Geographie / Francais / Anglais / Allmagne
+        moy.push(noteMath);
+        moy.push(notePhy);
+        moy.push(noteLit);
+        moy.push(noteSvt);
+        moy.push(noteChim);
+        moy.push(noteHis);
+        moy.push(noteGeo);
+        moy.push(noteFr);
+        moy.push(noteAng);
+        moy.push(noteGer);
+
+        sc.close();
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
+    public String getNom() { return nom; }
 
-    public String getDateDeNaiss() {
-        return dateDeNaiss;
-    }
+    public String getPrenom() { return prenom; }
 
-    public ArrayList<Note> getNotes() {
-        return notes;
-    }
+    public String getDateDeNaiss() { return dateDeNaiss; }
+
+
     public String toString(){
-        return (nom + " " + prenom + " " + dateDeNaiss + " " + notes);
+        if (moy != null) {return (nom + " " + prenom + " " + dateDeNaiss + " " + moy.toString());}
+        return (nom + " " + prenom + " " + dateDeNaiss);
     }
 }
