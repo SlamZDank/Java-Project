@@ -21,6 +21,8 @@ public class Moyenne {
 
     public Moyenne(ArrayList<Note> Tab){this.TabMoy = Tab;}
 
+
+    //!!! THIS METHOD IS NOT WORKING CORRECTLY !!!!
     public double getMoy(){
         if (Moy == -1) {
             Moy = 0;
