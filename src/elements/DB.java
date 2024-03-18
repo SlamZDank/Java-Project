@@ -11,14 +11,16 @@ import java.util.ArrayList;
 
  // There is a method on a db to export to CSV idk about pdf
 
-public class DB {; 
+public class DB {
     public DB() {}
     
     public void ajoutEtudiant(Etudiant e){}
 
     public void supprimeEtudiant(Etudiant e){}
 
-    public void afficheListeEtudiant(){}
+    public void afficheListeEtudiant(){
+
+    }
     public static void main(String[] args) {
         try {
             String url = "jdbc:mysql://localhost:3306/Etudiant";
@@ -28,6 +30,7 @@ public class DB {;
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement();
             //stmt.executeUpdate();
+            stmt.executeQuery("select * from Etudiant");
 
         } catch (Exception e) {
             e.printStackTrace();
