@@ -11,6 +11,13 @@ import java.sql.*;
 
  // There is a method on a db to export to CSV idk about pdf
 
+ /*
+  * Upon login ken we7ed yedekhel:
+  *   1. ID jdid -> Creation mte3 info jdida fil table bel id jdid wel donnés ferghin
+  *   2. ID deja mawjoud -> login mrgl wywerri l fields m3obbin bel valeurat mel data base
+  *   3. "root" -> ye3mel search lel ness lkol "select * from Etudiant" w ywarrihom
+  */
+
 public class DB {
     public DB() {}
     
