@@ -28,7 +28,7 @@ public class DB {
     public void afficheListeEtudiant(){
 
     }
-    public static void main(String[] args) {
+    public static void test(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/Etudiant";

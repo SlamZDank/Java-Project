@@ -19,5 +19,8 @@ public class App {
       System.out.println(e);
       e.toString(); */
       UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
+      Login l = new Login();
+      l.setVisible(true);
+      
     }
 }
