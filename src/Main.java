@@ -14,10 +14,10 @@ import ui.*;
  //
 public class Main {
     public static void main(String[] args) {
-      Etudiant e = new Etudiant("Slama","Med Amine","23 / 02 / 2003");
+      /* Etudiant e = new Etudiant("Slama","Med Amine","23 / 02 / 2003");
       e.ajouteNotes();
       System.out.println(e);
-      e.toString();
-      
+      e.toString(); */
+      ui.Err.writeErr("Sus", "Something went wrong in my java understanding");
     }
 }
