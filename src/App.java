@@ -12,7 +12,7 @@ import ui.*;
 
 
  //
-public class Main {
+public class App {
     public static void main(String[] args) {
       /* Etudiant e = new Etudiant("Slama","Med Amine","23 / 02 / 2003");
       e.ajouteNotes();
