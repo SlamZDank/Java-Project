@@ -1,5 +1,5 @@
 import elements.*;
-import ui.*;
+import UI.*;
 
 // This is a comment in Java yay!
 
@@ -18,6 +18,6 @@ public class App {
       e.ajouteNotes();
       System.out.println(e);
       e.toString(); */
-      ui.Err.writeErr("Sus", "Something went wrong in my java understanding");
+      UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
     }
 }
