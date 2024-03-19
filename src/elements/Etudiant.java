@@ -65,23 +65,23 @@ public class Etudiant {
 
         System.out.println("Histoire: ");
         Note noteHis = Note.HISTOIRE;
-        noteSvt.setNote(sc.nextDouble());
+        noteHis.setNote(sc.nextDouble());
 
         System.out.println("Geographhie: ");
         Note noteGeo = Note.GEOGRAPHIE;
-        noteSvt.setNote(sc.nextDouble());
+        noteGeo.setNote(sc.nextDouble());
         
         System.out.println("Français: ");
         Note noteFr = Note.FRANCAIS;
-        noteSvt.setNote(sc.nextDouble());
+        noteFr.setNote(sc.nextDouble());
 
         System.out.println("Anglais: ");
         Note noteAng = Note.ANGLAIS;
-        noteSvt.setNote(sc.nextDouble());
+        noteAng.setNote(sc.nextDouble());
 
         System.out.println("Allemand: ");
         Note noteGer = Note.ALLEMAND;
-        noteSvt.setNote(sc.nextDouble());
+        noteGer.setNote(sc.nextDouble());
 
         //Matières: Math / Physique / Litteraire / Chimie / SVT / Histoire / Geographie / Francais / Anglais / Allmagne
         moy.push(noteMath);
