@@ -1,2 +1,4 @@
+# This is to ignore build and test files / classes
+
 test.java
 *.class
