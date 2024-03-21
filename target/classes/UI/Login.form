@@ -219,7 +219,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;Ignite Passion.&#xa;&lt;br&gt;&#xa;Inspire Excellence.&#xa;&lt;br&gt;&#xa; Imagine Possibilities.&#xa;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt; Ignite Passion. &lt;br&gt; Inspire Excellence. &lt;br&gt;  Imagine Possibilities. &lt;/html&gt;"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

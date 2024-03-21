@@ -133,7 +133,7 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Source Code Pro Semibold", 2, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("<html>\nIgnite Passion.\n<br>\nInspire Excellence.\n<br>\n Imagine Possibilities.\n</html>");
+        jLabel6.setText("<html> Ignite Passion. <br> Inspire Excellence. <br>  Imagine Possibilities. </html>");
         Right.add(jLabel6);
         jLabel6.setBounds(0, 340, 390, 100);
 
@@ -207,5 +207,6 @@ public class Login extends javax.swing.JFrame {
     
     // Set the icon as a window title bar icon instead of that ugly character!
     private void setIconImage() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));}
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
+    }
 }

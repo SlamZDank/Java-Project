@@ -4,6 +4,8 @@
  */
 package UI;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author slamzdank
@@ -15,6 +17,7 @@ public class UserMode extends javax.swing.JFrame {
      */
     public UserMode() {
         initComponents();
+        setIconImage();
     }
 
     /**
@@ -29,6 +32,13 @@ public class UserMode extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        reveal_moyenne = new javax.swing.JButton();
+        Publish_To_DB1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -42,37 +52,95 @@ public class UserMode extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Submission Form");
+        setPreferredSize(new java.awt.Dimension(1500, 900));
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 980));
+        jPanel2.setLayout(null);
 
         jPanel3.setLayout(null);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 477, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Sakura High School");
+        jPanel3.add(jLabel5);
+        jLabel5.setBounds(0, 260, 400, 50);
+
+        jLabel4.setFont(new java.awt.Font("Source Code Pro Semibold", 2, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("<html> Ignite Passion. <br> Inspire Excellence. <br>  Imagine Possibilities. </html>");
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(40, 710, 320, 130);
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Copyright © Sakura High School, All Rights Reserved.");
+        jPanel3.add(jLabel3);
+        jLabel3.setBounds(0, 870, 400, 15);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLabel2);
+        jLabel2.setBounds(0, 60, 400, 210);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_screen.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(-330, -150, 750, 1480);
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(0, 0, 401, 900);
+
+        reveal_moyenne.setBackground(new java.awt.Color(255, 204, 255));
+        reveal_moyenne.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        reveal_moyenne.setText("Reveal Score");
+        reveal_moyenne.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
+        reveal_moyenne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reveal_moyenneActionPerformed(evt);
+            }
+        });
+        jPanel2.add(reveal_moyenne);
+        reveal_moyenne.setBounds(450, 820, 180, 40);
+
+        Publish_To_DB1.setBackground(new java.awt.Color(255, 204, 255));
+        Publish_To_DB1.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        Publish_To_DB1.setText("Publish");
+        Publish_To_DB1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
+        Publish_To_DB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Publish_To_DB1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Publish_To_DB1);
+        Publish_To_DB1.setBounds(1300, 820, 150, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reveal_moyenneActionPerformed
+
+    private void Publish_To_DB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DB1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Publish_To_DB1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,8 +178,19 @@ public class UserMode extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Publish_To_DB1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton reveal_moyenne;
     // End of variables declaration//GEN-END:variables
+
+    private void setIconImage() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
+    }
 }
