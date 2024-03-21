@@ -31,10 +31,10 @@ public class DB {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/Etudiant";
+            String url = "jdbc:mysql://localhost:3306/Java-Project";
             // This is to connect to the database in table Etudiant
-            String username = "root";
-            String password = "0000";
+            String username = "sqluser";
+            String password = "password";
             Connection con = DriverManager.getConnection(url,username,password);
             Statement stmt = con.createStatement();
             //stmt.executeUpdate();
