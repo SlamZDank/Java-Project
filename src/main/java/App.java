@@ -18,7 +18,7 @@ public class App {
       e.ajouteNotes();
       System.out.println(e);
       e.toString(); */
-      UserMode l = new UserMode();
+      Login l = new Login();
       l.setVisible(true);
       l.pack();
       l.setLocationRelativeTo(null);

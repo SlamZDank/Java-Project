@@ -176,8 +176,12 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
-        // this.dispose();
-        UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
+        // UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
+        this.dispose();
+        UserMode UM = new UserMode();
+        UM.setVisible(true);
+        UM.pack();
+        UM.setLocationRelativeTo(null);
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
