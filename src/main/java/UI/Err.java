@@ -7,8 +7,7 @@ public class Err {
         // If clicked on OK the fields that contain invalid info
         // May be deleted
         JOptionPane.showMessageDialog(null, 
-                                    errMes, "Error: " + errType,
+                                    errMes, errType,
                                     JOptionPane.ERROR_MESSAGE);
-        
     }
 }

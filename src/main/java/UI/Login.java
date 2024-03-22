@@ -10,13 +10,24 @@ import java.awt.Toolkit;
  * @author slamzdank
  */
 public class Login extends javax.swing.JFrame {
-
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
         setIconImage();
+    }
+    
+    public static boolean isNumeric(String strNum) {
+    if (strNum == null) {
+        return false;
+    }
+    try {
+        int d = Integer.parseInt(strNum);
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+    return true;
     }
 
     /**
@@ -91,7 +102,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("V0.0.1");
+        jLabel7.setText("V0.0.2");
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
@@ -177,11 +188,28 @@ public class Login extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
         // UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
+        String input = UserIDField.getText();
         this.dispose();
-        UserMode UM = new UserMode();
-        UM.setVisible(true);
-        UM.pack();
-        UM.setLocationRelativeTo(null);
+        if (isNumeric(input)) {
+            UserMode UM = new UserMode();
+            UM.setVisible(true);
+            UM.pack();
+            UM.setLocationRelativeTo(null);
+        } else if (input.equals("root") || input.equals("admin")) {
+            AdminMode AM = new AdminMode();
+            AM.setVisible(true);
+            AM.pack();
+            AM.setLocationRelativeTo(null);
+        } else {
+            Login l = new Login();
+            l.setVisible(true);
+            l.pack();
+            l.setLocationRelativeTo(null);
+            Err.writeErr("Invalid Input", "Please enter a valid Identifier!");
+        }
+        
+        
+        
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
