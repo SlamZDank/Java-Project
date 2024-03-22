@@ -39,10 +39,16 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        Modify = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        Export = new javax.swing.JButton();
+        Sort = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Mode");
-        setPreferredSize(new java.awt.Dimension(1500, 827));
+        setPreferredSize(new java.awt.Dimension(1500, 840));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -103,15 +109,86 @@ public class AdminMode extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 390, 1235);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1050, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(420, 80, 1050, 650);
+
+        Modify.setBackground(new java.awt.Color(255, 204, 255));
+        Modify.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
+        Modify.setText("Modify Selected Entry");
+        Modify.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
+        Modify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Modify);
+        Modify.setBounds(420, 750, 210, 40);
+
+        Delete.setBackground(new java.awt.Color(255, 204, 255));
+        Delete.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
+        Delete.setText("Delete Selected Entries");
+        Delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Delete);
+        Delete.setBounds(700, 750, 210, 40);
+
+        Export.setBackground(new java.awt.Color(255, 204, 255));
+        Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
+        Export.setText("Export as CSV / PDF");
+        Export.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
+        Export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Export);
+        Export.setBounds(990, 750, 210, 40);
+
+        Sort.setBackground(new java.awt.Color(255, 204, 255));
+        Sort.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
+        Sort.setText("Sort by Highest Score");
+        Sort.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
+        Sort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SortActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Sort);
+        Sort.setBounds(1260, 750, 210, 40);
+
+        jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 48)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Database Report:");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(400, 20, 1090, 50);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1498, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
         );
 
         pack();
@@ -125,13 +202,33 @@ public class AdminMode extends javax.swing.JFrame {
         l.setLocationRelativeTo(null);
     }//GEN-LAST:event_DisconnectActionPerformed
 
+    private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExportActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteActionPerformed
+
+    private void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SortActionPerformed
+
+    private void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModifyActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Delete;
     private javax.swing.JButton Disconnect;
+    private javax.swing.JButton Export;
+    private javax.swing.JButton Modify;
+    private javax.swing.JButton Sort;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -139,8 +236,10 @@ public class AdminMode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {
