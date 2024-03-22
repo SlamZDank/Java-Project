@@ -1,34 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 import java.awt.Toolkit;
 
-/**
- *
- * @author slamzdank
- */
+
 public class Login extends javax.swing.JFrame {
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
         setIconImage();
     }
     
     public static boolean isNumeric(String strNum) {
-    if (strNum == null) {
-        return false;
-    }
-    try {
-        int d = Integer.parseInt(strNum);
-    } catch (NumberFormatException nfe) {
-        return false;
-    }
-    return true;
-    }
+        if (strNum == null) { return false; }
+        try { int d = Integer.parseInt(strNum); } catch (NumberFormatException nfe) {
+            return false;
+        } return true;}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,11 +79,6 @@ public class Login extends javax.swing.JFrame {
         UserIDField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         UserIDField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         UserIDField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        UserIDField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserIDFieldActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,14 +202,9 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_LoginButtonActionPerformed
 
-    private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserIDFieldActionPerformed
-
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
@@ -249,7 +223,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
     
-    // Set the icon as a window title bar icon instead of that ugly character!
     private void setIconImage() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
     }

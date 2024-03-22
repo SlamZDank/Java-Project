@@ -1,4 +1,5 @@
 package UI;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Dialogs {
@@ -23,6 +24,4 @@ public class Dialogs {
                                 SuccMes, SuccType, 
                              JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    
 }

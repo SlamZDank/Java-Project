@@ -7,15 +7,7 @@ package UI;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author slamzdank
- */
 public class UserMode extends javax.swing.JFrame {
-
-    /**
-     * Creates new form UserMode
-     */
     public UserMode() {
         initComponents();
         setIconImage();
@@ -281,11 +273,6 @@ public class UserMode extends javax.swing.JFrame {
         jTextField13.setForeground(new java.awt.Color(255, 255, 255));
         jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField13.setText("Surname");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
-            }
-        });
         jPanel2.add(jTextField13);
         jTextField13.setBounds(710, 150, 230, 50);
 
@@ -406,10 +393,6 @@ public class UserMode extends javax.swing.JFrame {
     private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
         Report_Score.setText("Hello, here's your score. Testing!");
     }//GEN-LAST:event_reveal_moyenneActionPerformed
-
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
 
     private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
         // TODO add your handling code here:
