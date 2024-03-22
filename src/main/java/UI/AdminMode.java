@@ -1,20 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 
 import java.awt.Toolkit;
 
-/**
- *
- * @author slamzdank
- */
 public class AdminMode extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminMode
-     */
     public AdminMode() {
         initComponents();
         setIconImage();
@@ -230,7 +219,6 @@ public class AdminMode extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
     private javax.swing.JButton Disconnect;

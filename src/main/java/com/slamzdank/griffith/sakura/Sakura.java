@@ -4,9 +4,9 @@ import UI.*;
 // import elements.*;
 
 /**
- *
- * @author slamzdank
+ * @authors SlamZDank, Griffith000
  */
+
 public class Sakura {
     public static void main(String[] args) {
       /* Etudiant e = new Etudiant("Slama","Med Amine","23 / 02 / 2003"); */
