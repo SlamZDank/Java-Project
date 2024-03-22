@@ -34,6 +34,7 @@ public class UserMode extends javax.swing.JFrame {
         Disconnect = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -110,6 +111,13 @@ public class UserMode extends javax.swing.JFrame {
         jLabel7.setText("User Mode:");
         jPanel3.add(jLabel7);
         jLabel7.setBounds(0, 380, 400, 60);
+
+        jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("<html>\nWARNING:\n<br>\nPlease TRIPLE CHECK your provided information before submitting\n<br>\npublishing this is irreversible! and can only be modified with\n<br>\nthe request of authorized personnel!\n</html>");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(50, 510, 310, 140);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -419,6 +427,7 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -195,7 +195,7 @@ public class Login extends javax.swing.JFrame {
             UM.setVisible(true);
             UM.pack();
             UM.setLocationRelativeTo(null);
-        } else if (input.equals("root") || input.equals("admin")) {
+        } else if (input.equals("root") || input.equals("admin") || input.equals("sudo")) {
             AdminMode AM = new AdminMode();
             AM.setVisible(true);
             AM.pack();
@@ -207,6 +207,8 @@ public class Login extends javax.swing.JFrame {
             l.setLocationRelativeTo(null);
             Err.writeErr("Invalid Input", "Please enter a valid Identifier!");
         }
+        
+        //Needs to handle an already existsing data entered!
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
