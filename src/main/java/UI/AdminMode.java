@@ -44,6 +44,7 @@ public class AdminMode extends javax.swing.JFrame {
         Delete = new javax.swing.JButton();
         Export = new javax.swing.JButton();
         Sort = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -173,6 +174,13 @@ public class AdminMode extends javax.swing.JFrame {
         jPanel1.add(Sort);
         Sort.setBounds(1260, 750, 210, 40);
 
+        jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("V0.0.3");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(1420, 20, 37, 15);
+
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -237,6 +245,7 @@ public class AdminMode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

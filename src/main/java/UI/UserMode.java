@@ -70,6 +70,7 @@ public class UserMode extends javax.swing.JFrame {
         Report_Score13 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel10 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -371,6 +372,14 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2.add(jSeparator1);
         jSeparator1.setBounds(830, 240, 30, 490);
 
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("V0.0.3");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(1170, 20, 37, 15);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -433,6 +442,7 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JTextField germanField;
     private javax.swing.JTextField historyField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
