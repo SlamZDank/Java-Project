@@ -456,6 +456,6 @@ public class UserMode extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/sheet_icon.png")));
     }
 }
