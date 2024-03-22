@@ -5,6 +5,7 @@
 package UI;
 
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,8 +43,8 @@ public class UserMode extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         reveal_moyenne = new javax.swing.JButton();
-        Publish_To_DB1 = new javax.swing.JButton();
-        Report_Score1 = new javax.swing.JLabel();
+        Publish_To_DB = new javax.swing.JButton();
+        Report_Score = new javax.swing.JLabel();
         Report_Score4 = new javax.swing.JLabel();
         englishField = new javax.swing.JTextField();
         physicsField = new javax.swing.JTextField();
@@ -171,24 +172,23 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2.add(reveal_moyenne);
         reveal_moyenne.setBounds(480, 820, 180, 40);
 
-        Publish_To_DB1.setBackground(new java.awt.Color(255, 204, 255));
-        Publish_To_DB1.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        Publish_To_DB1.setText("Publish");
-        Publish_To_DB1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
-        Publish_To_DB1.addActionListener(new java.awt.event.ActionListener() {
+        Publish_To_DB.setBackground(new java.awt.Color(255, 204, 255));
+        Publish_To_DB.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        Publish_To_DB.setText("Publish");
+        Publish_To_DB.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
+        Publish_To_DB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Publish_To_DB1ActionPerformed(evt);
+                Publish_To_DBActionPerformed(evt);
             }
         });
-        jPanel2.add(Publish_To_DB1);
-        Publish_To_DB1.setBounds(1030, 820, 150, 40);
+        jPanel2.add(Publish_To_DB);
+        Publish_To_DB.setBounds(1030, 820, 150, 40);
 
-        Report_Score1.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        Report_Score1.setForeground(new java.awt.Color(255, 255, 255));
-        Report_Score1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Report_Score1.setText("insert Moyenne here");
-        jPanel2.add(Report_Score1);
-        Report_Score1.setBounds(480, 760, 700, 40);
+        Report_Score.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        Report_Score.setForeground(new java.awt.Color(255, 255, 255));
+        Report_Score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(Report_Score);
+        Report_Score.setBounds(480, 760, 700, 40);
 
         Report_Score4.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         Report_Score4.setForeground(new java.awt.Color(255, 255, 255));
@@ -385,12 +385,17 @@ public class UserMode extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Publish_To_DB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DB1ActionPerformed
+    private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Publish_To_DB1ActionPerformed
+        int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the information, this is IRREVERSIBLE!");
+        if (confirmation == JOptionPane.YES_OPTION) {
+            Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
+        }
+        
+    }//GEN-LAST:event_Publish_To_DBActionPerformed
 
     private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
-        // TODO add your handling code here:
+        Report_Score.setText("Hello, here's your score. Testing!");
     }//GEN-LAST:event_reveal_moyenneActionPerformed
 
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
@@ -409,8 +414,8 @@ public class UserMode extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Disconnect;
-    private javax.swing.JButton Publish_To_DB1;
-    private javax.swing.JLabel Report_Score1;
+    private javax.swing.JButton Publish_To_DB;
+    private javax.swing.JLabel Report_Score;
     private javax.swing.JLabel Report_Score10;
     private javax.swing.JLabel Report_Score11;
     private javax.swing.JLabel Report_Score12;

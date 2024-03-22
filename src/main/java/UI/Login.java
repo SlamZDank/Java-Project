@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
-        // UI.Err.writeErr("Sus", "Something went wrong in my java understanding");
+        // UI.Dialogs.writeErr("Sus", "Something went wrong in my java understanding");
         String input = UserIDField.getText();
         this.dispose();
         if (isNumeric(input)) {
@@ -205,7 +205,7 @@ public class Login extends javax.swing.JFrame {
             l.setVisible(true);
             l.pack();
             l.setLocationRelativeTo(null);
-            Err.writeErr("Invalid Input", "Please enter a valid Identifier!");
+            Dialogs.writeErr("Invalid Input", "Please enter a valid Identifier!");
         }
         
         //Needs to handle an already existsing data entered!
