@@ -10,9 +10,9 @@ public class Login extends javax.swing.JFrame {
     
     public static boolean isNumeric(String strNum) {
         if (strNum == null) { return false; }
-        try { int d = Integer.parseInt(strNum); } catch (NumberFormatException nfe) {
-            return false;
-        } return true;}
+        try { int d = Integer.parseInt(strNum); } catch (NumberFormatException nfe) { return false; } 
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,7 +86,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("<html>Under DEVELOPEMENT, <br>Some aspects may be changed.</html>");
+        jLabel9.setText("<html>Under DEVELOPMENT, <br>Some aspects may be changed.</html>");
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);

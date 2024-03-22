@@ -383,7 +383,7 @@ public class UserMode extends javax.swing.JFrame {
 
     private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         // TODO add your handling code here:
-        int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the information, this is IRREVERSIBLE!");
+        int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
