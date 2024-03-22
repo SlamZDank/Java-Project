@@ -31,7 +31,9 @@ public class UserMode extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        Disconnect = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -88,7 +90,26 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 980));
         jPanel2.setLayout(null);
 
+        Disconnect.setBackground(new java.awt.Color(255, 204, 255));
+        Disconnect.setFont(new java.awt.Font("SF Pro Display", 3, 14)); // NOI18N
+        Disconnect.setText("<<    Disconnect");
+        Disconnect.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 153)));
+        Disconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisconnectActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Disconnect);
+        Disconnect.setBounds(20, 20, 150, 30);
+
         jPanel3.setLayout(null);
+
+        jLabel7.setFont(new java.awt.Font("SF Pro Rounded", 0, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("User Mode:");
+        jPanel3.add(jLabel7);
+        jLabel7.setBounds(0, 380, 400, 60);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,7 +382,18 @@ public class UserMode extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField13ActionPerformed
 
+    private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Login l = new Login();
+        l.setVisible(true);
+        l.pack();
+        l.setLocationRelativeTo(null);
+    }//GEN-LAST:event_DisconnectActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Disconnect;
     private javax.swing.JButton Publish_To_DB1;
     private javax.swing.JLabel Report_Score1;
     private javax.swing.JLabel Report_Score10;
@@ -386,6 +418,7 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

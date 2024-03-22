@@ -32,6 +32,7 @@ public class AdminMode extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        Disconnect = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -54,6 +55,18 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel7.setText("Admin Mode:");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(0, 300, 390, 70);
+
+        Disconnect.setBackground(new java.awt.Color(255, 204, 255));
+        Disconnect.setFont(new java.awt.Font("SF Pro Display", 3, 14)); // NOI18N
+        Disconnect.setText("<<    Disconnect");
+        Disconnect.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 102)));
+        Disconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisconnectActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Disconnect);
+        Disconnect.setBounds(20, 20, 150, 30);
 
         jLabel6.setFont(new java.awt.Font("Source Code Pro", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,12 +117,21 @@ public class AdminMode extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
+        this.dispose();
+        Login l = new Login();
+        l.setVisible(true);
+        l.pack();
+        l.setLocationRelativeTo(null);
+    }//GEN-LAST:event_DisconnectActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Disconnect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

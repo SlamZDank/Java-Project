@@ -207,9 +207,6 @@ public class Login extends javax.swing.JFrame {
             l.setLocationRelativeTo(null);
             Err.writeErr("Invalid Input", "Please enter a valid Identifier!");
         }
-        
-        
-        
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void UserIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDFieldActionPerformed
