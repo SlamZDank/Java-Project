@@ -33,6 +33,7 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Disconnect = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -105,6 +106,12 @@ public class UserMode extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
+        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("<html> - Providing false information WILL<br> lead to SEVERE repercussions, be warned!</html>");
+        jPanel3.add(jLabel9);
+        jLabel9.setBounds(50, 640, 300, 70);
+
         jLabel7.setFont(new java.awt.Font("SF Pro Rounded", 0, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -115,9 +122,9 @@ public class UserMode extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("<html>\nWARNING:\n<br>\nPlease TRIPLE CHECK your provided information before submitting\n<br>\npublishing this is irreversible! and can only be modified with\n<br>\nthe request of authorized personnel!\n</html>");
+        jLabel8.setText("<html> WARNING: <br><br> - Please TRIPLE CHECK your information before submitting <br> as it is IRREVERSIBLE and can only <br> be changed by authorised personnel!</html>");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(50, 510, 310, 140);
+        jLabel8.setBounds(50, 490, 310, 140);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -428,6 +435,7 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
