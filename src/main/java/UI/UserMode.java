@@ -110,7 +110,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("<html> - Providing false information WILL<br> lead to SEVERE repercussions, be warned!</html>");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(50, 640, 300, 70);
+        jLabel9.setBounds(40, 640, 300, 70);
 
         jLabel7.setFont(new java.awt.Font("SF Pro Rounded", 0, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,7 +124,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("<html> WARNING: <br><br> - Please TRIPLE CHECK your information before submitting <br> as it is IRREVERSIBLE and can only <br> be changed by authorised personnel!</html>");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(50, 490, 310, 140);
+        jLabel8.setBounds(40, 490, 310, 140);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));

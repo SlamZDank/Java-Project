@@ -72,10 +72,10 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Welcome!");
 
         LoginButton.setBackground(new java.awt.Color(255, 153, 255));
-        LoginButton.setFont(new java.awt.Font("SF Compact Rounded", 0, 24)); // NOI18N
+        LoginButton.setFont(new java.awt.Font("SF Compact Text", 1, 24)); // NOI18N
         LoginButton.setText("Login");
         LoginButton.setToolTipText("Click to login!");
-        LoginButton.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 102, 255)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SF Pro Display", 0, 12), new java.awt.Color(255, 0, 255))); // NOI18N
+        LoginButton.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(102, 0, 102)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SF Pro Display", 0, 12), new java.awt.Color(102, 0, 102))); // NOI18N
         LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class Login extends javax.swing.JFrame {
         UserIDField.setFont(new java.awt.Font("SF Pro Rounded", 0, 18)); // NOI18N
         UserIDField.setForeground(new java.awt.Color(255, 255, 255));
         UserIDField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        UserIDField.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        UserIDField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         UserIDField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         UserIDField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("V0.0.2");
+        jLabel7.setText("V0.0.3");
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);
@@ -116,11 +116,11 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(UserIDField)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(107, 107, 107))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LeftLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(42, 42, 42))))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
         );
         LeftLayout.setVerticalGroup(
             LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
