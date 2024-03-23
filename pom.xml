@@ -13,10 +13,10 @@
     </properties>
     <name>Sakura-Project</name>
     <dependencies>
-        <dependency>
+        <!-- <dependency>
             <groupId>anyvalue</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.3</version>
-        </dependency>
+        </dependency> -->
     </dependencies>
 </project>
