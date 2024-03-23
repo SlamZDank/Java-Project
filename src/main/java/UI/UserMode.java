@@ -1,16 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 
+import elements.Etudiant;
+
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 public class UserMode extends javax.swing.JFrame {
+    Etudiant Person = null;
+    
     public UserMode() {
         initComponents();
         setIconImage();
+    }
+    
+    public static boolean isvalidScore(String strNum) {
+        int d;
+        if (strNum == null) { return false; }
+        try { d = Integer.parseInt(strNum); } catch (NumberFormatException nfe) { return false; }
+        return (!(d > 20 || d < 0));
     }
 
     /**
@@ -41,7 +51,7 @@ public class UserMode extends javax.swing.JFrame {
         englishField = new javax.swing.JTextField();
         physicsField = new javax.swing.JTextField();
         mathField = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        dobField = new javax.swing.JTextField();
         literatureField = new javax.swing.JTextField();
         chemistryField = new javax.swing.JTextField();
         geographyField = new javax.swing.JTextField();
@@ -49,8 +59,8 @@ public class UserMode extends javax.swing.JFrame {
         historyField = new javax.swing.JTextField();
         frenchField = new javax.swing.JTextField();
         germanField = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
+        surnameField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         Report_Score5 = new javax.swing.JLabel();
         Report_Score6 = new javax.swing.JLabel();
         Report_Score7 = new javax.swing.JLabel();
@@ -211,13 +221,13 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2.add(mathField);
         mathField.setBounds(590, 280, 100, 50);
 
-        jTextField5.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField5.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("Date of Birth");
-        jPanel2.add(jTextField5);
-        jTextField5.setBounds(960, 150, 230, 50);
+        dobField.setBackground(new java.awt.Color(0, 0, 0));
+        dobField.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
+        dobField.setForeground(new java.awt.Color(255, 255, 255));
+        dobField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        dobField.setText("Date of Birth");
+        jPanel2.add(dobField);
+        dobField.setBounds(960, 150, 230, 50);
 
         literatureField.setBackground(new java.awt.Color(0, 0, 0));
         literatureField.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,21 +278,21 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2.add(germanField);
         germanField.setBounds(1070, 640, 100, 50);
 
-        jTextField13.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField13.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        jTextField13.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField13.setText("Surname");
-        jPanel2.add(jTextField13);
-        jTextField13.setBounds(710, 150, 230, 50);
+        surnameField.setBackground(new java.awt.Color(0, 0, 0));
+        surnameField.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
+        surnameField.setForeground(new java.awt.Color(255, 255, 255));
+        surnameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        surnameField.setText("Surname");
+        jPanel2.add(surnameField);
+        surnameField.setBounds(710, 150, 230, 50);
 
-        jTextField14.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField14.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
-        jTextField14.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField14.setText("Name");
-        jPanel2.add(jTextField14);
-        jTextField14.setBounds(460, 150, 230, 50);
+        nameField.setBackground(new java.awt.Color(0, 0, 0));
+        nameField.setFont(new java.awt.Font("SF Pro", 3, 18)); // NOI18N
+        nameField.setForeground(new java.awt.Color(255, 255, 255));
+        nameField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nameField.setText("Name");
+        jPanel2.add(nameField);
+        nameField.setBounds(460, 150, 230, 50);
 
         Report_Score5.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         Report_Score5.setForeground(new java.awt.Color(255, 255, 255));
@@ -381,21 +391,68 @@ public class UserMode extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // Makes a detailed report if false using the dialogs
+    private boolean validateData(){
+
+        String genHtml = "<html>";
+        String name = nameField.getText(), surname = surnameField.getText(), dob = dobField.getText();
+        String math = mathField.getText(), french = frenchField.getText(), geography = geographyField.getText();
+        String chemistry = chemistryField.getText(), german = germanField.getText(), history = historyField.getText();
+        String english = englishField.getText(), physics = physicsField.getText(), science = scienceField.getText();
+        String literature = literatureField.getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (name.toLowerCase() == "name") { genHtml += "Name shouldn't be " + name + "<br>"; }
+        if (surname.toLowerCase() == "surname") { genHtml += "Surname shouldn't be " + surname + "<br>"; }
+        try { LocalDate date = formatter.parse(dob, LocalDate::from); } 
+        catch (DateTimeParseException e) { genHtml += "Date input is incorrect,<br>it needs to follow dd/MM/yyyy" + "<br>"; }
+
+        if (!isvalidScore(math)) { genHtml += "Math score is not valid <br>"; }
+        if (!isvalidScore(french)) { genHtml += "French score is not valid <br>"; }
+        if (!isvalidScore(geography)) { genHtml += "Geography score is not valid <br>"; }
+        if (!isvalidScore(chemistry)) { genHtml += "Chemistry score is not valid <br>"; }
+        if (!isvalidScore(german)) { genHtml += "German score is not valid <br>"; }
+        if (!isvalidScore(history)) { genHtml += "History score is not valid <br>"; }
+        if (!isvalidScore(english)) { genHtml += "English score is not valid <br>"; }
+        if (!isvalidScore(physics)) { genHtml += "Physics score is not valid <br>"; }
+        if (!isvalidScore(science)) { genHtml += "Science score is not valid <br>"; }
+        if (!isvalidScore(literature)) { genHtml += "Literature score is not valid <br>"; }
+        
+        // Spaghetti Code incoming
+        
+        if (genHtml != "<html>") {
+            genHtml += "</html>";
+            Dialogs.writeErr("Invalid Input", genHtml);
+            return false;
+        } else if (Person == null) {
+            Person = new Etudiant(name, surname, dob);
+            Person.ajouteNotes(Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
+        } else {
+            Person.setHimself();
+        } // Modify Data
+        return true;
+    }
+    
+    private boolean dataMake(){
+        if (validateData() == false) return false;
+        return true;
+    }
+    
+    
     private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         // TODO add your handling code here:
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
-        
     }//GEN-LAST:event_Publish_To_DBActionPerformed
 
     private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
-        Report_Score.setText("Hello, here's your score. Testing!");
+        if (Person == null || dataMake() == false) { return; }
+        Report_Score.setText(Person.moy.toString());
     }//GEN-LAST:event_reveal_moyenneActionPerformed
 
     private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         Login l = new Login();
         l.setVisible(true);
@@ -419,6 +476,7 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JLabel Report_Score8;
     private javax.swing.JLabel Report_Score9;
     private javax.swing.JTextField chemistryField;
+    private javax.swing.JTextField dobField;
     private javax.swing.JTextField englishField;
     private javax.swing.JTextField frenchField;
     private javax.swing.JTextField geographyField;
@@ -438,14 +496,13 @@ public class UserMode extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField literatureField;
     private javax.swing.JTextField mathField;
+    private javax.swing.JTextField nameField;
     private javax.swing.JTextField physicsField;
     private javax.swing.JButton reveal_moyenne;
     private javax.swing.JTextField scienceField;
+    private javax.swing.JTextField surnameField;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {
