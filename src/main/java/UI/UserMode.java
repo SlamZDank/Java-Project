@@ -402,21 +402,21 @@ public class UserMode extends javax.swing.JFrame {
         String english = englishField.getText(), physics = physicsField.getText(), science = scienceField.getText();
         String literature = literatureField.getText();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (name.toLowerCase() == "name") { genHtml += "Name shouldn't be " + name + "<br>"; }
-        if (surname.toLowerCase() == "surname") { genHtml += "Surname shouldn't be " + surname + "<br>"; }
+        if (name.toLowerCase() == "name") { genHtml += "- Name shouldn't be " + name + "<br>"; }
+        if (surname.toLowerCase() == "surname") { genHtml += "- Surname shouldn't be " + surname + "<br>"; }
         try { LocalDate date = formatter.parse(dob, LocalDate::from); } 
-        catch (DateTimeParseException e) { genHtml += "Date input is incorrect,<br>it needs to follow dd/MM/yyyy" + "<br>"; }
+        catch (DateTimeParseException e) { genHtml += "- Date input is incorrect, it needs to follow: dd/MM/yyyy" + "<br>"; }
 
-        if (!isvalidScore(math)) { genHtml += "Math score is not valid <br>"; }
-        if (!isvalidScore(french)) { genHtml += "French score is not valid <br>"; }
-        if (!isvalidScore(geography)) { genHtml += "Geography score is not valid <br>"; }
-        if (!isvalidScore(chemistry)) { genHtml += "Chemistry score is not valid <br>"; }
-        if (!isvalidScore(german)) { genHtml += "German score is not valid <br>"; }
-        if (!isvalidScore(history)) { genHtml += "History score is not valid <br>"; }
-        if (!isvalidScore(english)) { genHtml += "English score is not valid <br>"; }
-        if (!isvalidScore(physics)) { genHtml += "Physics score is not valid <br>"; }
-        if (!isvalidScore(science)) { genHtml += "Science score is not valid <br>"; }
-        if (!isvalidScore(literature)) { genHtml += "Literature score is not valid"; }
+        if (!isvalidScore(math)) { genHtml += "- Math score is not valid <br>"; }
+        if (!isvalidScore(french)) { genHtml += "- French score is not valid <br>"; }
+        if (!isvalidScore(geography)) { genHtml += "- Geography score is not valid <br>"; }
+        if (!isvalidScore(chemistry)) { genHtml += "- Chemistry score is not valid <br>"; }
+        if (!isvalidScore(german)) { genHtml += "- German score is not valid <br>"; }
+        if (!isvalidScore(history)) { genHtml += "- History score is not valid <br>"; }
+        if (!isvalidScore(english)) { genHtml += "- English score is not valid <br>"; }
+        if (!isvalidScore(physics)) { genHtml += "- Physics score is not valid <br>"; }
+        if (!isvalidScore(science)) { genHtml += "- Science score is not valid <br>"; }
+        if (!isvalidScore(literature)) { genHtml += "- Literature score is not valid"; }
         
         // Spaghetti Code incoming
         
