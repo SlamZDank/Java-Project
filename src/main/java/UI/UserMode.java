@@ -10,10 +10,13 @@ import javax.swing.JOptionPane;
 
 public class UserMode extends javax.swing.JFrame {
     Etudiant Person = null;
+    String ID_Personne;
     
-    public UserMode() {
+    public UserMode(String ID) {
         initComponents();
         setIconImage();
+        ID_Personne = ID;
+        ID_Field.setText("ID: " + ID_Personne);
     }
     
     public static boolean isvalidScore(String strNum) {
@@ -36,6 +39,7 @@ public class UserMode extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Disconnect = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        ID_Field = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -110,6 +114,12 @@ public class UserMode extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
+        ID_Field.setFont(new java.awt.Font("SF Pro", 1, 36)); // NOI18N
+        ID_Field.setForeground(new java.awt.Color(255, 255, 255));
+        ID_Field.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(ID_Field);
+        ID_Field.setBounds(0, 380, 400, 50);
+
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("<html> - Providing false information WILL<br> lead to SEVERE repercussions, be warned!</html>");
@@ -121,7 +131,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("User Mode:");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(0, 380, 400, 60);
+        jLabel7.setBounds(0, 320, 400, 60);
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
@@ -459,6 +469,7 @@ public class UserMode extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Disconnect;
+    private javax.swing.JLabel ID_Field;
     private javax.swing.JButton Publish_To_DB;
     private javax.swing.JLabel Report_Score;
     private javax.swing.JLabel Report_Score10;
