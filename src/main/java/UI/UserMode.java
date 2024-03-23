@@ -88,7 +88,7 @@ public class UserMode extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Submission Form");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1242, 955));
+        setPreferredSize(new java.awt.Dimension(1242, 925));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -147,7 +147,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(0, 860, 400, 15);
+        jLabel3.setBounds(0, 870, 400, 15);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
@@ -158,10 +158,10 @@ public class UserMode extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_screen.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(-330, -140, 750, 1480);
+        jLabel1.setBounds(-330, -150, 750, 1480);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(0, 0, 401, 1000);
+        jPanel3.setBounds(0, 0, 401, 900);
 
         reveal_moyenne.setBackground(new java.awt.Color(255, 204, 255));
         reveal_moyenne.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
@@ -385,7 +385,7 @@ public class UserMode extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
 
         pack();
