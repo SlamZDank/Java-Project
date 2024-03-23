@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Enter Your User ID:");
 
         UserIDField.setBackground(new java.awt.Color(0, 0, 0));
-        UserIDField.setFont(new java.awt.Font("SF Pro Rounded", 0, 18)); // NOI18N
+        UserIDField.setFont(new java.awt.Font("SF Pro Display", 0, 24)); // NOI18N
         UserIDField.setForeground(new java.awt.Color(255, 255, 255));
         UserIDField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         UserIDField.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -179,24 +179,19 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         // UI.Dialogs.writeErr("Sus", "Something went wrong in my java understanding");
         String input = UserIDField.getText();
-        this.dispose();
         if (isNumeric(input)) {
+            this.dispose();
             UserMode UM = new UserMode();
             UM.setVisible(true);
             UM.pack();
             UM.setLocationRelativeTo(null);
         } else if (input.equals("root") || input.equals("admin") || input.equals("sudo")) {
+            this.dispose();
             AdminMode AM = new AdminMode();
             AM.setVisible(true);
             AM.pack();
             AM.setLocationRelativeTo(null);
-        } else {
-            Login l = new Login();
-            l.setVisible(true);
-            l.pack();
-            l.setLocationRelativeTo(null);
-            Dialogs.writeErr("Invalid Input", "Please enter a valid Identifier!");
-        }
+        } else { Dialogs.writeErr("Invalid Input", "Please enter a valid Identifier!"); }
         
         //Needs to handle an already existsing data entered!
         
