@@ -181,7 +181,7 @@ public class Login extends javax.swing.JFrame {
         String input = UserIDField.getText();
         if (isNumeric(input)) {
             this.dispose();
-            UserMode UM = new UserMode();
+            UserMode UM = new UserMode(input);
             UM.setVisible(true);
             UM.pack();
             UM.setLocationRelativeTo(null);
