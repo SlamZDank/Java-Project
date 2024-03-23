@@ -416,7 +416,7 @@ public class UserMode extends javax.swing.JFrame {
         if (!isvalidScore(english)) { genHtml += "- English score is not valid <br>"; }
         if (!isvalidScore(physics)) { genHtml += "- Physics score is not valid <br>"; }
         if (!isvalidScore(science)) { genHtml += "- Science score is not valid <br>"; }
-        if (!isvalidScore(literature)) { genHtml += "- Literature score is not valid"; }
+        if (!isvalidScore(literature)) { genHtml += "- Literature score is not valid <br>"; }
         
         // Spaghetti Code incoming
         
