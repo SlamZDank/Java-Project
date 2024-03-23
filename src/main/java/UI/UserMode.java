@@ -17,9 +17,9 @@ public class UserMode extends javax.swing.JFrame {
     }
     
     public static boolean isvalidScore(String strNum) {
-        int d;
+        double d;
         if (strNum == null) { return false; }
-        try { d = Integer.parseInt(strNum); } catch (NumberFormatException nfe) { return false; }
+        try { d = Double.parseDouble(strNum); } catch (NumberFormatException nfe) { return false; }
         return (!(d > 20 || d < 0));
     }
 
@@ -395,15 +395,15 @@ public class UserMode extends javax.swing.JFrame {
     // Makes a detailed report if false using the dialogs
     private boolean validateData(){
 
-        String genHtml = "<html>";
+        String genHtml = "<html><h3>INVALID INPUT</h3><br>";
         String name = nameField.getText(), surname = surnameField.getText(), dob = dobField.getText();
         String math = mathField.getText(), french = frenchField.getText(), geography = geographyField.getText();
         String chemistry = chemistryField.getText(), german = germanField.getText(), history = historyField.getText();
         String english = englishField.getText(), physics = physicsField.getText(), science = scienceField.getText();
         String literature = literatureField.getText();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        if (name.toLowerCase() == "name") { genHtml += "- Name shouldn't be " + name + "<br>"; }
-        if (surname.toLowerCase() == "surname") { genHtml += "- Surname shouldn't be " + surname + "<br>"; }
+        if (name.toLowerCase().equals("name")) { genHtml += "- Name shouldn't be " + name + "<br>"; }
+        if (surname.toLowerCase().equals("surname")) { genHtml += "- Surname shouldn't be " + surname + "<br>"; }
         try { LocalDate date = formatter.parse(dob, LocalDate::from); } 
         catch (DateTimeParseException e) { genHtml += "- Date input is incorrect, it needs to follow: dd/MM/yyyy" + "<br>"; }
 
@@ -420,7 +420,7 @@ public class UserMode extends javax.swing.JFrame {
         
         // Spaghetti Code incoming
         
-        if (genHtml != "<html>") {
+        if (!(genHtml.equals("<html><h3>INVALID INPUT</h3><br>"))) {
             genHtml += "</html>";
             Dialogs.writeErr("Invalid Input", genHtml);
             return false;
@@ -429,7 +429,7 @@ public class UserMode extends javax.swing.JFrame {
             Person.ajouteNotes(Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
         } else {
             Person.setHimself(name, surname, dob, Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
-        } // Modify Data
+        }
         return true;
     }
     
@@ -438,6 +438,7 @@ public class UserMode extends javax.swing.JFrame {
         if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
+            // try and catch for connectivity with database
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
     }//GEN-LAST:event_Publish_To_DBActionPerformed
