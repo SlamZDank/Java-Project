@@ -373,7 +373,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("V0.0.3");
+        jLabel10.setText("V0.0.4");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(1170, 20, 37, 15);
 

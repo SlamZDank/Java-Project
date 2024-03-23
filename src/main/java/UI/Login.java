@@ -82,7 +82,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("V0.0.3");
+        jLabel7.setText("V0.0.4");
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
