@@ -7,15 +7,12 @@ import java.text.DecimalFormat;
 // Not sure about it... didnt get the time to check
 
 public class Moyenne {
-    private ArrayList<Note> TabMoy = new ArrayList<>();
+    ArrayList<Note> TabMoy = new ArrayList<>();
     private double Moy = -1;
     private double coef_all = 0;
     private String mention = null;
 
-    public void push(Note New){
-        TabMoy.add(New);
-        // System.out.println("Pushed Note"); -> this works!
-    }
+    public void push(Note New){ TabMoy.add(New); }
 
     public Moyenne(){}
 
