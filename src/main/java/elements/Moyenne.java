@@ -66,5 +66,5 @@ public class Moyenne {
                 + getMention() + 
                 "\" et avec une moyenne de " 
                 + decimalFormat.format(getMoy())+ " !");
-    }
+    } // TODO: Correct This to change to english
 }

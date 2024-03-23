@@ -416,7 +416,7 @@ public class UserMode extends javax.swing.JFrame {
         if (!isvalidScore(english)) { genHtml += "English score is not valid <br>"; }
         if (!isvalidScore(physics)) { genHtml += "Physics score is not valid <br>"; }
         if (!isvalidScore(science)) { genHtml += "Science score is not valid <br>"; }
-        if (!isvalidScore(literature)) { genHtml += "Literature score is not valid <br>"; }
+        if (!isvalidScore(literature)) { genHtml += "Literature score is not valid"; }
         
         // Spaghetti Code incoming
         
@@ -428,19 +428,14 @@ public class UserMode extends javax.swing.JFrame {
             Person = new Etudiant(name, surname, dob);
             Person.ajouteNotes(Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
         } else {
-            Person.setHimself();
+            Person.setHimself(name, surname, dob, Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
         } // Modify Data
-        return true;
-    }
-    
-    private boolean dataMake(){
-        if (validateData() == false) return false;
         return true;
     }
     
     
     private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
-        // TODO add your handling code here:
+        if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
@@ -448,7 +443,7 @@ public class UserMode extends javax.swing.JFrame {
     }//GEN-LAST:event_Publish_To_DBActionPerformed
 
     private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
-        if (Person == null || dataMake() == false) { return; }
+        if (!(validateData())) { return; }
         Report_Score.setText(Person.moy.toString());
     }//GEN-LAST:event_reveal_moyenneActionPerformed
 

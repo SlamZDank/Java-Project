@@ -38,8 +38,12 @@ public class Etudiant {
         this.dateDeNaiss = dateDeNaiss;
     }
 
-    public void setHimself(){
-        
+    public void setHimself(String nom, String prenom, String dateDeNaiss, double m, double p, double l, double s, double c, double h, double g, double fr, double en, double ger){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateDeNaiss = dateDeNaiss;
+        ajouteNotes(m, p, l, s, c, h, g, fr, en, ger);
+        // It is going to be garbage collected anyway.
     }
 
     public void ajouteNotes(double m, double p, double l, double s, double c, double h, double g, double fr, double en, double ger){
