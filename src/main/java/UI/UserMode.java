@@ -168,7 +168,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(0, 870, 400, 15);
+        jLabel3.setBounds(0, 870, 400, 16);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
@@ -396,7 +396,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("V0.0.4");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(1170, 20, 37, 15);
+        jLabel10.setBounds(1170, 20, 35, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -410,69 +410,6 @@ public class UserMode extends javax.swing.JFrame {
         );
 
         pack();
-         //--------------- publish of the student info in the database--------------------
-        Publish_To_DB.addActionListener((java.awt.event.ActionListener) new ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            int studentId = Integer.parseInt( ID_Field.getText());
-            String studentName = nameField.getText();
-            String studentSurname = surnameField.getText();
-            String dobString = dobField.getText();
-            double mathScore = Double.parseDouble(mathField.getText());
-            double physicsScore = Double.parseDouble(physicsField.getText());
-            double literatureScore = Double.parseDouble(literatureField.getText());
-            double scienceScore = Double.parseDouble(scienceField.getText());
-            double chemistryScore = Double.parseDouble(chemistryField.getText());
-            double frenchScore = Double.parseDouble(frenchField.getText());
-            double englishScore = Double.parseDouble(englishField.getText());
-            double germanScore = Double.parseDouble(germanField.getText());
-    
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate dob = LocalDate.parse(dobString, formatter);
-    
-            DB db = new DB();
-            Connection connection = DB.getConnection();
-    
-            String query = "INSERT INTO student (id, name, surname, dob, math, physics, literature, chemistry, science, french, english, german, average, grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                int index = 1;
-                statement.setInt(index++, studentId);
-                statement.setString(index++, studentName);
-                statement.setString(index++, studentSurname);
-                statement.setDate(index++, java.sql.Date.valueOf(dob));
-                statement.setDouble(index++, mathScore);
-                statement.setDouble(index++, physicsScore);
-                statement.setDouble(index++, literatureScore);
-                statement.setDouble(index++, chemistryScore);
-                statement.setDouble(index++, scienceScore);
-                statement.setDouble(index++, frenchScore);
-                statement.setDouble(index++, englishScore);
-                statement.setDouble(index++, germanScore);
-                JLabel reportScoreField;
-                statement.setDouble(index++, Double.parseDouble(reportScoreField.getText()));
-                JLabel reportGradeField;
-                statement.setString(index++, reportGradeField.getText());
-                statement.executeUpdate();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(UserMode.this, "Error inserting data into database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-    
-            DB.closeConnection();
-        }
-
-        @Override
-        public void onResponse(Object response) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'onResponse'");
-        }
-
-        @Override
-        public void onFailure(Exception e) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'onFailure'");
-        }
-    });
-
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -509,7 +446,7 @@ public class UserMode extends javax.swing.JFrame {
             Dialogs.writeErr("Invalid Input", genHtml);
             return false;
         } else if (Person == null) {
-            Person = new Etudiant(name, surname, dob); // Person <- Etudiant refrence
+            Person = new Etudiant(name, surname, dob); // Person <- Etudiant reference
             Person.ajouteNotes(Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
         } else {
             Person.setHimself(name, surname, dob, Double.parseDouble(math), Double.parseDouble(physics), Double.parseDouble(literature), Double.parseDouble(science), Double.parseDouble(chemistry), Double.parseDouble(history), Double.parseDouble(geography), Double.parseDouble(french), Double.parseDouble(english), Double.parseDouble(german));
@@ -522,11 +459,68 @@ public class UserMode extends javax.swing.JFrame {
         if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
-            // try and catch for connectivity with database
+            int studentId = Integer.parseInt( ID_Field.getText());
+            String studentName = nameField.getText();
+            String studentSurname = surnameField.getText();
+            String dobString = dobField.getText();
+            double mathScore = Double.parseDouble(mathField.getText());
+            double physicsScore = Double.parseDouble(physicsField.getText());
+            double literatureScore = Double.parseDouble(literatureField.getText());
+            double scienceScore = Double.parseDouble(scienceField.getText());
+            double chemistryScore = Double.parseDouble(chemistryField.getText());
+            double historyScore = Double.parseDouble(historyField.getText());
+            double geographyScore = Double.parseDouble(geographyField.getText());
+            double frenchScore = Double.parseDouble(frenchField.getText());
+            double englishScore = Double.parseDouble(englishField.getText());
+            double germanScore = Double.parseDouble(germanField.getText());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate dob = LocalDate.parse(dobString, formatter);
+            Etudiant Person = new Etudiant(studentName, studentSurname, dobString); 
+            Person.ajouteNotes(mathScore,physicsScore, literatureScore, scienceScore, chemistryScore,historyScore, geographyScore, frenchScore,(englishScore),germanScore);
+            
+            // try and catch for connectivity with database 
+            Connection connection = DB.getConnection();
+            // define the insert query
+            String query = "INSERT INTO student (id, name, surname, dob, math, physics, literature, chemistry, science,history,geography, french, english, german, average, grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            // Statement help run the query using parameters in this case ? <- variable name
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                int index = 1;
+               
+                statement.setInt(index++, studentId);
+                statement.setString(index++, studentName);
+                statement.setString(index++, studentSurname);
+                statement.setDate(index++, java.sql.Date.valueOf(dob));
+                statement.setDouble(index++, mathScore);
+                statement.setDouble(index++, physicsScore);
+                statement.setDouble(index++, literatureScore);
+                statement.setDouble(index++, chemistryScore);
+                statement.setDouble(index++, scienceScore);
+                statement.setDouble(index++, historyScore);
+                statement.setDouble(index++, geographyScore);
+                statement.setDouble(index++, frenchScore);
+                statement.setDouble(index++, englishScore);
+                statement.setDouble(index++, germanScore);
+                statement.setDouble(index++, Person.moy.getMoy());
+                statement.setString(index++, Person.moy.getMention());
+                statement.executeUpdate();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(UserMode.this, "Error inserting data into database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    
+            DB.closeConnection();
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
-    }//GEN-LAST:event_Publish_To_DBActionPerformed
+    
+    
+//GEN-LAST:event_Publish_To_DBActionPerformed
 
+    Publish_To_DB.addActionListener(new  java.awt.event.ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            Publish_To_DBActionPerformed(e);
+        }
+    });
+}
     private void reveal_moyenneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reveal_moyenneActionPerformed
         if (!(validateData())) { return; }
         Report_Score.setText(Person.moy.toString());
