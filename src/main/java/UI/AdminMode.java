@@ -75,7 +75,7 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(0, 770, 390, 15);
+        jLabel5.setBounds(0, 770, 390, 16);
 
         jLabel4.setFont(new java.awt.Font("Noto Serif Display", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,7 +168,7 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("V0.0.4");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(1420, 20, 37, 15);
+        jLabel9.setBounds(1420, 20, 34, 16);
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
