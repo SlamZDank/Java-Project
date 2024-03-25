@@ -29,6 +29,8 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         Modify = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
         Export = new javax.swing.JButton();
@@ -69,13 +71,13 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("<html> Ignite Passion. <br> Inspire Excellence. <br>  Imagine Possibilities. </html>");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(0, 620, 390, 130);
+        jLabel6.setBounds(0, 520, 390, 130);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(0, 770, 390, 16);
+        jLabel5.setBounds(0, 660, 390, 16);
 
         jLabel4.setFont(new java.awt.Font("Noto Serif Display", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,26 +96,46 @@ public class AdminMode extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Admin_Screen.png"))); // NOI18N
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(-40, -90, 440, 932);
+        jLabel2.setBounds(0, 0, 440, 780);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 390, 1235);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science", "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1050, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(420, 80, 1050, 650);
+        jPanel3.setBounds(420, 80, 1040, 420);
 
         Modify.setBackground(new java.awt.Color(255, 204, 255));
         Modify.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -125,7 +147,7 @@ public class AdminMode extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Modify);
-        Modify.setBounds(420, 750, 210, 40);
+        Modify.setBounds(460, 590, 180, 40);
 
         Delete.setBackground(new java.awt.Color(255, 204, 255));
         Delete.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -137,7 +159,7 @@ public class AdminMode extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Delete);
-        Delete.setBounds(700, 750, 210, 40);
+        Delete.setBounds(930, 590, 210, 40);
 
         Export.setBackground(new java.awt.Color(255, 204, 255));
         Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -149,7 +171,7 @@ public class AdminMode extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Export);
-        Export.setBounds(990, 750, 210, 40);
+        Export.setBounds(1170, 590, 210, 40);
 
         Sort.setBackground(new java.awt.Color(255, 204, 255));
         Sort.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -161,7 +183,7 @@ public class AdminMode extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Sort);
-        Sort.setBounds(1260, 750, 210, 40);
+        Sort.setBounds(680, 590, 210, 40);
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,7 +207,7 @@ public class AdminMode extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -237,6 +259,8 @@ public class AdminMode extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {

@@ -129,13 +129,13 @@ public class UserMode extends javax.swing.JFrame {
         ID_Field.setForeground(new java.awt.Color(255, 255, 255));
         ID_Field.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel3.add(ID_Field);
-        ID_Field.setBounds(0, 380, 400, 50);
+        ID_Field.setBounds(10, 370, 400, 40);
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("<html> - Providing false information WILL<br> lead to SEVERE repercussions, be warned!</html>");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(40, 640, 300, 70);
+        jLabel9.setBounds(30, 600, 250, 90);
 
         jLabel7.setFont(new java.awt.Font("SF Pro Rounded", 0, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +149,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("<html> WARNING: <br><br> - Please TRIPLE CHECK your information before submitting <br> as it is IRREVERSIBLE and can only <br> be changed by authorised personnel!</html>");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(40, 490, 310, 140);
+        jLabel8.setBounds(30, 410, 280, 190);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,24 +162,24 @@ public class UserMode extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("<html> Ignite Passion. <br> Inspire Excellence. <br>  Imagine Possibilities. </html>");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(40, 710, 320, 130);
+        jLabel4.setBounds(40, 690, 270, 100);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(0, 870, 400, 16);
+        jLabel3.setBounds(-20, 790, 400, 16);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(0, 60, 400, 210);
+        jLabel2.setBounds(10, 60, 400, 210);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user_screen.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(-330, -150, 750, 1480);
+        jLabel1.setBounds(-310, -200, 750, 1480);
 
         jPanel2.add(jPanel3);
         jPanel3.setBounds(0, 0, 401, 900);
@@ -194,7 +194,7 @@ public class UserMode extends javax.swing.JFrame {
             }
         });
         jPanel2.add(reveal_moyenne);
-        reveal_moyenne.setBounds(480, 820, 180, 40);
+        reveal_moyenne.setBounds(520, 760, 180, 40);
 
         Publish_To_DB.setBackground(new java.awt.Color(255, 204, 255));
         Publish_To_DB.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
@@ -206,7 +206,7 @@ public class UserMode extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Publish_To_DB);
-        Publish_To_DB.setBounds(1030, 820, 150, 40);
+        Publish_To_DB.setBounds(1030, 760, 150, 40);
 
         Report_Score.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         Report_Score.setForeground(new java.awt.Color(255, 255, 255));
@@ -396,17 +396,19 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("V0.0.4");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(1170, 20, 35, 16);
+        jLabel10.setBounds(1170, 20, 34, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -454,7 +456,7 @@ public class UserMode extends javax.swing.JFrame {
         return true;
     }
     
-    
+    // This method is under testing 
     private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
@@ -514,10 +516,19 @@ public class UserMode extends javax.swing.JFrame {
     
     
 //GEN-LAST:event_Publish_To_DBActionPerformed
-
+    
     Publish_To_DB.addActionListener(new  java.awt.event.ActionListener() {
+        @Override
         public void actionPerformed(ActionEvent e) {
             Publish_To_DBActionPerformed(e);
+            //this commented code adds the new student to the table in admin mode once it's added to the database 
+            // Still don't know how to use jTable1 since it's  declared in AdminMode.java
+            //jTable1.addRow(new Object[]{
+                               //studentId,studentName.studentSurname,
+                               //dob,mathScore,physicsScore,literatureScore
+                               //,chemistryScore,scienceScore,historyScore,geographyScore,
+                               //frenchScore,englishScore,germanScore,Person.moy.getMoy()
+                               //,Person.moy.getMention()});
         }
     });
 }
