@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo</module>
-        <module>demo</module>
+       
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,12 +17,18 @@
     </properties>
     <name>Sakura-Project</name>
     <dependencies>
-        <!-- <dependency>
-            <groupId>anyvalue</groupId>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.3</version>
-        </dependency> -->
-    
+            <version>8.3.0</version>
+        </dependency>
+
+        <!-- <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>  -->
       <dependency>
         <groupId>org.elasticsearch</groupId>
         <artifactId>elasticsearch</artifactId>
