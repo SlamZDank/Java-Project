@@ -64,6 +64,7 @@ public class Login extends javax.swing.JFrame {
         LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("click");
                 LoginButtonActionPerformed(evt);
             }
         });

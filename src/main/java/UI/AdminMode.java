@@ -1,12 +1,27 @@
 package UI;
 
+import elements.Etudiant;
+import elements.DB;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class AdminMode extends javax.swing.JFrame {
+public class AdminMode extends javax.swing.JFrame  {
+     private ArrayList<Etudiant> etudiants; // Stores student data
+   
 
     public AdminMode() {
         initComponents();
         setIconImage();
+        etudiants = new ArrayList<>();
+        populateTable();
     }
 
     /**
@@ -221,20 +236,154 @@ public class AdminMode extends javax.swing.JFrame {
         l.setLocationRelativeTo(null);
     }//GEN-LAST:event_DisconnectActionPerformed
 
+    private void populateTable() {
+    // Sample data (replace with your data retrieval logic)
+    etudiants.add(new Etudiant("John", "doe", "02/01/2003"));
+    etudiants.add(new Etudiant("carl", "johnson", "12/10/2003"));
+
+    // Create DefaultTableModel for the table
+    DefaultTableModel tableModel = new DefaultTableModel(
+        new String[]{"Nom", "Prénom", "Date de Naissance", "Moyenne"}, 0);
+
+    // Add student data to the table model
+    for (Etudiant etudiant : etudiants) {
+      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
+      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
+    }
+
+    // Set the table model for jTable1
+    jTable1.setModel(tableModel);
+  }
     private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ExportActionPerformed
 
+    
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow >= 0) {
+      int confirmation = JOptionPane.showConfirmDialog(this, "Delete selected sturdent ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+      if (confirmation == JOptionPane.YES_OPTION) {
+        etudiants.remove(selectedRow);
+        updateTableModel();
+      }
+    } else {
+      JOptionPane.showMessageDialog(this, "Select the student you want to remove", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_DeleteActionPerformed
+
+// Problem with adding event listeners to buttons 
+    
+ //Delete.addActionListener(new  java.awt.event.ActionListener() {
+        //Override
+        //public void DeleteActionPerformed1(ActionEvent e) {
+       //     DeleteActionPerformed(e);
+       // }
+   // });
+//}
 
     private void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
         // TODO add your handling code here:
+          //Collections.sort(etudiants);
     }//GEN-LAST:event_SortActionPerformed
 
+     public void updateStudent(Etudiant updatedEtudiant) {
+    // Update the corresponding Etudiant object in the ArrayList
+    int selectedRow = jTable1.getSelectedRow();
+    etudiants.set(selectedRow, updatedEtudiant);
+
+    // Update the table model with the modified data
+    updateTableModel();
+  }
+      private void updateTableModel() {
+    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+    tableModel.setRowCount(0); // Clear existing data
+
+    // Repopulate the table model with updated student data
+    for (Etudiant etudiant : etudiants) {
+      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
+      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
+    }
+
+    // Refresh the table
+    tableModel.fireTableDataChanged();
+  }
+        public void refreshTable() {
+    // Clear existing data from the table model
+    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+    tableModel.setRowCount(0);
+
+    // Fetch updated student data from database (replace with your query)
+    etudiants.clear();
+    Connection connection = DB.getConnection();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet resultSet = statement.executeQuery("SELECT * FROM students");
+      while (resultSet.next()) {
+        String name = resultSet.getString("name");
+        String surname = resultSet.getString("surname");
+        String dob = resultSet.getString("dob");
+        // ... (extract other student information)
+        Etudiant etudiant = new Etudiant(name, surname, dob);
+        // ... (set other student information like scores and average)
+        etudiants.add(etudiant);
+      }
+      resultSet.close();
+      statement.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+      JOptionPane.showMessageDialog(this, "Erreur lors du rechargement des données", "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Repopulate the table model with updated student data
+    for (Etudiant etudiant : etudiants) {
+      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
+      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
+    }
+
+    // Refresh the table
+    tableModel.fireTableDataChanged();
+  }
     private void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+            if (selectedRow >= 0) {
+              Etudiant selectedEtudiant = etudiants.get(selectedRow);
+
+              // display a simple dialog to edit some fields
+              String newName = JOptionPane.showInputDialog(this, "Enter new name:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newSurname = JOptionPane.showInputDialog(this, "Enter new surname:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+            
+              String newdateOfBirth = JOptionPane.showInputDialog(this, "Enter new Date of birth:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newMathScore = JOptionPane.showInputDialog(this, "Enter new math score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newPhysicsScore = JOptionPane.showInputDialog(this, "Enter new physics score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newLiterraturescore = JOptionPane.showInputDialog(this, "Enter new litterature score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newScienceScore = JOptionPane.showInputDialog(this, "Enter new science score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newChemistryScore = JOptionPane.showInputDialog(this, "Enter new chemistry score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newHistoryScore = JOptionPane.showInputDialog(this, "Enter new history score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newGeographyScore = JOptionPane.showInputDialog(this, "Enter new geography score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newFrenchScore = JOptionPane.showInputDialog(this, "Enter new french score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newEnglishScore = JOptionPane.showInputDialog(this, "Enter new english score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+              String newGermanScore = JOptionPane.showInputDialog(this, "Enter new german score:", "Modify Student", JOptionPane.PLAIN_MESSAGE);
+          
+              // ... (similar prompts for other editable fields)
+
+              // Update the selected student object with the modified values
+              if (newName != null) {
+                selectedEtudiant.setNom(newName);
+              }
+              if (newSurname != null) {
+                selectedEtudiant.setPrenom(newSurname);
+              }
+              // ... (update other fields based on user input)
+
+              // Update the table model with the modified data
+              updateTableModel();
+            } else {
+              JOptionPane.showMessageDialog(this, "Select a student to modify", "Error", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_ModifyActionPerformed
 
     /**

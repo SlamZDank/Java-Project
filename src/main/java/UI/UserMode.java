@@ -11,6 +11,8 @@ import java.awt.Toolkit;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,8 +22,8 @@ import org.elasticsearch.action.ActionListener;
 public class UserMode extends javax.swing.JFrame {
     Etudiant Person = null;
     String ID_Person;
-    
-    public UserMode(String ID) {
+
+        public UserMode(String ID) {
         initComponents();
         setIconImage();
         ID_Person = ID;
@@ -190,6 +192,7 @@ public class UserMode extends javax.swing.JFrame {
         reveal_moyenne.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
         reveal_moyenne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("click");
                 reveal_moyenneActionPerformed(evt);
             }
         });
@@ -212,7 +215,7 @@ public class UserMode extends javax.swing.JFrame {
         Report_Score.setForeground(new java.awt.Color(255, 255, 255));
         Report_Score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(Report_Score);
-        Report_Score.setBounds(480, 760, 700, 40);
+        Report_Score.setBounds(480, 710, 700, 40);
 
         Report_Score4.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         Report_Score4.setForeground(new java.awt.Color(255, 255, 255));
@@ -388,7 +391,7 @@ public class UserMode extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setFont(new java.awt.Font("SF Pro Display", 0, 48)); // NOI18N
         jPanel2.add(jSeparator1);
-        jSeparator1.setBounds(830, 240, 30, 490);
+        jSeparator1.setBounds(830, 240, 30, 460);
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
@@ -455,16 +458,33 @@ public class UserMode extends javax.swing.JFrame {
         }
         return true;
     }
+//this method extracts the id from the ID_field
+      public static String extractID(String input) {
+        String id = null;
+        Pattern pattern = Pattern.compile("\\d+"); // Match one or more digits
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+            id = matcher.group(); // Retrieve the matched digits
+        }
+
+        return id;
+    }
     
     // This method is under testing 
-    private void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
+    public void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");
         if (confirmation == JOptionPane.YES_OPTION) {
-            int studentId = Integer.parseInt( ID_Field.getText());
+            int studentId = Integer.parseInt( extractID(ID_Field.getText()));
             String studentName = nameField.getText();
-            String studentSurname = surnameField.getText();
             String dobString = dobField.getText();
+            //testing date format 
+            // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            // LocalDate date = LocalDate.parse(dobString, formatter);
+            System.out.println(dobString);
+            String studentSurname = surnameField.getText();
+           
             double mathScore = Double.parseDouble(mathField.getText());
             double physicsScore = Double.parseDouble(physicsField.getText());
             double literatureScore = Double.parseDouble(literatureField.getText());
@@ -475,7 +495,7 @@ public class UserMode extends javax.swing.JFrame {
             double frenchScore = Double.parseDouble(frenchField.getText());
             double englishScore = Double.parseDouble(englishField.getText());
             double germanScore = Double.parseDouble(germanField.getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dob = LocalDate.parse(dobString, formatter);
             Etudiant Person = new Etudiant(studentName, studentSurname, dobString); 
             Person.ajouteNotes(mathScore,physicsScore, literatureScore, scienceScore, chemistryScore,historyScore, geographyScore, frenchScore,(englishScore),germanScore);
@@ -483,7 +503,7 @@ public class UserMode extends javax.swing.JFrame {
             // try and catch for connectivity with database 
             Connection connection = DB.getConnection();
             // define the insert query
-            String query = "INSERT INTO student (id, name, surname, dob, math, physics, literature, chemistry, science,history,geography, french, english, german, average, grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO etudiant (id, name, surname, dob, math, physics, literature, chemistry, science,history,geography, french, english, german, average, grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Statement help run the query using parameters in this case ? <- variable name
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -506,6 +526,7 @@ public class UserMode extends javax.swing.JFrame {
                 statement.setDouble(index++, Person.moy.getMoy());
                 statement.setString(index++, Person.moy.getMention());
                 statement.executeUpdate();
+                 JOptionPane.showMessageDialog(this, "Data inserted into the database", "Succes", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(UserMode.this, "Error inserting data into database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -520,12 +541,13 @@ public class UserMode extends javax.swing.JFrame {
     Publish_To_DB.addActionListener(new  java.awt.event.ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("click");
             Publish_To_DBActionPerformed(e);
             //this commented code adds the new student to the table in admin mode once it's added to the database 
             // Still don't know how to use jTable1 since it's  declared in AdminMode.java
             //jTable1.addRow(new Object[]{
                                //studentId,studentName.studentSurname,
-                               //dob,mathScore,physicsScore,literatureScore
+                                //dob,mathScore,physicsScore,literatureScore
                                //,chemistryScore,scienceScore,historyScore,geographyScore,
                                //frenchScore,englishScore,germanScore,Person.moy.getMoy()
                                //,Person.moy.getMention()});

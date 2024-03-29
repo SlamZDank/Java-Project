@@ -4,7 +4,11 @@
     <groupId>com.slamzdank.griffith</groupId>
     <artifactId>sakura</artifactId>
     <version>0.0.4</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>demo</module>
+        <module>demo</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>

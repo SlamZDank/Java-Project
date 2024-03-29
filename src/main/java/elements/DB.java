@@ -34,7 +34,7 @@ public  class DB {
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/etudiant", "root", "ILikeIcecream00");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/etudiant", "sqluser", "password");
             } catch (SQLException e) {
                 e.printStackTrace(); // Handle the exception appropriately
             }

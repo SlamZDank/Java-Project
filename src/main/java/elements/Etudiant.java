@@ -96,6 +96,15 @@ public class Etudiant {
 
     public String getPrenom() { return prenom; }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
+
     public String getDateDeNaiss() { return dateDeNaiss; }
 
 
