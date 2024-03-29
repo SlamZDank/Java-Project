@@ -1,6 +1,6 @@
 package elements;
 
-import java.util.*;
+// import java.util.*;
 
 /*
  * This concerns the implementation of Moyenne (multiple note) Class
@@ -38,50 +38,46 @@ public class Etudiant {
         this.dateDeNaiss = dateDeNaiss;
     }
 
-    public void ajouteNotes(){
+    public void setHimself(String nom, String prenom, String dateDeNaiss, double m, double p, double l, double s, double c, double h, double g, double fr, double en, double ger){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateDeNaiss = dateDeNaiss;
+        ajouteNotes(m, p, l, s, c, h, g, fr, en, ger);
+        // It is going to be garbage collected anyway.
+    }
+
+    public void ajouteNotes(double m, double p, double l, double s, double c, double h, double g, double fr, double en, double ger){
         moy = new Moyenne();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Donner les notes: ");
 
-        System.out.println("Math: ");
         Note noteMath = Note.MATH;
-        noteMath.setNote(sc.nextDouble());
+        noteMath.setNote(m);
 
-        System.out.println("Physique: ");
         Note notePhy = Note.PHYSIQUE;
-        notePhy.setNote(sc.nextDouble());
-        
-        System.out.println("Litteraire: ");
+        notePhy.setNote(p);
+
         Note noteLit = Note.LITTERAIRE;
-        noteLit.setNote(sc.nextDouble());
+        noteLit.setNote(l);
 
-        System.out.println("Svt: ");
         Note noteSvt = Note.SVT;
-        noteSvt.setNote(sc.nextDouble());
+        noteSvt.setNote(s);
 
-        System.out.println("Chimie: ");
         Note noteChim = Note.CHIMIE;
-        noteChim.setNote(sc.nextDouble());
+        noteChim.setNote(c);
 
-        System.out.println("Histoire: ");
         Note noteHis = Note.HISTOIRE;
-        noteHis.setNote(sc.nextDouble());
+        noteHis.setNote(h);
 
-        System.out.println("Geographhie: ");
         Note noteGeo = Note.GEOGRAPHIE;
-        noteGeo.setNote(sc.nextDouble());
+        noteGeo.setNote(g);
         
-        System.out.println("Français: ");
         Note noteFr = Note.FRANCAIS;
-        noteFr.setNote(sc.nextDouble());
+        noteFr.setNote(fr);
 
-        System.out.println("Anglais: ");
         Note noteAng = Note.ANGLAIS;
-        noteAng.setNote(sc.nextDouble());
+        noteAng.setNote(en);
 
-        System.out.println("Allemand: ");
         Note noteGer = Note.ALLEMAND;
-        noteGer.setNote(sc.nextDouble());
+        noteGer.setNote(ger);
 
         //Matières: Math / Physique / Litteraire / Chimie / SVT / Histoire / Geographie / Francais / Anglais / Allmagne
         moy.push(noteMath);
@@ -94,13 +90,20 @@ public class Etudiant {
         moy.push(noteFr);
         moy.push(noteAng);
         moy.push(noteGer);
-
-        sc.close();
     }
 
     public String getNom() { return nom; }
 
     public String getPrenom() { return prenom; }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
 
     public String getDateDeNaiss() { return dateDeNaiss; }
 

@@ -7,15 +7,12 @@ import java.text.DecimalFormat;
 // Not sure about it... didnt get the time to check
 
 public class Moyenne {
-    private ArrayList<Note> TabMoy = new ArrayList<>();
+    ArrayList<Note> TabMoy = new ArrayList<>();
     private double Moy = -1;
     private double coef_all = 0;
     private String mention = null;
 
-    public void push(Note New){
-        TabMoy.add(New);
-        // System.out.println("Pushed Note"); -> this works!
-    }
+    public void push(Note New){ TabMoy.add(New); }
 
     public Moyenne(){}
 
@@ -39,35 +36,35 @@ public class Moyenne {
         if (mention != null) {return mention;}
 
         if (this.getMoy() < 10.0) { 
-            mention = "Refusé(e)";
+            mention = "Not Good";
             return mention;
         }
 
         if (this.getMoy() < 12.0) { 
-            mention = "Assez Bien";
+            mention = "Sufficiently Good";
             return mention;
         }
 
         if (this.getMoy() < 14.0) { 
-            mention = "Bien";
+            mention = "Good";
             return mention;
         }
 
-        mention = "Très Bien";
+        mention = "Very Good";
         return mention;
     }
     public String status(){
         String mention = getMention();
-        if (mention.equals("Refusée!")) {return "Refusé(e)";}
-        else{return "Admis(e)";}
+        if (mention.equals("Not Good")) {return "Rejected";}
+        else{return "Accepted";}
     }
     
     public String toString(){
-        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
         return (status() + 
-                " avec une mention de \"" 
+                " with a remark of \"" 
                 + getMention() + 
-                "\" et avec une moyenne de " 
+                "\" and with a score of " 
                 + decimalFormat.format(getMoy())+ " !");
     }
 }
