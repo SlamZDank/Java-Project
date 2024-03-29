@@ -18,7 +18,8 @@ import java.sql.*;
   *   3. "root" -> ye3mel search lel ness lkol "select * from Etudiant" w ywarrihom
   */
 
-public class DB {
+public  class DB {
+    private static Connection connection;
     public DB() {}
     
     public void ajoutEtudiant(){}
@@ -28,25 +29,26 @@ public class DB {
     public void afficheListeEtudiant(){
 
     }
-    public static void main(String[] args) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/Java-Project";
-            // This is to connect to the database in table Etudiant
-            String username = "sqluser";
-            String password = "password";
-            Connection con = DriverManager.getConnection(url,username,password);
-            Statement stmt = con.createStatement();
-            //stmt.executeUpdate();
-            
-            ResultSet myRs =stmt.executeQuery("select * from Etudiant");
-            while (myRs.next()){
-                System.out.println(myRs.getString("nom") + ", " + myRs.getString("prenom"));
+   
+    
+    public static Connection getConnection() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/etudiant", "sqluser", "password");
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle the exception appropriately
             }
-            myRs.close ( ) ; stmt.close ( ); con.close ( );
+        }
+        return connection;
+    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
         }
     }
 }
