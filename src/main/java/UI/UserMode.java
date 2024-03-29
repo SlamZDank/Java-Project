@@ -43,7 +43,7 @@ public class UserMode extends javax.swing.JFrame {
      */
 
     
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "rawtypes" })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -429,7 +429,7 @@ public class UserMode extends javax.swing.JFrame {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (name.toLowerCase().equals("name")) { genHtml += "- Name shouldn't be " + name + "<br>"; }
         if (surname.toLowerCase().equals("surname")) { genHtml += "- Surname shouldn't be " + surname + "<br>"; }
-        try { LocalDate date = formatter.parse(dob, LocalDate::from); } 
+        try { formatter.parse(dob, LocalDate::from); } 
         catch (DateTimeParseException e) { genHtml += "- Date input is incorrect, it needs to follow: dd/MM/yyyy" + "<br>"; }
 
         if (!isvalidScore(math)) { genHtml += "- Math score is not valid <br>"; }
@@ -525,13 +525,11 @@ public class UserMode extends javax.swing.JFrame {
                 statement.setDouble(index++, Person.moy.getMoy());
                 statement.setString(index++, Person.moy.getMention());
                 statement.executeUpdate();
-                 JOptionPane.showMessageDialog(this, "Data inserted into the database", "Succes", JOptionPane.INFORMATION_MESSAGE);
+                
+                Dialogs.SuccessDialog("Success", "Data inserted into the database!");
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(UserMode.this, "Error inserting data into database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                Dialogs.writeErr("Error", "<html>Error inserting data into database: <br>" + ex.getMessage() + "</html>");
             }
-    
-        //    DB.closeConnection();
-            Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
     
     
@@ -544,12 +542,12 @@ public class UserMode extends javax.swing.JFrame {
             Publish_To_DBActionPerformed(e);
             //this commented code adds the new student to the table in admin mode once it's added to the database 
             // Still don't know how to use jTable1 since it's  declared in AdminMode.java
-            //jTable1.addRow(new Object[]{
-                               //studentId,studentName.studentSurname,
-                                //dob,mathScore,physicsScore,literatureScore
-                               //,chemistryScore,scienceScore,historyScore,geographyScore,
-                               //frenchScore,englishScore,germanScore,Person.moy.getMoy()
-                               //,Person.moy.getMention()});
+            /* jTable1.addRow(new Object[]{
+                               studentId,studentName.studentSurname,
+                                dob,mathScore,physicsScore,literatureScore
+                               ,chemistryScore,scienceScore,historyScore,geographyScore,
+                               frenchScore,englishScore,germanScore,Person.moy.getMoy()
+                               ,Person.moy.getMention()}); */
         }
     });
 }
@@ -558,12 +556,13 @@ public class UserMode extends javax.swing.JFrame {
         Report_Score.setText(Person.moy.toString());
     }//GEN-LAST:event_reveal_moyenneActionPerformed
 
-    private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
+    public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
         this.dispose();
         Login l = new Login();
         l.setVisible(true);
         l.pack();
         l.setLocationRelativeTo(null);
+        DB.closeConnection();
     }//GEN-LAST:event_DisconnectActionPerformed
 
     

@@ -228,15 +228,16 @@ public class AdminMode extends javax.swing.JFrame  {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
+    public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
         this.dispose();
         Login l = new Login();
         l.setVisible(true);
         l.pack();
         l.setLocationRelativeTo(null);
+        DB.closeConnection();
     }//GEN-LAST:event_DisconnectActionPerformed
 
-    private void populateTable() {
+    public void populateTable() {
     // Sample data (replace with your data retrieval logic)
     etudiants.add(new Etudiant("John", "doe", "02/01/2003"));
     etudiants.add(new Etudiant("carl", "johnson", "12/10/2003"));
@@ -254,12 +255,12 @@ public class AdminMode extends javax.swing.JFrame  {
     // Set the table model for jTable1
     jTable1.setModel(tableModel);
   }
-    private void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
+    public void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ExportActionPerformed
 
     
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+    public void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
     if (selectedRow >= 0) {
@@ -271,19 +272,20 @@ public class AdminMode extends javax.swing.JFrame  {
     } else {
       JOptionPane.showMessageDialog(this, "Select the student you want to remove", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    }//GEN-LAST:event_DeleteActionPerformed
+  }
+    //GEN-LAST:event_DeleteActionPerformed
 
 // Problem with adding event listeners to buttons 
     
- //Delete.addActionListener(new  java.awt.event.ActionListener() {
-        //Override
-        //public void DeleteActionPerformed1(ActionEvent e) {
-       //     DeleteActionPerformed(e);
-       // }
-   // });
-//}
+//  Delete.addActionListener(new  java.awt.event.ActionListener() {
+//         @Override
+//         public void DeleteActionPerformed1(ActionEvent e) {
+//            DeleteActionPerformed(e);
+//        }
+//    });
+// }
 
-    private void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
+    public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
         // TODO add your handling code here:
           //Collections.sort(etudiants);
     }//GEN-LAST:event_SortActionPerformed
@@ -346,7 +348,7 @@ public class AdminMode extends javax.swing.JFrame  {
     // Refresh the table
     tableModel.fireTableDataChanged();
   }
-    private void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
+    public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
             if (selectedRow >= 0) {
@@ -409,10 +411,30 @@ public class AdminMode extends javax.swing.JFrame  {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/db_icon.png")));
     }
 }
+
+// End of AdminMode.java
+// Reload the database: state(-1) -> Used in AdminMode.java when constructing the AdminMode Window
+// it does these things:
+// DELETE ALL ELEMENTS FROM THE JTABLE
+// Access the database
+// set label
+// Query the database: SELECT * from etudiants
+// Iterate over each element while populating the JTable
+// JTable has all elements
+//
+// Reload the database: state(1) ->
+// DELETE ALL ELEMENTS FROM THE JTABLE
+// Query the database with sorting of moyenne
+// set label
+// Populate the JTable with the sorted elements
+
+// int s = -1;
+// s *= -1;
+// Reload the database: state(s)
