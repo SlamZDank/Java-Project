@@ -502,7 +502,7 @@ public class UserMode extends javax.swing.JFrame {
             // try and catch for connectivity with database 
             Connection connection = DB.getConnection();
             // define the insert query
-            String query = "INSERT INTO etudiant (id, name, surname, dob, math, physics, literature, chemistry, science,history,geography, french, english, german, average, grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO etudiant (idEtudiant, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
             // Statement help run the query using parameters in this case ? <- variable name
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -530,7 +530,7 @@ public class UserMode extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(UserMode.this, "Error inserting data into database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
     
-            DB.closeConnection();
+        //    DB.closeConnection();
             Dialogs.SuccessDialog("Data Published", "Successfully Published the data!");
         }
     
