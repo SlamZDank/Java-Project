@@ -19,6 +19,9 @@ import java.sql.*;
   */
 
 public  class DB {
+    // static final String URL = "jdbc:mysql://localhost:3306/etudiant";
+    // static final String USER = "sqluser";
+    // static final String PASS = "password";
     private static Connection connection;
     public DB() {}
     
@@ -35,8 +38,10 @@ public  class DB {
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/etudiant", "sqluser", "password");
+                System.out.println("Connected to MySQL database");
             } catch (SQLException e) {
                 e.printStackTrace(); // Handle the exception appropriately
+                System.out.println("Connection failed to the database");
             }
         }
         return connection;
@@ -51,4 +56,15 @@ public  class DB {
             }
         }
     }
+    // public static void main(String[] args) throws SQLException {
+    //     try(Connection conn = DriverManager.getConnection(URL, USER, PASS);
+    //     Statement stmt = conn.createStatement();){
+    //         String sql = "CREATE DATABASE new";
+    //         stmt.executeUpdate(sql);
+    //         System.out.println("Database created successfully...");
+    //     }
+    //     catch(SQLException e){
+    //         e.printStackTrace();
+    //     }
+    // }
 }
