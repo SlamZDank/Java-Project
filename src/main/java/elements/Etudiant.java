@@ -29,6 +29,7 @@ package elements;
 
 
 public class Etudiant {
+    private int id;
     private String nom,prenom,dateDeNaiss;
     public Moyenne moy = null;
 
@@ -96,12 +97,67 @@ public class Etudiant {
 
     public String getPrenom() { return prenom; }
 
+    public void setId(int id ) {
+        this.id= id;
+     }
+     public int getId() {
+        return id;
+     }
     public void setNom(String nom) {
         this.nom = nom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+    public double getNoteMath(){
+        Note noteMath = Note.MATH;
+        return noteMath.getNote();
+    }
+    
+    public double getNotePhysique(){
+        Note notePhysique = Note.PHYSIQUE;
+        return notePhysique.getNote();
+    }
+    
+    public double getNoteLitteraire(){
+        Note noteLitteraire = Note.LITTERAIRE;
+        return noteLitteraire.getNote();
+    }
+    
+    public double getNoteSvt(){
+        Note noteSvt = Note.SVT;
+        return noteSvt.getNote();
+    }
+    
+    public double getNoteChimie(){
+        Note noteChimie = Note.CHIMIE;
+        return noteChimie.getNote();
+    }
+    
+    public double getNoteHistoire(){
+        Note noteHistoire = Note.HISTOIRE;
+        return noteHistoire.getNote();
+    }
+    
+    public double getNoteGeographie(){
+        Note noteGeographie = Note.GEOGRAPHIE;
+        return noteGeographie.getNote();
+    }
+    
+    public double getNoteFrancais(){
+        Note noteFrancais = Note.FRANCAIS;
+        return noteFrancais.getNote();
+    }
+    
+    public double getNoteAnglais(){
+        Note noteAnglais = Note.ANGLAIS;
+        return noteAnglais.getNote();
+    }
+    
+    public double getNoteAllemand(){
+        Note noteAllemand = Note.ALLEMAND;
+        return noteAllemand.getNote();
     }
     
 

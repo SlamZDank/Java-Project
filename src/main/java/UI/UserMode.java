@@ -540,14 +540,6 @@ public class UserMode extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("click");
             Publish_To_DBActionPerformed(e);
-            //this commented code adds the new student to the table in admin mode once it's added to the database 
-            // Still don't know how to use jTable1 since it's  declared in AdminMode.java
-            /* jTable1.addRow(new Object[]{
-                               studentId,studentName.studentSurname,
-                                dob,mathScore,physicsScore,literatureScore
-                               ,chemistryScore,scienceScore,historyScore,geographyScore,
-                               frenchScore,englishScore,germanScore,Person.moy.getMoy()
-                               ,Person.moy.getMention()}); */
         }
     });
 }

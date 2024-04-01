@@ -4,14 +4,18 @@ import elements.Etudiant;
 import elements.DB;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminMode extends javax.swing.JFrame  {
      private ArrayList<Etudiant> etudiants; // Stores student data
@@ -21,7 +25,8 @@ public class AdminMode extends javax.swing.JFrame  {
         initComponents();
         setIconImage();
         etudiants = new ArrayList<>();
-        populateTable();
+        renderDatabase();
+      
     }
 
     /**
@@ -126,10 +131,12 @@ public class AdminMode extends javax.swing.JFrame  {
                 "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science", "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
             }
         ) {
+            @SuppressWarnings("rawtypes")
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
 
+            @SuppressWarnings("rawtypes")
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
@@ -170,19 +177,46 @@ public class AdminMode extends javax.swing.JFrame  {
         Delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+              int selectedRow = jTable1.getSelectedRow();
+
+              if (selectedRow >= 0) {
+                  // Confirmation dialog for deletion
+                  int confirmation = JOptionPane.showConfirmDialog(AdminMode.this, "Delete selected student?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                  if (confirmation == JOptionPane.YES_OPTION) {
+        
+                      // 1- Get the student object from the model (if applicable):
+                      Etudiant selectedStudent = null;
+                      if (etudiants != null && selectedRow < etudiants.size()) {
+                          selectedStudent = etudiants.get(selectedRow);
+                      }
+        
+                      // 2- Remove student from the underlying data source (database)
+                      if (selectedStudent != null) {
+                          // ... delete student from database using selectedStudent.getId() 
+                          System.out.println("Student " + selectedStudent.getId() + " deleted from database");
+                      }
+        
+                      // 3- Update the table model 
+                      updateTableModel(selectedStudent.getId());
+                  }
+              } else {
+                  JOptionPane.showMessageDialog(AdminMode.this, "Select the student you want to remove", "Error", JOptionPane.ERROR_MESSAGE);
+              }
             }
         });
         jPanel1.add(Delete);
         Delete.setBounds(930, 590, 210, 40);
-
+        
         Export.setBackground(new java.awt.Color(255, 204, 255));
         Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
         Export.setText("Export as CSV / PDF");
         Export.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Export.addActionListener(new java.awt.event.ActionListener() {
+          // public void ExportActionPerformed(ActionEvent event) {
+          //     // Add code to handle the export action here
+          // }
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExportActionPerformed(evt);
+                //ExportActionPerformed(evt);
             }
         });
         jPanel1.add(Export);
@@ -206,14 +240,14 @@ public class AdminMode extends javax.swing.JFrame  {
         jLabel9.setText("V0.0.4");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 34, 16);
-
+        
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Database Report:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(400, 20, 1090, 50);
-
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,116 +271,106 @@ public class AdminMode extends javax.swing.JFrame  {
         DB.closeConnection();
     }//GEN-LAST:event_DisconnectActionPerformed
 
-    public void populateTable() {
-    // Sample data (replace with your data retrieval logic)
-    etudiants.add(new Etudiant("John", "doe", "02/01/2003"));
-    etudiants.add(new Etudiant("carl", "johnson", "12/10/2003"));
-
-    // Create DefaultTableModel for the table
-    DefaultTableModel tableModel = new DefaultTableModel(
-        new String[]{"Nom", "Prénom", "Date de Naissance", "Moyenne"}, 0);
-
-    // Add student data to the table model
-    for (Etudiant etudiant : etudiants) {
-      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
-      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
-    }
-
-    // Set the table model for jTable1
-    jTable1.setModel(tableModel);
-  }
-    public void ExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ExportActionPerformed
-
-    
-    public void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-    if (selectedRow >= 0) {
-      int confirmation = JOptionPane.showConfirmDialog(this, "Delete selected sturdent ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-      if (confirmation == JOptionPane.YES_OPTION) {
-        etudiants.remove(selectedRow);
-        updateTableModel();
+    private void updateTableModel(int id) {
+      DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+  
+      // Remove the appropriate row (assuming student objects are stored in etudiants)
+      int rowIndexToRemove = -1;
+      for (int i = 0; i < etudiants.size(); i++) {
+          if (etudiants.get(i).getId() == id) { // Assuming you have the selected student's id
+              rowIndexToRemove = i;
+              break;
+          }
       }
-    } else {
-      JOptionPane.showMessageDialog(this, "Select the student you want to remove", "Error", JOptionPane.ERROR_MESSAGE);
+      if (rowIndexToRemove >= 0) {
+          tableModel.removeRow(rowIndexToRemove);
+      }
+  
+      // Alternatively, if we're not storing student objects, we can use table model's data directly:
+       //tableModel.removeRow(selectedRow);
+  
+      // Refresh the table
+      tableModel.fireTableDataChanged();
+      //refresh the database in here
+    try (Connection con = DB.getConnection();
+         PreparedStatement ps = con.prepareStatement("DELETE FROM etudiant WHERE idEtudiant = ?")) {
+        ps.setInt(1, id); // Set the student ID in the prepared statement
+        int rowsDeleted = ps.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("Student with ID " + id + " deleted from database");
+        } else {
+            System.out.println("No student found with ID " + id + " in database");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error deleting student from database", "Error", JOptionPane.ERROR_MESSAGE);
+       
     }
-  }
-    //GEN-LAST:event_DeleteActionPerformed
-
-// Problem with adding event listeners to buttons 
-    
-//  Delete.addActionListener(new  java.awt.event.ActionListener() {
-//         @Override
-//         public void DeleteActionPerformed1(ActionEvent e) {
-//            DeleteActionPerformed(e);
-//        }
-//    });
-// }
-
+}
+      
+  
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
         // TODO add your handling code here:
-          //Collections.sort(etudiants);
+         // Collections.sort((List<T>) etudiants);
     }//GEN-LAST:event_SortActionPerformed
 
-     public void updateStudent(Etudiant updatedEtudiant) {
-    // Update the corresponding Etudiant object in the ArrayList
-    int selectedRow = jTable1.getSelectedRow();
-    etudiants.set(selectedRow, updatedEtudiant);
-
-    // Update the table model with the modified data
-    updateTableModel();
-  }
-      private void updateTableModel() {
-    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-    tableModel.setRowCount(0); // Clear existing data
-
-    // Repopulate the table model with updated student data
-    for (Etudiant etudiant : etudiants) {
-      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
-      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
-    }
-
-    // Refresh the table
-    tableModel.fireTableDataChanged();
-  }
-        public void refreshTable() {
+   
+      
+  // -----------work with this method to render the database-----
+    public void renderDatabase() {
     // Clear existing data from the table model
     DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
     tableModel.setRowCount(0);
 
-    // Fetch updated student data from database (replace with your query)
+    // Fetch updated student data from database 
     etudiants.clear();
     Connection connection = DB.getConnection();
     try {
       Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery("SELECT * FROM students");
+      ResultSet resultSet = statement.executeQuery("SELECT * FROM etudiant");
       while (resultSet.next()) {
-        String name = resultSet.getString("name");
-        String surname = resultSet.getString("surname");
-        String dob = resultSet.getString("dob");
-        // ... (extract other student information)
+
+        int id = resultSet.getInt("idEtudiant");
+        String name = resultSet.getString("nom");
+        String surname = resultSet.getString("prenom");
+        String dob = resultSet.getString("dateDeNaissance");
+        double mathScore = resultSet.getDouble("noteMath");
+        double physicsScore = resultSet.getDouble("notePhysique");
+        double litteraturescore = resultSet.getDouble("noteLitterature");
+        double chemistryScore = resultSet.getDouble("noteChimie");
+        double scienceScore = resultSet.getDouble("noteSVT");
+        double historyScore = resultSet.getDouble("noteHistoire");
+        double geographyScore = resultSet.getDouble("noteGeographie");
+        double frenchScore = resultSet.getDouble("noteFrancais");
+        double englishScore = resultSet.getDouble("noteAnglais");
+        double germanScore = resultSet.getDouble("noteAllemand");
+        double Moyenne = resultSet.getDouble("Moyenne");
+        String Mention = resultSet.getString("Mention");
+
+        System.out.println(id + " " + name + " " + surname + " " + dob + " " + mathScore + " " + physicsScore + " " + litteraturescore + " " + chemistryScore + " " + scienceScore + " " + historyScore + " " + geographyScore + " " + frenchScore + " " + englishScore + " " + germanScore + " " + Moyenne + " " + Mention);
+       
         Etudiant etudiant = new Etudiant(name, surname, dob);
-        // ... (set other student information like scores and average)
-        etudiants.add(etudiant);
+    
+        etudiant.ajouteNotes(mathScore, physicsScore, litteraturescore, scienceScore,chemistryScore, historyScore, geographyScore, englishScore, frenchScore,  germanScore);
+        etudiant.setId(id);
+        
+        // Repopulate the table model with updated student data
+           etudiants.add(etudiant);
+          tableModel.addRow(new Object[]{etudiant.getId(),etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),etudiant.getNoteLitteraire(), etudiant.getNoteChimie(),etudiant.getNoteSvt(), etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), etudiant.moy.getMoy(), etudiant.moy.getMention()});
+        
+    
+        // Refresh the table
+        tableModel.fireTableDataChanged();
+        
       }
-      resultSet.close();
-      statement.close();
-      connection.close();
+      //  resultSet.close();
+      //  statement.close();
+      //  connection.close();
     } catch (SQLException ex) {
       ex.printStackTrace();
-      JOptionPane.showMessageDialog(this, "Erreur lors du rechargement des données", "Erreur", JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, "Connection failed to the database", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    // Repopulate the table model with updated student data
-    for (Etudiant etudiant : etudiants) {
-      double moyenne = etudiant.moy != null ? etudiant.moy.getMoy() : 0.0;
-      tableModel.addRow(new Object[]{etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), moyenne});
-    }
-
-    // Refresh the table
-    tableModel.fireTableDataChanged();
   }
     public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
         // TODO add your handling code here:
@@ -382,7 +406,7 @@ public class AdminMode extends javax.swing.JFrame  {
               // ... (update other fields based on user input)
 
               // Update the table model with the modified data
-              updateTableModel();
+              updateTableModel(selectedRow);
             } else {
               JOptionPane.showMessageDialog(this, "Select a student to modify", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -411,7 +435,7 @@ public class AdminMode extends javax.swing.JFrame  {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     private void setIconImage() {
