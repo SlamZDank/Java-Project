@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 public class AdminMode extends javax.swing.JFrame  {
      private ArrayList<Etudiant> etudiants; // Stores student data
+     int sortMode = -1;
    
 
     public AdminMode() {
@@ -97,7 +98,7 @@ public class AdminMode extends javax.swing.JFrame  {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(0, 660, 390, 16);
+        jLabel5.setBounds(0, 660, 390, 15);
 
         jLabel4.setFont(new java.awt.Font("Noto Serif Display", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -131,12 +132,10 @@ public class AdminMode extends javax.swing.JFrame  {
                 "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science", "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
             }
         ) {
-            @SuppressWarnings("rawtypes")
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
 
-            @SuppressWarnings("rawtypes")
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
@@ -177,46 +176,19 @@ public class AdminMode extends javax.swing.JFrame  {
         Delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-              int selectedRow = jTable1.getSelectedRow();
-
-              if (selectedRow >= 0) {
-                  // Confirmation dialog for deletion
-                  int confirmation = JOptionPane.showConfirmDialog(AdminMode.this, "Delete selected student?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                  if (confirmation == JOptionPane.YES_OPTION) {
-        
-                      // 1- Get the student object from the model (if applicable):
-                      Etudiant selectedStudent = null;
-                      if (etudiants != null && selectedRow < etudiants.size()) {
-                          selectedStudent = etudiants.get(selectedRow);
-                      }
-        
-                      // 2- Remove student from the underlying data source (database)
-                      if (selectedStudent != null) {
-                          // ... delete student from database using selectedStudent.getId() 
-                          System.out.println("Student " + selectedStudent.getId() + " deleted from database");
-                      }
-        
-                      // 3- Update the table model 
-                      updateTableModel(selectedStudent.getId());
-                  }
-              } else {
-                  JOptionPane.showMessageDialog(AdminMode.this, "Select the student you want to remove", "Error", JOptionPane.ERROR_MESSAGE);
-              }
+                DeleteActionPerformed(evt);
             }
         });
         jPanel1.add(Delete);
         Delete.setBounds(930, 590, 210, 40);
-        
+
         Export.setBackground(new java.awt.Color(255, 204, 255));
         Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
         Export.setText("Export as CSV / PDF");
         Export.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Export.addActionListener(new java.awt.event.ActionListener() {
-          // public void ExportActionPerformed(ActionEvent event) {
-          //     // Add code to handle the export action here
-          // }
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //ExportActionPerformed(evt);
+                ExportActionPerformed(evt);
             }
         });
         jPanel1.add(Export);
@@ -239,15 +211,15 @@ public class AdminMode extends javax.swing.JFrame  {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("V0.0.4");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(1420, 20, 34, 16);
-        
+        jLabel9.setBounds(1420, 20, 37, 15);
+
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Database Report:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(400, 20, 1090, 50);
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,9 +284,19 @@ public class AdminMode extends javax.swing.JFrame  {
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
         // TODO add your handling code here:
          // Collections.sort((List<T>) etudiants);
+         
+        
     }//GEN-LAST:event_SortActionPerformed
 
+   public void ExportActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        
+        
+    }        
    
+      public void DeleteActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        
+        
+    }   
       
   // -----------work with this method to render the database-----
     public void renderDatabase() {
