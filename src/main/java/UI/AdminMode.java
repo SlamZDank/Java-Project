@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 
 import java.io.FileOutputStream;
 
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.*;
 
 public class AdminMode extends javax.swing.JFrame  {
@@ -342,6 +343,7 @@ public class AdminMode extends javax.swing.JFrame  {
 
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(pathName + "/report.pdf"));
+            doc.setPageSize(PageSize.A3.rotate()); // Make the page wider by rotating it
             doc.open();
             PdfPTable table = new PdfPTable(jTable1.getColumnCount());
 
@@ -361,7 +363,7 @@ public class AdminMode extends javax.swing.JFrame  {
             table.addCell("German");
             table.addCell("Score");
             table.addCell("Remarks");
-
+            
             for (int i = 0; i<jTable1.getRowCount(); i++) {
                 String id = jTable1.getValueAt(i, 0).toString();
                 String name = jTable1.getValueAt(i, 1).toString();
@@ -396,10 +398,11 @@ public class AdminMode extends javax.swing.JFrame  {
                 table.addCell(score);
                 table.addCell(remarks);
             }
+            table.setWidths(new float[]{5f, 5f, 5f, 6f, 5f, 5f, 5f, 5f, 6f, 5f, 6f, 5f, 5f, 5f, 5f, 5f}); // make the pdf table wider by increasing the width of each column
             doc.add(table);
             doc.close();
             Dialogs.SuccessDialog("Success", "Report successfully created.");
-
+            
         } catch (Exception e) {
             Dialogs.writeErr("Error", "No file Access.");
         }
