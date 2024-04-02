@@ -1,6 +1,6 @@
 package elements;
 import java.sql.*;
-
+import UI.Dialogs;
 
 
 /*
@@ -41,7 +41,7 @@ public  class DB {
                 System.out.println("Connected to MySQL database");
             } catch (SQLException e) {
                 e.printStackTrace(); // Handle the exception appropriately
-                System.out.println("Connection failed to the database");
+                Dialogs.writeErr("Error", "<html>Failed to connect to MySQL database<br>* Data may not be loaded nor interacted with!<br><h3>- LIMITED FUNCTIONNALITY MODE -</h3>");
             }
         }
         return connection;
