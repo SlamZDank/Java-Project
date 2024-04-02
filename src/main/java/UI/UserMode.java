@@ -34,7 +34,7 @@ public class UserMode extends javax.swing.JFrame {
         if (strNum == null) { return false; }
         try { d = Double.parseDouble(strNum); } catch (NumberFormatException nfe) { return false; }
         return (!(d > 20 || d < 0));
-    }
+    } //! This method validates if the score (double) is between 0 and 20
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -423,11 +423,13 @@ public class UserMode extends javax.swing.JFrame {
         String chemistry = chemistryField.getText(), german = germanField.getText(), history = historyField.getText();
         String english = englishField.getText(), physics = physicsField.getText(), science = scienceField.getText();
         String literature = literatureField.getText();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         if (name.toLowerCase().equals("name")) { genHtml += "- Name shouldn't be " + name + "<br>"; }
         if (surname.toLowerCase().equals("surname")) { genHtml += "- Surname shouldn't be " + surname + "<br>"; }
-        try { formatter.parse(dob, LocalDate::from); } 
-        catch (DateTimeParseException e) { genHtml += "- Date input is incorrect, it needs to follow: dd/MM/yyyy" + "<br>"; }
+
+        //! To verify that the date is valid
+        try { formatter.parse(dob, LocalDate::from); }//condition 
+        catch (DateTimeParseException e) { genHtml += "- Date input is incorrect, it needs to follow: dd-MM-yyyy" + "<br>"; }
 
         if (!isvalidScore(math)) { genHtml += "- Math score is not valid <br>"; }
         if (!isvalidScore(french)) { genHtml += "- French score is not valid <br>"; }
@@ -491,8 +493,11 @@ public class UserMode extends javax.swing.JFrame {
             double frenchScore = Double.parseDouble(frenchField.getText());
             double englishScore = Double.parseDouble(englishField.getText());
             double germanScore = Double.parseDouble(germanField.getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate dob = LocalDate.parse(dobString, formatter);
+            //! To Apply the changes to the dob string
+
             Etudiant Person = new Etudiant(studentName, studentSurname, dobString); 
             Person.ajouteNotes(mathScore,physicsScore, literatureScore, scienceScore, chemistryScore,historyScore, geographyScore, frenchScore,(englishScore),germanScore);
             

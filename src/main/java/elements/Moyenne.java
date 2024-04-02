@@ -29,7 +29,9 @@ public class Moyenne {
             }
             Moy /= coef_all;// Moy /= TabMoy.size();
         }
-        return Moy;
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String decimalString = decimalFormat.format(Moy);
+        return Double.parseDouble(decimalString);
     }
 
     public String getMention(){
@@ -60,11 +62,10 @@ public class Moyenne {
     }
     
     public String toString(){
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
         return (status() + 
                 " with a remark of \"" 
                 + getMention() + 
                 "\" and with a score of " 
-                + decimalFormat.format(getMoy())+ " !");
+                + getMoy() + " !");
     }
 }
