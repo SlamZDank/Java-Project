@@ -12,10 +12,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.pdf.*;
 
 public class AdminMode extends javax.swing.JFrame  {
      private ArrayList<Etudiant> etudiants; // Stores student data
@@ -314,7 +321,6 @@ public class AdminMode extends javax.swing.JFrame  {
       
   
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
-        // TODO add your handling code here:
         // Collections.sort((List<T>) etudiants);
         renderDatabase(sortMode);
         // Sorting button will not change state Unless the connection to MySql is established
@@ -324,8 +330,79 @@ public class AdminMode extends javax.swing.JFrame  {
     }//GEN-LAST:event_SortActionPerformed
 
     public void ExportActionPerformed(java.awt.event.ActionEvent evt) {                                     
+        // The code used to get information from the jtable1
+        // TODO: Implement this method
+        String pathName = "";
+        JFileChooser file = new JFileChooser();
+        file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x = file.showSaveDialog(this);
         
-        
+        if (x == JFileChooser.APPROVE_OPTION) { pathName = file.getSelectedFile().getAbsolutePath(); }
+        com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
+
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(pathName + "/report.pdf"));
+            doc.open();
+            PdfPTable table = new PdfPTable(jTable1.getColumnCount());
+
+            table.addCell("ID");
+            table.addCell("Name");
+            table.addCell("Surname");
+            table.addCell("Date of birth");
+            table.addCell("Math");
+            table.addCell("Physics");
+            table.addCell("Litterary");
+            table.addCell("Science");
+            table.addCell("Chemistry");
+            table.addCell("History");
+            table.addCell("Geography");
+            table.addCell("French");
+            table.addCell("English");
+            table.addCell("German");
+            table.addCell("Score");
+            table.addCell("Remarks");
+
+            for (int i = 0; i<jTable1.getRowCount(); i++) {
+                String id = jTable1.getValueAt(i, 0).toString();
+                String name = jTable1.getValueAt(i, 1).toString();
+                String surname = jTable1.getValueAt(i, 2).toString();
+                String date = jTable1.getValueAt(i, 3).toString();
+                String math = jTable1.getValueAt(i, 4).toString();
+                String physics = jTable1.getValueAt(i, 5).toString();
+                String lit = jTable1.getValueAt(i, 6).toString();
+                String science = jTable1.getValueAt(i, 7).toString();
+                String chem = jTable1.getValueAt(i, 8).toString();
+                String history = jTable1.getValueAt(i, 9).toString();
+                String geo = jTable1.getValueAt(i, 10).toString();
+                String french = jTable1.getValueAt(i, 11).toString();
+                String english = jTable1.getValueAt(i, 12).toString();
+                String german = jTable1.getValueAt(i, 13).toString();
+                String score = jTable1.getValueAt(i, 14).toString();
+                String remarks = jTable1.getValueAt(i, 15).toString();
+                table.addCell(id);
+                table.addCell(name);
+                table.addCell(surname);
+                table.addCell(date);
+                table.addCell(math);
+                table.addCell(physics);
+                table.addCell(lit);
+                table.addCell(science);
+                table.addCell(chem);
+                table.addCell(history);
+                table.addCell(geo);
+                table.addCell(french);
+                table.addCell(english);
+                table.addCell(german);
+                table.addCell(score);
+                table.addCell(remarks);
+            }
+            doc.add(table);
+            doc.close();
+            Dialogs.SuccessDialog("Success", "Report successfully created.");
+
+        } catch (Exception e) {
+            Dialogs.writeErr("Error", "No file Access.");
+        }
     }        
    
     public void DeleteActionPerformed(java.awt.event.ActionEvent evt) {                                     
