@@ -332,7 +332,6 @@ public class AdminMode extends javax.swing.JFrame  {
 
     public void ExportActionPerformed(java.awt.event.ActionEvent evt) {                                     
         // The code used to get information from the jtable1
-        // TODO: Implement this method
         String pathName = "";
         JFileChooser file = new JFileChooser();
         file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -344,6 +343,9 @@ public class AdminMode extends javax.swing.JFrame  {
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(pathName + "/report.pdf"));
             doc.setPageSize(PageSize.A3.rotate()); // Make the page wider by rotating it
+            doc.setMargins(0, 0, 0, 0); // Remove PDF margins
+            doc.addTitle("Report");
+            
             doc.open();
             PdfPTable table = new PdfPTable(jTable1.getColumnCount());
 
