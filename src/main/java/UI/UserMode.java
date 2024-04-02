@@ -104,7 +104,7 @@ public class UserMode extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Submission Form");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1242, 925));
+        setPreferredSize(new java.awt.Dimension(1243, 840));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -130,46 +130,46 @@ public class UserMode extends javax.swing.JFrame {
         ID_Field.setForeground(new java.awt.Color(255, 255, 255));
         ID_Field.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel3.add(ID_Field);
-        ID_Field.setBounds(10, 370, 400, 40);
+        ID_Field.setBounds(0, 360, 400, 40);
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("<html> - Providing false information WILL<br> lead to SEVERE repercussions, be warned!</html>");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(30, 600, 250, 90);
+        jLabel9.setBounds(30, 560, 310, 90);
 
         jLabel7.setFont(new java.awt.Font("SF Pro Rounded", 0, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("User Mode:");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(0, 320, 400, 60);
+        jLabel7.setBounds(0, 290, 400, 50);
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("<html> WARNING: <br><br> - Please TRIPLE CHECK your information before submitting <br> as it is IRREVERSIBLE and can only <br> be changed by authorised personnel!</html>");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(30, 410, 280, 190);
+        jLabel8.setBounds(30, 390, 310, 190);
 
         jLabel5.setFont(new java.awt.Font("Noto Serif Display Black", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Sakura High School");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(0, 260, 400, 50);
+        jLabel5.setBounds(0, 240, 400, 50);
 
         jLabel4.setFont(new java.awt.Font("Source Code Pro Semibold", 2, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("<html> Ignite Passion. <br> Inspire Excellence. <br>  Imagine Possibilities. </html>");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(40, 690, 270, 100);
+        jLabel4.setBounds(40, 650, 320, 100);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel3.add(jLabel3);
-        jLabel3.setBounds(-20, 790, 400, 16);
+        jLabel3.setBounds(0, 790, 400, 15);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
@@ -191,7 +191,6 @@ public class UserMode extends javax.swing.JFrame {
         reveal_moyenne.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 153, 255)));
         reveal_moyenne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("click");
                 reveal_moyenneActionPerformed(evt);
             }
         });
@@ -396,9 +395,9 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("V0.0.4");
+        jLabel10.setText("V0.0.5");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(1170, 20, 34, 16);
+        jLabel10.setBounds(1170, 20, 37, 15);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -408,9 +407,7 @@ public class UserMode extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

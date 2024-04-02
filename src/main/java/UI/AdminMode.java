@@ -65,7 +65,7 @@ public class AdminMode extends javax.swing.JFrame  {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin Mode");
-        setPreferredSize(new java.awt.Dimension(1500, 840));
+        setPreferredSize(new java.awt.Dimension(1500, 760));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -102,7 +102,7 @@ public class AdminMode extends javax.swing.JFrame  {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Copyright © Sakura High School, All Rights Reserved.");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(0, 660, 390, 15);
+        jLabel5.setBounds(0, 700, 390, 15);
 
         jLabel4.setFont(new java.awt.Font("Noto Serif Display", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -152,15 +152,19 @@ public class AdminMode extends javax.swing.JFrame  {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(420, 80, 1040, 420);
+        jPanel3.setBounds(410, 80, 1060, 535);
 
         Modify.setBackground(new java.awt.Color(255, 204, 255));
         Modify.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -172,7 +176,7 @@ public class AdminMode extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Modify);
-        Modify.setBounds(460, 590, 180, 40);
+        Modify.setBounds(480, 660, 180, 40);
 
         Delete.setBackground(new java.awt.Color(255, 204, 255));
         Delete.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -184,7 +188,7 @@ public class AdminMode extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Delete);
-        Delete.setBounds(930, 590, 210, 40);
+        Delete.setBounds(950, 660, 210, 40);
 
         Export.setBackground(new java.awt.Color(255, 204, 255));
         Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -196,7 +200,7 @@ public class AdminMode extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Export);
-        Export.setBounds(1170, 590, 210, 40);
+        Export.setBounds(1190, 660, 210, 40);
 
         Sort.setBackground(new java.awt.Color(255, 204, 255));
         Sort.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
@@ -208,12 +212,12 @@ public class AdminMode extends javax.swing.JFrame  {
             }
         });
         jPanel1.add(Sort);
-        Sort.setBounds(680, 590, 210, 40);
+        Sort.setBounds(700, 660, 210, 40);
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("V0.0.4");
+        jLabel9.setText("V0.0.5");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 37, 15);
 
@@ -232,7 +236,7 @@ public class AdminMode extends javax.swing.JFrame  {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
 
         pack();
