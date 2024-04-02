@@ -314,7 +314,6 @@ public class AdminMode extends javax.swing.JFrame  {
       
   
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
-        // TODO add your handling code here:
         // Collections.sort((List<T>) etudiants);
         renderDatabase(sortMode);
         // Sorting button will not change state Unless the connection to MySql is established
@@ -396,7 +395,7 @@ public class AdminMode extends javax.swing.JFrame  {
 
   }
     public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
-        // TODO add your handling code here:
+        
         int selectedRow = jTable1.getSelectedRow();
             if (selectedRow >= 0) {
               Etudiant selectedEtudiant = etudiants.get(selectedRow);
