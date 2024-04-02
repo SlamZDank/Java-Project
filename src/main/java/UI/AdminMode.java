@@ -185,6 +185,30 @@ public class AdminMode extends javax.swing.JFrame  {
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteActionPerformed(evt);
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow >= 0) {
+                    // Confirmation dialog for deletion
+                    int confirmation = Dialogs.ConfirmDialog("Confirmation", "Are you sure you want to remove this student?");
+                    if (confirmation == JOptionPane.YES_OPTION) {
+  
+                        // 1- Get the student object from the model (if applicable):
+                        Etudiant selectedStudent = null;
+                        if (etudiants != null && selectedRow < etudiants.size()) {
+                            selectedStudent = etudiants.get(selectedRow);
+                        }
+  
+                        // 2- Remove student from the underlying data source (database)
+                        if (selectedStudent != null) {
+                            // ... delete student from database using selectedStudent.getId() 
+                            System.out.println("Student " + selectedStudent.getId() + " deleted from database");
+                        }
+  
+                        // 3- Update the table model 
+                        updateTableModel(selectedStudent.getId());
+                    }
+                } else {
+                    Dialogs.writeErr("Error", "Select the student you want to remove");
+                }
             }
         });
         jPanel1.add(Delete);
