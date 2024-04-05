@@ -21,12 +21,18 @@ import javax.swing.JOptionPane;
 public class UserMode extends javax.swing.JFrame {
     Etudiant Person = null;
     String ID_Person;
+    Connection connection = null;
 
-        public UserMode(String ID) {
+        public UserMode(Connection con, String ID) {
         initComponents();
         setIconImage();
         ID_Person = ID;
         ID_Field.setText("ID: " + ID_Person);
+        try {
+            connection = con;
+        } catch (Exception e) {
+            return;
+        }
     }
     
     public static boolean isvalidScore(String strNum) {
@@ -502,7 +508,7 @@ public class UserMode extends javax.swing.JFrame {
             Person.ajouteNotes(mathScore,physicsScore, literatureScore, scienceScore, chemistryScore,historyScore, geographyScore, frenchScore,(englishScore),germanScore);
             
             // try and catch for connectivity with database 
-            Connection connection = DB.getConnection();
+            
             // define the insert query
             String query = "INSERT INTO etudiant (idEtudiant, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 

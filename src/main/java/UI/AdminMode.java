@@ -33,14 +33,15 @@ import com.itextpdf.text.pdf.*;
 public class AdminMode extends javax.swing.JFrame  {
      private ArrayList<Etudiant> etudiants; // Stores student data
      int sortMode = -1;
-   
+    Connection connection = null;
 
-    public AdminMode() {
+    public AdminMode(Connection con) {
         initComponents();
         setIconImage();
         etudiants = new ArrayList<>();
         try {
-            renderDatabase(sortMode);
+            connection = con;
+            renderDatabase(con ,sortMode);
         } catch (Exception e) {
             return;
         }
@@ -309,8 +310,7 @@ public class AdminMode extends javax.swing.JFrame  {
       // Refresh the table
       tableModel.fireTableDataChanged();
       //refresh the database in here
-    try (Connection con = DB.getConnection();
-         PreparedStatement ps = con.prepareStatement("DELETE FROM etudiant WHERE idEtudiant = ?")) {
+    try (PreparedStatement ps = connection.prepareStatement("DELETE FROM etudiant WHERE idEtudiant = ?")) {
         ps.setInt(1, id); // Set the student ID in the prepared statement
         int rowsDeleted = ps.executeUpdate();
         if (rowsDeleted > 0) {
@@ -328,7 +328,7 @@ public class AdminMode extends javax.swing.JFrame  {
   
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
         // Collections.sort((List<T>) etudiants);
-        renderDatabase(sortMode);
+        renderDatabase(connection, sortMode);
         // Sorting button will not change state Unless the connection to MySql is established
         sortMode *= -1;
         String text = (sortMode == 1) ? "Sort by Highest Score" : "Unsort the list";
@@ -418,19 +418,14 @@ public class AdminMode extends javax.swing.JFrame  {
     
       
   // -----------work with this method to render the database-----
-    public void renderDatabase(int sortMode) {
+    public void renderDatabase(Connection connection, int sortMode) {
     // Clear existing data from the table model
     DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
    
 
     // Fetch updated student data from database 
     etudiants.clear();
-    Connection connection = null;
-    try {
-      connection = DB.getConnection();
-    } catch (Exception ex) {
-      return;
-    }
+    
     try (Statement statement = connection.createStatement()){
     // @Ghassen u need to check this result set 
       
@@ -613,8 +608,7 @@ public class AdminMode extends javax.swing.JFrame  {
 
 
                    // Update database (replace placeholders with actual table and column names)
-                  try (Connection con = DB.getConnection();
-                  PreparedStatement ps = con.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, notePhysique = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
+                  try (PreparedStatement ps = connection.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, notePhysique = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
                   ps.setString(1, newName);
                   ps.setString(2, newSurname);
                   ps.setString(3, newDateOfBirth);
@@ -641,7 +635,7 @@ public class AdminMode extends javax.swing.JFrame  {
                   ex.printStackTrace();
                   JOptionPane.showMessageDialog(this, "Error updating student in database", "Error", JOptionPane.ERROR_MESSAGE);
                   }
-                  renderDatabase(result);
+                  renderDatabase(connection, result);
                }
           
     }

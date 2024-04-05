@@ -1,10 +1,21 @@
 package UI;
 import java.awt.Toolkit;
-
+import elements.DB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class Login extends javax.swing.JFrame {
+    Connection con = null;
     public Login() {
         initComponents();
         setIconImage();
+        if (con != null) return;
+        try {
+            con = DB.getConnection();
+        } catch (Exception e){
+            return;
+        }
     }
     
     public static boolean isNumeric(String strNum) {
@@ -180,13 +191,13 @@ public class Login extends javax.swing.JFrame {
         //! Login using ID: XXXXXX
         if (input.length() == 6 && isNumeric(input)) {
             this.dispose();
-            UserMode UM = new UserMode(input);
+            UserMode UM = new UserMode(con, input);
             UM.setVisible(true);
             UM.pack();
             UM.setLocationRelativeTo(null);
         } else if (input.equals("root") || input.equals("admin") || input.equals("sudo")) {
             this.dispose();
-            AdminMode AM = new AdminMode();
+            AdminMode AM = new AdminMode(con);
             AM.setVisible(true);
             AM.pack();
             AM.setLocationRelativeTo(null);
