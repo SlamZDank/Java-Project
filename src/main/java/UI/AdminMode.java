@@ -604,9 +604,6 @@ public class AdminMode extends javax.swing.JFrame  {
       // Update the table model with the modified data
                //updateTableModel(selectedRow);
                if (result == JOptionPane.OK_OPTION){
-                   Dialogs.SuccessDialog("Success", "Student modified successfully");
-
-
                    // Update database (replace placeholders with actual table and column names)
                   try (PreparedStatement ps = connection.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, notePhysique = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
                   ps.setString(1, newName);
@@ -631,6 +628,7 @@ public class AdminMode extends javax.swing.JFrame  {
                   ps.setInt(16, selectedEtudiant.getId()); 
                   ps.executeUpdate();
                   System.out.println("Student with ID " + selectedEtudiant.getId() + " updated in database");
+                  Dialogs.SuccessDialog("Success", "Student modified successfully");
                   } catch (SQLException ex) {
                   ex.printStackTrace();
                   JOptionPane.showMessageDialog(this, "Error updating student in database", "Error", JOptionPane.ERROR_MESSAGE);
