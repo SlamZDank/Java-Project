@@ -558,7 +558,7 @@ public class UserMode extends javax.swing.JFrame {
 
     public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
         this.dispose();
-        Login l = new Login();
+        Login l = new Login(connection);
         l.setVisible(true);
         l.pack();
         l.setLocationRelativeTo(null);
