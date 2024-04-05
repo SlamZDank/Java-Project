@@ -92,14 +92,51 @@ public class Etudiant {
         moy.push(noteAng);
         moy.push(noteGer);
     }
+    public String getField(String fieldName) {
+        switch (fieldName) {
+            case "id":
+            return String.valueOf(this.id);
+            case "Name":
+                return this.nom;
+            case "Surname":
+                return this.prenom;
+            case "Date of Birth (YYYY-MM-DD)":
+                return this.dateDeNaiss;
+                case "Math":
+                return String.valueOf(getNoteMath());
+            case "Physics":
+                return String.valueOf(getNotePhysique());
+            case "Literature":
+                return String.valueOf(getNoteLitterature());
+            case "Science":
+                return String.valueOf(getNoteSvt());
+            case "Chemistry":
+                return String.valueOf(getNoteChimie());
+            case "History":
+                return String.valueOf(getNoteHistoire());
+            case "Geography":
+                return String.valueOf(getNoteGeographie());
+            case "French":
+                return String.valueOf(getNoteFrancais());
+            case "English":
+                return String.valueOf(getNoteAnglais());
+            case "German":
+                return String.valueOf(getNoteAllemand());
+           
 
+            default:
+                return null; // Or throw an exception if the field name is not recognized
+        }
+    }
+
+    
     public String getNom() { return nom; }
-
+    
     public String getPrenom() { return prenom; }
-
+    
     public void setId(int id ) {
         this.id= id;
-     }
+    }
      public int getId() {
         return id;
      }
@@ -110,6 +147,52 @@ public class Etudiant {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+    public void setDateDeNaiss(String dateDeNaiss) {
+        this.dateDeNaiss = dateDeNaiss;
+    }
+    public void setNoteMath(double m) {
+        Note noteMath = Note.MATH;
+        noteMath.setNote(m);
+    }
+    
+    public void setNotePhysique(double p) {
+        Note notePhysique = Note.PHYSIQUE;
+        notePhysique.setNote(p);
+    }
+    public void setNoteLitterature(double p) {
+        Note noteLitterature = Note.LITTERAIRE;
+        noteLitterature.setNote(p);
+    }
+    
+    public void setNoteChimie (double l) {
+        Note noteChimie = Note.CHIMIE;
+        noteChimie.setNote(l);
+    }
+    public void setNoteSvt(double s){
+        Note noteSvt = Note.SVT;
+        noteSvt.setNote(s);
+    }
+    public void setNoteHistoire(double l) {
+        Note noteHistoire = Note.HISTOIRE;
+        noteHistoire.setNote(l);
+    }
+    public void setNoteGeographie(double l) {
+        Note noteGeographie = Note.GEOGRAPHIE;
+        noteGeographie.setNote(l);
+    }
+    public void setNoteFrancais(double l) {
+        Note noteFrancais = Note.FRANCAIS;
+        noteFrancais.setNote(l);
+    }
+    public void setNoteAnglais(double l) {
+        Note noteAnglais = Note.ANGLAIS;
+        noteAnglais.setNote(l);
+    }
+    public void setNoteAllemand(double l) {
+        Note noteAllemand = Note.ALLEMAND;
+        noteAllemand.setNote(l);
+    }
+
     public double getNoteMath(){
         Note noteMath = Note.MATH;
         return noteMath.getNote();
@@ -120,7 +203,7 @@ public class Etudiant {
         return notePhysique.getNote();
     }
     
-    public double getNoteLitteraire(){
+    public double getNoteLitterature(){
         Note noteLitteraire = Note.LITTERAIRE;
         return noteLitteraire.getNote();
     }
@@ -163,6 +246,9 @@ public class Etudiant {
 
     public String getDateDeNaiss() { return dateDeNaiss; }
 
+    
+    
+    
 
     public String toString(){
         if (moy != null) {return (nom + " " + prenom + " " + dateDeNaiss + " " + moy.toString());}

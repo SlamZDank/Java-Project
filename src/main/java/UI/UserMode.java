@@ -469,7 +469,7 @@ public class UserMode extends javax.swing.JFrame {
         return id;
     }
     
-    // This method is under testing 
+   
     public void Publish_To_DBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Publish_To_DBActionPerformed
         if (!(validateData())) { return; }
         int confirmation = Dialogs.ConfirmDialog("Submission", "Are you sure you want to submit the informations provided? this action is IRREVERSIBLE!");

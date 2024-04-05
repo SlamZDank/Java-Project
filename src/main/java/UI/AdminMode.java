@@ -1,5 +1,5 @@
 package UI;
-
+import UI.UserMode;
 import elements.Etudiant;
 import elements.DB;
 import java.awt.Toolkit;
@@ -8,18 +8,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.awt.GridLayout;
 import java.io.FileOutputStream;
 
 import com.itextpdf.text.PageSize;
@@ -192,7 +197,7 @@ public class AdminMode extends javax.swing.JFrame  {
         Delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+               
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow >= 0) {
                     // Confirmation dialog for deletion
@@ -207,7 +212,7 @@ public class AdminMode extends javax.swing.JFrame  {
   
                         // 2- Remove student from the underlying data source (database)
                         if (selectedStudent != null) {
-                            // ... delete student from database using selectedStudent.getId() 
+                            // delete student from database using selectedStudent.getId() 
                             System.out.println("Student " + selectedStudent.getId() + " deleted from database");
                         }
   
@@ -280,7 +285,7 @@ public class AdminMode extends javax.swing.JFrame  {
         l.setVisible(true);
         l.pack();
         l.setLocationRelativeTo(null);
-        DB.closeConnection();
+       // DB.closeConnection();
     }//GEN-LAST:event_DisconnectActionPerformed
 
     private void updateTableModel(int id) {
@@ -410,16 +415,13 @@ public class AdminMode extends javax.swing.JFrame  {
         }
     }        
    
-    public void DeleteActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        
-        
-    }   
+    
       
   // -----------work with this method to render the database-----
     public void renderDatabase(int sortMode) {
     // Clear existing data from the table model
     DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-    tableModel.setRowCount(0);
+   
 
     // Fetch updated student data from database 
     etudiants.clear();
@@ -429,9 +431,9 @@ public class AdminMode extends javax.swing.JFrame  {
     } catch (Exception ex) {
       return;
     }
-    try {
-      Statement statement = connection.createStatement();
-      // @Ghassen u need to check this result set
+    try (Statement statement = connection.createStatement()){
+    // @Ghassen u need to check this result set 
+      
       ResultSet resultSet = sortMode == 1 ? statement.executeQuery("SELECT * FROM etudiant ORDER BY moyenne DESC") : statement.executeQuery("SELECT * FROM etudiant");
       tableModel.setRowCount(0); // Clear existing data from the table maybe, haven't tested
      
@@ -462,61 +464,228 @@ public class AdminMode extends javax.swing.JFrame  {
         
         // Repopulate the table model with updated student data
            etudiants.add(etudiant);
-          tableModel.addRow(new Object[]{etudiant.getId(),etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),etudiant.getNoteLitteraire(), etudiant.getNoteChimie(),etudiant.getNoteSvt(), etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), etudiant.moy.getMoy(), etudiant.moy.getMention()});
+          tableModel.addRow(new Object[]{etudiant.getId(),etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),etudiant.getNoteLitterature(), etudiant.getNoteChimie(),etudiant.getNoteSvt(), etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), etudiant.moy.getMoy(), etudiant.moy.getMention()});
         
     
         // Refresh the table
         tableModel.fireTableDataChanged();
         
       }
-      //  resultSet.close();
-      //  statement.close();
-      //  connection.close();
+        //resultSet.close();
+        //statement.close();
+        //connection.close();
     } catch (SQLException ex) {
       ex.printStackTrace();
     }
 
   }
-    public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyActionPerformed
-        
-        int selectedRow = jTable1.getSelectedRow();
-            if (selectedRow >= 0) {
-              Etudiant selectedEtudiant = etudiants.get(selectedRow);
+  public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {
+  int selectedRow = jTable1.getSelectedRow();
+  if (selectedRow >= 0) {
+    Etudiant selectedEtudiant = etudiants.get(selectedRow);
 
-              // display a simple dialog to edit some fields
-              String newName = Dialogs.InputDialog("Modify Student", "Enter new name:" );
-              String newSurname = Dialogs.InputDialog("Modify Student", "Enter new surname:" );
+    // Prepare data for the dialog
+    String name = selectedEtudiant.getNom();
+    String surname = selectedEtudiant.getPrenom();
+    String dob = selectedEtudiant.getDateDeNaiss();
+    String mathScore = String.valueOf(selectedEtudiant.getNoteMath()); 
+    String physicsScore = String.valueOf(selectedEtudiant.getNotePhysique());
+    String litteraturescore = String.valueOf(selectedEtudiant.getNoteLitterature());
+    String chemistryScore = String.valueOf(selectedEtudiant.getNoteChimie());
+    String scienceScore = String.valueOf(selectedEtudiant.getNoteSvt());
+    String historyScore = String.valueOf(selectedEtudiant.getNoteHistoire());
+    String geographyScore = String.valueOf(selectedEtudiant.getNoteGeographie());
+    String frenchScore = String.valueOf(selectedEtudiant.getNoteFrancais());
+    String englishScore = String.valueOf(selectedEtudiant.getNoteAnglais());
+    String germanScore = String.valueOf(selectedEtudiant.getNoteAllemand());
+    // Create a custom panel with text fields for editable fields
+    JPanel modifyPanel = new JPanel(new GridLayout(0, 2, 5, 5));
+    JTextField nameField = new JTextField(name, 20);
+    JTextField surnameField = new JTextField(surname, 20);
+    JTextField dobField = new JTextField(dob, 20);
+    JTextField mathScoreField = new JTextField(mathScore, 5);
+    JTextField physicsScoreField = new JTextField(physicsScore, 5);
+    JTextField litteratureScoreField = new JTextField(litteraturescore, 5);
+    JTextField chemistryScoreField = new JTextField(chemistryScore, 5);
+    JTextField scienceScoreField = new JTextField(scienceScore, 5);
+    JTextField historyScoreField = new JTextField(historyScore, 5);
+    JTextField geographyScoreField = new JTextField(geographyScore, 5);
+    JTextField frenchScoreField = new JTextField(frenchScore, 5);
+    JTextField englishScoreField = new JTextField(englishScore, 5);
+    JTextField germanScoreField = new JTextField(germanScore, 5);
+
+    modifyPanel.add(new JLabel("Name:"));
+    modifyPanel.add(nameField);
+    modifyPanel.add(new JLabel("Surname:"));
+    modifyPanel.add(surnameField);
+    modifyPanel.add(new JLabel("Date of Birth (YYYY-MM-DD):"));
+    modifyPanel.add(dobField);
+    modifyPanel.add(new JLabel("Math Score:"));
+    modifyPanel.add(mathScoreField);
+    modifyPanel.add(new JLabel("Physics Score:"));
+    modifyPanel.add(physicsScoreField);
+    modifyPanel.add(new JLabel("Litterature Score:"));
+    modifyPanel.add(litteratureScoreField);
+    modifyPanel.add(new JLabel("chemistry Score:"));
+    modifyPanel.add(chemistryScoreField);
+    modifyPanel.add(new JLabel("Science Score:"));
+    modifyPanel.add(scienceScoreField);
+    modifyPanel.add(new JLabel("history Score:"));
+    modifyPanel.add(historyScoreField);
+    modifyPanel.add(new JLabel("geography Score:"));
+    modifyPanel.add(geographyScoreField);
+    modifyPanel.add(new JLabel("french Score:"));
+    modifyPanel.add(frenchScoreField);
+    modifyPanel.add(new JLabel("english Score:"));
+    modifyPanel.add(englishScoreField);
+    modifyPanel.add(new JLabel("german Score:"));
+    modifyPanel.add(germanScoreField);
+
+    int result = JOptionPane.showConfirmDialog(this, modifyPanel, "Modify Student", JOptionPane.OK_CANCEL_OPTION);
+
+  
+      // Update student object with modified values
+      String newName = nameField.getText();
+      String newSurname = surnameField.getText();
+      String newDateOfBirth = dobField.getText();
+      String newMathScore = mathScoreField.getText();
+      String newPhysicsScore = physicsScoreField.getText();
+      String newLiterraturescore= litteratureScoreField.getText();
+      String newChemistryScore = chemistryScoreField.getText();
+      String newScienceScore = scienceScoreField.getText();
+      String newHistoryScore = historyScoreField.getText();
+      String newGeographyScore = geographyScoreField.getText();
+      String newFrenchScore = geographyScoreField.getText();
+      String newGermanScore = germanScoreField.getText();
+      String newEnglishScore = englishScoreField.getText();
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      if (newName != null) {
+        selectedEtudiant.setNom(newName);
+      }
+      if (newSurname != null) {
+        selectedEtudiant.setPrenom(newSurname);
+      }
+      if (newDateOfBirth != null && formatter.parse(newDateOfBirth, LocalDate::from) != null) {
+        selectedEtudiant.setDateDeNaiss(newDateOfBirth);
+      } else {
+        Dialogs.writeErr("Error", "Invalid Date of Birth format (YYYY-MM-DD)");
+      }
+
+      // Validate and update scores
+      if (UserMode.isvalidScore(newMathScore)) {
+        selectedEtudiant.setNoteMath(Double.parseDouble(newMathScore));
+      }
+      if (UserMode.isvalidScore(newPhysicsScore)) {
+        selectedEtudiant.setNotePhysique(Double.parseDouble(newPhysicsScore));
+      }
+      if (UserMode.isvalidScore(newLiterraturescore)) {
+        selectedEtudiant.setNoteLitterature(Double.parseDouble(newLiterraturescore));
+      }
+      if (UserMode.isvalidScore(newChemistryScore)) {
+        selectedEtudiant.setNoteChimie(Double.parseDouble(newChemistryScore));
+      }
+      if (UserMode.isvalidScore(newScienceScore)) {
+        selectedEtudiant.setNotePhysique(Double.parseDouble(newScienceScore));
+      }
+      if (UserMode.isvalidScore(newHistoryScore)) {
+        selectedEtudiant.setNoteHistoire(Double.parseDouble(newHistoryScore));
+      }
+      if (UserMode.isvalidScore(newGeographyScore)) {
+        selectedEtudiant.setNoteGeographie(Double.parseDouble(newGeographyScore));
+      }
+      if (UserMode.isvalidScore(newFrenchScore)) {
+        selectedEtudiant.setNoteFrancais(Double.parseDouble(newFrenchScore));
+      }
+      if (UserMode.isvalidScore(newEnglishScore)) {
+        selectedEtudiant.setNoteAnglais(Double.parseDouble(newEnglishScore));
+      }
+      if (UserMode.isvalidScore(newGermanScore)) {
+        selectedEtudiant.setNoteAllemand(Double.parseDouble(newGermanScore));
+      }
+      
+     
+
+      // Update table model (you'll need to modify this based on your implementation)
+      // Update the table model with the modified data
+               //updateTableModel(selectedRow);
+               if (result == JOptionPane.OK_OPTION){
+                   Dialogs.SuccessDialog("Success", "Student modified successfully");
+
+
+                   // Update database (replace placeholders with actual table and column names)
+                  try (Connection con = DB.getConnection();
+                  PreparedStatement ps = con.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, notePhysique = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
+                  ps.setString(1, newName);
+                  ps.setString(2, newSurname);
+                  ps.setString(3, newDateOfBirth);
+                  ps.setDouble(4, Double.parseDouble(newMathScore));
+                  ps.setDouble(5, Double.parseDouble(newPhysicsScore));
+                  ps.setDouble(6, Double.parseDouble(newLiterraturescore));
+                  ps.setDouble(7, Double.parseDouble(newChemistryScore));
+                  ps.setDouble(8, Double.parseDouble(newScienceScore));
+                  ps.setDouble(9, Double.parseDouble(newHistoryScore));  
+                  ps.setDouble(10, Double.parseDouble(newGeographyScore));
+                  ps.setDouble(11, Double.parseDouble(newFrenchScore));
+                  ps.setDouble(12, Double.parseDouble(newEnglishScore));
+                  ps.setDouble(13, Double.parseDouble(newGermanScore)); 
+                  ps.setDouble(14, selectedEtudiant.moy.getMoy()); 
+                  ps.setString(15, selectedEtudiant.moy.getMention()); 
+                                 
+
+                  
+                 
+                  ps.setInt(16, selectedEtudiant.getId()); 
+                  ps.executeUpdate();
+                  System.out.println("Student with ID " + selectedEtudiant.getId() + " updated in database");
+                  } catch (SQLException ex) {
+                  ex.printStackTrace();
+                  JOptionPane.showMessageDialog(this, "Error updating student in database", "Error", JOptionPane.ERROR_MESSAGE);
+                  }
+                  renderDatabase(result);
+               }
+          
+    }
+  }
+
+
+    //     int selectedRow = jTable1.getSelectedRow();
+    //         if (selectedRow >= 0) {
+    //           Etudiant selectedEtudiant = etudiants.get(selectedRow);
+
+    //           // display a simple dialog to edit some fields
+    //           String newName = Dialogs.InputDialog("Modify Student", "Enter new name:" );
+    //           String newSurname = Dialogs.InputDialog("Modify Student", "Enter new surname:" );
                 
-              String newdateOfBirth = Dialogs.InputDialog("Modify Student", "Enter new Date of birth:" );
-              String newMathScore = Dialogs.InputDialog("Modify Student", "Enter new math score:" );
-              String newPhysicsScore = Dialogs.InputDialog("Modify Student", "Enter new physics score:" );
-              String newLiterraturescore = Dialogs.InputDialog("Modify Student", "Enter new litterature score:" );
-              String newScienceScore = Dialogs.InputDialog("Modify Student", "Enter new science score:" );
-              String newChemistryScore = Dialogs.InputDialog("Modify Student", "Enter new chemistry score:" );
-              String newHistoryScore = Dialogs.InputDialog("Modify Student", "Enter new history score:" );
-              String newGeographyScore = Dialogs.InputDialog("Modify Student", "Enter new geography score:" );
-              String newFrenchScore = Dialogs.InputDialog("Modify Student", "Enter new french score:" );
-              String newEnglishScore = Dialogs.InputDialog("Modify Student", "Enter new english score:" );
-              String newGermanScore = Dialogs.InputDialog("Modify Student", "Enter new german score:" );
-                // Wow just use Dialogs for this!!!!
+    //           String newdateOfBirth = Dialogs.InputDialog("Modify Student", "Enter new Date of birth:" );
+    //           String newMathScore = Dialogs.InputDialog("Modify Student", "Enter new math score:" );
+    //           String newPhysicsScore = Dialogs.InputDialog("Modify Student", "Enter new physics score:" );
+    //           String newLiterraturescore = Dialogs.InputDialog("Modify Student", "Enter new litterature score:" );
+    //           String newScienceScore = Dialogs.InputDialog("Modify Student", "Enter new science score:" );
+    //           String newChemistryScore = Dialogs.InputDialog("Modify Student", "Enter new chemistry score:" );
+    //           String newHistoryScore = Dialogs.InputDialog("Modify Student", "Enter new history score:" );
+    //           String newGeographyScore = Dialogs.InputDialog("Modify Student", "Enter new geography score:" );
+    //           String newFrenchScore = Dialogs.InputDialog("Modify Student", "Enter new french score:" );
+    //           String newEnglishScore = Dialogs.InputDialog("Modify Student", "Enter new english score:" );
+    //           String newGermanScore = Dialogs.InputDialog("Modify Student", "Enter new german score:" );
+    //             // Wow just use Dialogs for this!!!!
 
-              // ... (similar prompts for other editable fields)
+    //           // ... (similar prompts for other editable fields)
 
-              // Update the selected student object with the modified values
-              if (newName != null) {
-                selectedEtudiant.setNom(newName);
-              }
-              if (newSurname != null) {
-                selectedEtudiant.setPrenom(newSurname);
-              }
-              // ... (update other fields based on user input)
+    //           // Update the selected student object with the modified values
+    //           if (newName != null) {
+    //             selectedEtudiant.setNom(newName);
+    //           }
+    //           if (newSurname != null) {
+    //             selectedEtudiant.setPrenom(newSurname);
+    //           }
+    //           // ... (update other fields based on user input)
 
-              // Update the table model with the modified data
-              updateTableModel(selectedRow);
-            } else {
-              Dialogs.writeErr("Error", "No student selected");
-            }
-    }//GEN-LAST:event_ModifyActionPerformed
+    //           // Update the table model with the modified data
+    //           updateTableModel(selectedRow);
+    //         } else {
+    //           Dialogs.writeErr("Error", "No student selected");
+    //         }
+    // }//GEN-LAST:event_ModifyActionPerformed
 
     /**
      * @param args the command line arguments
