@@ -605,22 +605,33 @@ public class AdminMode extends javax.swing.JFrame  {
                //updateTableModel(selectedRow);
                if (result == JOptionPane.OK_OPTION){
                    // Update database (replace placeholders with actual table and column names)
-                  try (PreparedStatement ps = connection.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, notePhysique = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
-                  ps.setString(1, newName);
-                  ps.setString(2, newSurname);
-                  ps.setString(3, newDateOfBirth);
-                  ps.setDouble(4, Double.parseDouble(newMathScore));
-                  ps.setDouble(5, Double.parseDouble(newPhysicsScore));
-                  ps.setDouble(6, Double.parseDouble(newLiterraturescore));
-                  ps.setDouble(7, Double.parseDouble(newChemistryScore));
-                  ps.setDouble(8, Double.parseDouble(newScienceScore));
-                  ps.setDouble(9, Double.parseDouble(newHistoryScore));  
-                  ps.setDouble(10, Double.parseDouble(newGeographyScore));
-                  ps.setDouble(11, Double.parseDouble(newFrenchScore));
-                  ps.setDouble(12, Double.parseDouble(newEnglishScore));
-                  ps.setDouble(13, Double.parseDouble(newGermanScore)); 
-                  ps.setDouble(14, selectedEtudiant.moy.getMoy()); 
-                  ps.setString(15, selectedEtudiant.moy.getMention()); 
+                  try (PreparedStatement ps = connection.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, noteSVT = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
+                    ps.setString(1, newName);
+                    ps.setString(2, newSurname);
+                    ps.setString(3, newDateOfBirth);
+                    double math = Double.parseDouble(newMathScore);
+                    ps.setDouble(4, math);
+                    double physics = Double.parseDouble(newPhysicsScore);
+                    ps.setDouble(5, physics);
+                    double Literature = Double.parseDouble(newLiterraturescore);
+                    ps.setDouble(6,Literature);
+                    double chemistry = Double.parseDouble(newChemistryScore);
+                    ps.setDouble(7, chemistry);
+                    double science = Double.parseDouble(newScienceScore);
+                    ps.setDouble(8,science);  
+                    double history = Double.parseDouble(newHistoryScore);
+                    ps.setDouble(9, history);
+                    double geography = Double.parseDouble(newGeographyScore);
+                    ps.setDouble(10, geography);
+                    double french = Double.parseDouble(newFrenchScore);
+                    ps.setDouble(11, french);
+                    double english = Double.parseDouble(newEnglishScore);
+                    ps.setDouble(12, english);
+                    double german = Double.parseDouble(newGermanScore);
+                    ps.setDouble(13, german); 
+                    ps.setDouble(14, selectedEtudiant.moy.getMoy()); 
+                    ps.setString(15, selectedEtudiant.moy.getMention()); 
+                       
                                  
 
                   
@@ -640,44 +651,7 @@ public class AdminMode extends javax.swing.JFrame  {
   }
 
 
-    //     int selectedRow = jTable1.getSelectedRow();
-    //         if (selectedRow >= 0) {
-    //           Etudiant selectedEtudiant = etudiants.get(selectedRow);
-
-    //           // display a simple dialog to edit some fields
-    //           String newName = Dialogs.InputDialog("Modify Student", "Enter new name:" );
-    //           String newSurname = Dialogs.InputDialog("Modify Student", "Enter new surname:" );
-                
-    //           String newdateOfBirth = Dialogs.InputDialog("Modify Student", "Enter new Date of birth:" );
-    //           String newMathScore = Dialogs.InputDialog("Modify Student", "Enter new math score:" );
-    //           String newPhysicsScore = Dialogs.InputDialog("Modify Student", "Enter new physics score:" );
-    //           String newLiterraturescore = Dialogs.InputDialog("Modify Student", "Enter new litterature score:" );
-    //           String newScienceScore = Dialogs.InputDialog("Modify Student", "Enter new science score:" );
-    //           String newChemistryScore = Dialogs.InputDialog("Modify Student", "Enter new chemistry score:" );
-    //           String newHistoryScore = Dialogs.InputDialog("Modify Student", "Enter new history score:" );
-    //           String newGeographyScore = Dialogs.InputDialog("Modify Student", "Enter new geography score:" );
-    //           String newFrenchScore = Dialogs.InputDialog("Modify Student", "Enter new french score:" );
-    //           String newEnglishScore = Dialogs.InputDialog("Modify Student", "Enter new english score:" );
-    //           String newGermanScore = Dialogs.InputDialog("Modify Student", "Enter new german score:" );
-    //             // Wow just use Dialogs for this!!!!
-
-    //           // ... (similar prompts for other editable fields)
-
-    //           // Update the selected student object with the modified values
-    //           if (newName != null) {
-    //             selectedEtudiant.setNom(newName);
-    //           }
-    //           if (newSurname != null) {
-    //             selectedEtudiant.setPrenom(newSurname);
-    //           }
-    //           // ... (update other fields based on user input)
-
-    //           // Update the table model with the modified data
-    //           updateTableModel(selectedRow);
-    //         } else {
-    //           Dialogs.writeErr("Error", "No student selected");
-    //         }
-    // }//GEN-LAST:event_ModifyActionPerformed
+ 
 
     /**
      * @param args the command line arguments
