@@ -161,6 +161,12 @@ public class AdminMode extends javax.swing.JFrame {
                     java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
 
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // all cells false
+                return false;
+            }
+
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
@@ -310,8 +316,6 @@ public class AdminMode extends javax.swing.JFrame {
             tableModel.removeRow(rowIndexToRemove);
         }
 
-    
-
         // Refresh the table
         tableModel.fireTableDataChanged();
         // refresh the database in here
@@ -334,11 +338,11 @@ public class AdminMode extends javax.swing.JFrame {
     public void SortActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SortActionPerformed
         // Collections.sort((List<T>) etudiants);
         System.err.println("**********************************************************************************");
+        sortMode *= -1;
         renderDatabase(connection, sortMode);
         // Sorting button will not change state Unless the connection to MySql is
         // established
-        sortMode *= -1;
-        String text = (sortMode == 1) ? "Sort by Highest Score" : "Unsort the list";
+        String text = (sortMode == 1) ? "Unsort the list" : "Sort by Highest Score";
         Sort.setText(text);
     }// GEN-LAST:event_SortActionPerformed
 
@@ -445,7 +449,7 @@ public class AdminMode extends javax.swing.JFrame {
 
             ResultSet resultSet = sortMode == 1 ? statement.executeQuery("SELECT * FROM etudiant ORDER BY moyenne DESC")
                     : statement.executeQuery("SELECT * FROM etudiant");
-            tableModel.setRowCount(0); // Clear existing data from the table maybe, haven't tested
+            tableModel.setRowCount(0); // Clear existing data from the table maybe, tested and big works
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("idEtudiant");
@@ -548,7 +552,7 @@ public class AdminMode extends javax.swing.JFrame {
             modifyPanel.add(nameField);
             modifyPanel.add(new JLabel("Surname:"));
             modifyPanel.add(surnameField);
-            modifyPanel.add(new JLabel("Date of Birth (YYYY-MM-DD):"));
+            modifyPanel.add(new JLabel("Date of Birth (dd-MM-yyyy):"));
             modifyPanel.add(dobField);
             modifyPanel.add(new JLabel("Math Score:"));
             modifyPanel.add(mathScoreField);
@@ -556,19 +560,19 @@ public class AdminMode extends javax.swing.JFrame {
             modifyPanel.add(physicsScoreField);
             modifyPanel.add(new JLabel("Litterature Score:"));
             modifyPanel.add(litteratureScoreField);
-            modifyPanel.add(new JLabel("chemistry Score:"));
+            modifyPanel.add(new JLabel("Chemistry Score:"));
             modifyPanel.add(chemistryScoreField);
             modifyPanel.add(new JLabel("Science Score:"));
             modifyPanel.add(scienceScoreField);
-            modifyPanel.add(new JLabel("history Score:"));
+            modifyPanel.add(new JLabel("History Score:"));
             modifyPanel.add(historyScoreField);
-            modifyPanel.add(new JLabel("geography Score:"));
+            modifyPanel.add(new JLabel("Geography Score:"));
             modifyPanel.add(geographyScoreField);
-            modifyPanel.add(new JLabel("french Score:"));
+            modifyPanel.add(new JLabel("French Score:"));
             modifyPanel.add(frenchScoreField);
-            modifyPanel.add(new JLabel("english Score:"));
+            modifyPanel.add(new JLabel("English Score:"));
             modifyPanel.add(englishScoreField);
-            modifyPanel.add(new JLabel("german Score:"));
+            modifyPanel.add(new JLabel("German Score:"));
             modifyPanel.add(germanScoreField);
 
             int result = JOptionPane.showConfirmDialog(this, modifyPanel, "Modify Student",
@@ -676,11 +680,11 @@ public class AdminMode extends javax.swing.JFrame {
                 selectedEtudiant.setNoteAllemand(Double.parseDouble(newGermanScore));
             }
 
-            if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) { 
-                return; 
+            if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
+                return;
             }
 
-            if (error == 1){
+            if (error == 1) {
                 genHtml += "</html>";
                 Dialogs.writeErr("Invalid input!", genHtml);
                 return;
@@ -725,7 +729,8 @@ public class AdminMode extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Error updating student in database", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
-                System.err.println("**********************************************************************************");
+                System.err
+                        .println("**********************************************************************************");
                 renderDatabase(connection, sortMode);
             }
 
