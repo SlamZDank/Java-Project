@@ -244,7 +244,7 @@ public class AdminMode extends javax.swing.JFrame {
 
         Export.setBackground(new java.awt.Color(255, 204, 255));
         Export.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
-        Export.setText("Export as CSV / PDF");
+        Export.setText("Export as PDF");
         Export.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +269,7 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("V1.0.0");
+        jLabel9.setText("V1.0.1");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 37, 15);
 

@@ -112,12 +112,12 @@ public class UserMode extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Submission Form");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1243, 840));
+        setPreferredSize(new java.awt.Dimension(1243, 855));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 980));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1000, 950));
         jPanel2.setLayout(null);
 
         Disconnect.setBackground(new java.awt.Color(255, 204, 255));
@@ -158,7 +158,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText(
-                "<html> WARNING: <br><br> - Please TRIPLE CHECK your information before submitting <br> as it is IRREVERSIBLE and can only <br> be changed by authorised personnel!</html>");
+                "<html></html>");
         jPanel3.add(jLabel8);
         jLabel8.setBounds(30, 390, 310, 190);
 
@@ -407,7 +407,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("V1.0.0");
+        jLabel10.setText("V1.0.1");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(1170, 20, 37, 15);
 
