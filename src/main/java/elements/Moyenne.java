@@ -1,10 +1,7 @@
 package elements;
+
 import java.util.*;
 import java.text.DecimalFormat;
-
-
-// May need modifications in order to work with enums.
-// Not sure about it... didnt get the time to check
 
 public class Moyenne {
     ArrayList<Note> TabMoy = new ArrayList<>();
@@ -12,18 +9,21 @@ public class Moyenne {
     private double coef_all = 0;
     private String mention = null;
 
-    public void push(Note New){ TabMoy.add(New); }
+    public void push(Note New) {
+        TabMoy.add(New);
+    }
 
-    public Moyenne(){}
+    public Moyenne() {
+    }
 
-    public Moyenne(ArrayList<Note> Tab){this.TabMoy = Tab;}
+    public Moyenne(ArrayList<Note> Tab) {
+        this.TabMoy = Tab;
+    }
 
-
-    // TODO: Ensure that methods are available for UI
-    public double getMoy(){
+    public double getMoy() {
         if (Moy == -1) {
             Moy = 0;
-            for (Note note: TabMoy){
+            for (Note note : TabMoy) {
                 Moy += note.getNote() * note.getCoef();
                 coef_all += note.getCoef();
             }
@@ -34,20 +34,22 @@ public class Moyenne {
         return Double.parseDouble(decimalString);
     }
 
-    public String getMention(){
-        if (mention != null) {return mention;}
+    public String getMention() {
+        if (mention != null) {
+            return mention;
+        }
 
-        if (this.getMoy() < 10.0) { 
+        if (this.getMoy() < 10.0) {
             mention = "Not Good";
             return mention;
         }
 
-        if (this.getMoy() < 12.0) { 
+        if (this.getMoy() < 12.0) {
             mention = "Sufficiently Good";
             return mention;
         }
 
-        if (this.getMoy() < 14.0) { 
+        if (this.getMoy() < 14.0) {
             mention = "Good";
             return mention;
         }
@@ -55,17 +57,21 @@ public class Moyenne {
         mention = "Very Good";
         return mention;
     }
-    public String status(){
+
+    public String status() {
         String mention = getMention();
-        if (mention.equals("Not Good")) {return "Rejected";}
-        else{return "Accepted";}
+        if (mention.equals("Not Good")) {
+            return "Rejected";
+        } else {
+            return "Accepted";
+        }
     }
-    
-    public String toString(){
-        return (status() + 
-                " with a remark of \"" 
-                + getMention() + 
-                "\" and with a score of " 
+
+    public String toString() {
+        return (status() +
+                " with a remark of \""
+                + getMention() +
+                "\" and with a score of "
                 + getMoy() + " !");
     }
 }

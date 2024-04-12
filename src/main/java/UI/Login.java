@@ -86,11 +86,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("V0.0.5");
+        jLabel7.setText("V1.0.0");
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("<html>Under DEVELOPMENT, <br>Some aspects may be changed.</html>");
+        jLabel9.setText("<html>Slama Med Amine<br>Ghassen Latrach</html>");
 
         javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
         Left.setLayout(LeftLayout);

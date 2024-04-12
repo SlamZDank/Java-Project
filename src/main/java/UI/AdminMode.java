@@ -1,4 +1,5 @@
 package UI;
+
 import UI.UserMode;
 import elements.Etudiant;
 import elements.DB;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,9 +32,9 @@ import java.io.FileOutputStream;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.*;
 
-public class AdminMode extends javax.swing.JFrame  {
-     private ArrayList<Etudiant> etudiants; // Stores student data
-     int sortMode = -1;
+public class AdminMode extends javax.swing.JFrame {
+    private ArrayList<Etudiant> etudiants; // Stores student data
+    int sortMode = -1;
     Connection connection = null;
 
     public AdminMode(Connection con) {
@@ -41,7 +43,8 @@ public class AdminMode extends javax.swing.JFrame  {
         etudiants = new ArrayList<>();
         try {
             connection = con;
-            renderDatabase(con ,sortMode);
+            System.err.println("**********************************************************************************");
+            renderDatabase(con, sortMode);
         } catch (Exception e) {
             return;
         }
@@ -54,7 +57,8 @@ public class AdminMode extends javax.swing.JFrame  {
      */
 
     @SuppressWarnings("unused, unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -143,19 +147,22 @@ public class AdminMode extends javax.swing.JFrame  {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science", "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                },
+                new String[] {
+                        "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science",
+                        "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                    java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                    java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         jTable1.setColumnSelectionAllowed(true);
@@ -165,17 +172,17 @@ public class AdminMode extends javax.swing.JFrame  {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(410, 80, 1060, 535);
@@ -198,26 +205,27 @@ public class AdminMode extends javax.swing.JFrame  {
         Delete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               
+
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow >= 0) {
                     // Confirmation dialog for deletion
-                    int confirmation = Dialogs.ConfirmDialog("Confirmation", "Are you sure you want to remove this student?");
+                    int confirmation = Dialogs.ConfirmDialog("Confirmation",
+                            "Are you sure you want to remove this student?");
                     if (confirmation == JOptionPane.YES_OPTION) {
-  
+
                         // 1- Get the student object from the model (if applicable):
                         Etudiant selectedStudent = null;
                         if (etudiants != null && selectedRow < etudiants.size()) {
                             selectedStudent = etudiants.get(selectedRow);
                         }
-  
+
                         // 2- Remove student from the underlying data source (database)
                         if (selectedStudent != null) {
-                            // delete student from database using selectedStudent.getId() 
+                            // delete student from database using selectedStudent.getId()
                             System.out.println("Student " + selectedStudent.getId() + " deleted from database");
                         }
-  
-                        // 3- Update the table model 
+
+                        // 3- Update the table model
                         updateTableModel(selectedStudent.getId());
                     }
                 } else {
@@ -255,7 +263,7 @@ public class AdminMode extends javax.swing.JFrame  {
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("V0.0.5");
+        jLabel9.setText("V1.0.0");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 37, 15);
 
@@ -269,80 +277,81 @@ public class AdminMode extends javax.swing.JFrame  {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1498, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1498, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisconnectActionPerformed
+    public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisconnectActionPerformed
         this.dispose();
         Login l = new Login(connection);
         l.setVisible(true);
         l.pack();
         l.setLocationRelativeTo(null);
-       // DB.closeConnection();
-    }//GEN-LAST:event_DisconnectActionPerformed
+        // DB.closeConnection();
+    }// GEN-LAST:event_DisconnectActionPerformed
 
     private void updateTableModel(int id) {
-      DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-  
-      // Remove the appropriate row (assuming student objects are stored in etudiants)
-      int rowIndexToRemove = -1;
-      for (int i = 0; i < etudiants.size(); i++) {
-          if (etudiants.get(i).getId() == id) { // Assuming you have the selected student's id
-              rowIndexToRemove = i;
-              break;
-          }
-      }
-      if (rowIndexToRemove >= 0) {
-          tableModel.removeRow(rowIndexToRemove);
-      }
-  
-      // Alternatively, if we're not storing student objects, we can use table model's data directly:
-       //tableModel.removeRow(selectedRow);
-  
-      // Refresh the table
-      tableModel.fireTableDataChanged();
-      //refresh the database in here
-    try (PreparedStatement ps = connection.prepareStatement("DELETE FROM etudiant WHERE idEtudiant = ?")) {
-        ps.setInt(1, id); // Set the student ID in the prepared statement
-        int rowsDeleted = ps.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("Student with ID " + id + " deleted from database");
-        } else {
-            System.out.println("No student found with ID " + id + " in database");
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+
+        // Remove the appropriate row (assuming student objects are stored in etudiants)
+        int rowIndexToRemove = -1;
+        for (int i = 0; i < etudiants.size(); i++) {
+            if (etudiants.get(i).getId() == id) { // Assuming you have the selected student's id
+                rowIndexToRemove = i;
+                break;
+            }
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error deleting student from database", "Error", JOptionPane.ERROR_MESSAGE);
-       
+        if (rowIndexToRemove >= 0) {
+            tableModel.removeRow(rowIndexToRemove);
+        }
+
+    
+
+        // Refresh the table
+        tableModel.fireTableDataChanged();
+        // refresh the database in here
+        try (PreparedStatement ps = connection.prepareStatement("DELETE FROM etudiant WHERE idEtudiant = ?")) {
+            ps.setInt(1, id); // Set the student ID in the prepared statement
+            int rowsDeleted = ps.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Student with ID " + id + " deleted from database");
+            } else {
+                System.out.println("No student found with ID " + id + " in database");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error deleting student from database", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
     }
-}
-      
-  
-    public void SortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SortActionPerformed
+
+    public void SortActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SortActionPerformed
         // Collections.sort((List<T>) etudiants);
+        System.err.println("**********************************************************************************");
         renderDatabase(connection, sortMode);
-        // Sorting button will not change state Unless the connection to MySql is established
+        // Sorting button will not change state Unless the connection to MySql is
+        // established
         sortMode *= -1;
         String text = (sortMode == 1) ? "Sort by Highest Score" : "Unsort the list";
         Sort.setText(text);
-    }//GEN-LAST:event_SortActionPerformed
+    }// GEN-LAST:event_SortActionPerformed
 
-    public void ExportActionPerformed(java.awt.event.ActionEvent evt) {                                     
+    public void ExportActionPerformed(java.awt.event.ActionEvent evt) {
         // The code used to get information from the jtable1
         String pathName = "";
         JFileChooser file = new JFileChooser();
         file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int x = file.showSaveDialog(this);
-        
-        if (x == JFileChooser.APPROVE_OPTION) { pathName = file.getSelectedFile().getAbsolutePath(); }
+
+        if (x == JFileChooser.APPROVE_OPTION) {
+            pathName = file.getSelectedFile().getAbsolutePath();
+        }
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
 
         try {
@@ -350,7 +359,7 @@ public class AdminMode extends javax.swing.JFrame  {
             doc.setPageSize(PageSize.A3.rotate()); // Make the page wider by rotating it
             doc.setMargins(0, 0, 0, 0); // Remove PDF margins
             doc.addTitle("Report");
-            
+
             doc.open();
             PdfPTable table = new PdfPTable(jTable1.getColumnCount());
 
@@ -370,8 +379,8 @@ public class AdminMode extends javax.swing.JFrame  {
             table.addCell("German");
             table.addCell("Score");
             table.addCell("Remarks");
-            
-            for (int i = 0; i<jTable1.getRowCount(); i++) {
+
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
                 String id = jTable1.getValueAt(i, 0).toString();
                 String name = jTable1.getValueAt(i, 1).toString();
                 String surname = jTable1.getValueAt(i, 2).toString();
@@ -405,207 +414,282 @@ public class AdminMode extends javax.swing.JFrame  {
                 table.addCell(score);
                 table.addCell(remarks);
             }
-            table.setWidths(new float[]{5f, 5f, 5f, 6f, 5f, 5f, 5f, 5f, 6f, 5f, 6f, 5f, 5f, 5f, 5f, 5f}); // make the pdf table wider by increasing the width of each column
+            table.setWidths(new float[] { 5f, 5f, 5f, 6f, 5f, 5f, 5f, 5f, 6f, 5f, 6f, 5f, 5f, 5f, 5f, 5f }); // make the
+                                                                                                             // pdf
+                                                                                                             // table
+                                                                                                             // wider by
+                                                                                                             // increasing
+                                                                                                             // the
+                                                                                                             // width of
+                                                                                                             // each
+                                                                                                             // column
             doc.add(table);
             doc.close();
             Dialogs.SuccessDialog("Success", "Report successfully created.");
-            
+
         } catch (Exception e) {
             Dialogs.writeErr("Error", "No file Access.");
         }
-    }        
-   
-    
-      
-  // -----------work with this method to render the database-----
-    public void renderDatabase(Connection connection, int sortMode) {
-    // Clear existing data from the table model
-    DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-   
-
-    // Fetch updated student data from database 
-    etudiants.clear();
-    
-    try (Statement statement = connection.createStatement()){
-    // @Ghassen u need to check this result set 
-      
-      ResultSet resultSet = sortMode == 1 ? statement.executeQuery("SELECT * FROM etudiant ORDER BY moyenne DESC") : statement.executeQuery("SELECT * FROM etudiant");
-      tableModel.setRowCount(0); // Clear existing data from the table maybe, haven't tested
-     
-      while (resultSet.next()) {
-        int id = resultSet.getInt("idEtudiant");
-        String name = resultSet.getString("nom");
-        String surname = resultSet.getString("prenom");
-        String dob = resultSet.getString("dateDeNaissance");
-        double mathScore = resultSet.getDouble("noteMath");
-        double physicsScore = resultSet.getDouble("notePhysique");
-        double litteraturescore = resultSet.getDouble("noteLitterature");
-        double chemistryScore = resultSet.getDouble("noteChimie");
-        double scienceScore = resultSet.getDouble("noteSVT");
-        double historyScore = resultSet.getDouble("noteHistoire");
-        double geographyScore = resultSet.getDouble("noteGeographie");
-        double frenchScore = resultSet.getDouble("noteFrancais");
-        double englishScore = resultSet.getDouble("noteAnglais");
-        double germanScore = resultSet.getDouble("noteAllemand");
-        double Moyenne = resultSet.getDouble("Moyenne");
-        String Mention = resultSet.getString("Mention");
-
-        System.out.println(id + " " + name + " " + surname + " " + dob + " " + mathScore + " " + physicsScore + " " + litteraturescore + " " + chemistryScore + " " + scienceScore + " " + historyScore + " " + geographyScore + " " + frenchScore + " " + englishScore + " " + germanScore + " " + Moyenne + " " + Mention);
-       
-        Etudiant etudiant = new Etudiant(name, surname, dob);
-    
-        etudiant.ajouteNotes(mathScore, physicsScore, litteraturescore, scienceScore,chemistryScore, historyScore, geographyScore, englishScore, frenchScore,  germanScore);
-        etudiant.setId(id);
-        
-        // Repopulate the table model with updated student data
-           etudiants.add(etudiant);
-          tableModel.addRow(new Object[]{etudiant.getId(),etudiant.getNom(), etudiant.getPrenom(), etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),etudiant.getNoteLitterature(), etudiant.getNoteChimie(),etudiant.getNoteSvt(), etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), etudiant.moy.getMoy(), etudiant.moy.getMention()});
-        
-    
-        // Refresh the table
-        tableModel.fireTableDataChanged();
-        
-      }
-        //resultSet.close();
-        //statement.close();
-        //connection.close();
-    } catch (SQLException ex) {
-      ex.printStackTrace();
     }
 
-  }
-  public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {
-  int selectedRow = jTable1.getSelectedRow();
-  if (selectedRow >= 0) {
-    Etudiant selectedEtudiant = etudiants.get(selectedRow);
+    // -----------work with this method to render the database-----
+    public void renderDatabase(Connection connection, int sortMode) {
+        // Clear existing data from the table model
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
-    // Prepare data for the dialog
-    String name = selectedEtudiant.getNom();
-    String surname = selectedEtudiant.getPrenom();
-    String dob = selectedEtudiant.getDateDeNaiss();
-    String mathScore = String.valueOf(selectedEtudiant.getNoteMath()); 
-    String physicsScore = String.valueOf(selectedEtudiant.getNotePhysique());
-    String litteraturescore = String.valueOf(selectedEtudiant.getNoteLitterature());
-    String chemistryScore = String.valueOf(selectedEtudiant.getNoteChimie());
-    String scienceScore = String.valueOf(selectedEtudiant.getNoteSvt());
-    String historyScore = String.valueOf(selectedEtudiant.getNoteHistoire());
-    String geographyScore = String.valueOf(selectedEtudiant.getNoteGeographie());
-    String frenchScore = String.valueOf(selectedEtudiant.getNoteFrancais());
-    String englishScore = String.valueOf(selectedEtudiant.getNoteAnglais());
-    String germanScore = String.valueOf(selectedEtudiant.getNoteAllemand());
-    // Create a custom panel with text fields for editable fields
-    JPanel modifyPanel = new JPanel(new GridLayout(0, 2, 5, 5));
-    JTextField nameField = new JTextField(name, 20);
-    JTextField surnameField = new JTextField(surname, 20);
-    JTextField dobField = new JTextField(dob, 20);
-    JTextField mathScoreField = new JTextField(mathScore, 5);
-    JTextField physicsScoreField = new JTextField(physicsScore, 5);
-    JTextField litteratureScoreField = new JTextField(litteraturescore, 5);
-    JTextField chemistryScoreField = new JTextField(chemistryScore, 5);
-    JTextField scienceScoreField = new JTextField(scienceScore, 5);
-    JTextField historyScoreField = new JTextField(historyScore, 5);
-    JTextField geographyScoreField = new JTextField(geographyScore, 5);
-    JTextField frenchScoreField = new JTextField(frenchScore, 5);
-    JTextField englishScoreField = new JTextField(englishScore, 5);
-    JTextField germanScoreField = new JTextField(germanScore, 5);
+        // Fetch updated student data from database
+        etudiants.clear();
 
-    modifyPanel.add(new JLabel("Name:"));
-    modifyPanel.add(nameField);
-    modifyPanel.add(new JLabel("Surname:"));
-    modifyPanel.add(surnameField);
-    modifyPanel.add(new JLabel("Date of Birth (YYYY-MM-DD):"));
-    modifyPanel.add(dobField);
-    modifyPanel.add(new JLabel("Math Score:"));
-    modifyPanel.add(mathScoreField);
-    modifyPanel.add(new JLabel("Physics Score:"));
-    modifyPanel.add(physicsScoreField);
-    modifyPanel.add(new JLabel("Litterature Score:"));
-    modifyPanel.add(litteratureScoreField);
-    modifyPanel.add(new JLabel("chemistry Score:"));
-    modifyPanel.add(chemistryScoreField);
-    modifyPanel.add(new JLabel("Science Score:"));
-    modifyPanel.add(scienceScoreField);
-    modifyPanel.add(new JLabel("history Score:"));
-    modifyPanel.add(historyScoreField);
-    modifyPanel.add(new JLabel("geography Score:"));
-    modifyPanel.add(geographyScoreField);
-    modifyPanel.add(new JLabel("french Score:"));
-    modifyPanel.add(frenchScoreField);
-    modifyPanel.add(new JLabel("english Score:"));
-    modifyPanel.add(englishScoreField);
-    modifyPanel.add(new JLabel("german Score:"));
-    modifyPanel.add(germanScoreField);
+        try (Statement statement = connection.createStatement()) {
+            // @Ghassen u need to check this result set
 
-    int result = JOptionPane.showConfirmDialog(this, modifyPanel, "Modify Student", JOptionPane.OK_CANCEL_OPTION);
+            ResultSet resultSet = sortMode == 1 ? statement.executeQuery("SELECT * FROM etudiant ORDER BY moyenne DESC")
+                    : statement.executeQuery("SELECT * FROM etudiant");
+            tableModel.setRowCount(0); // Clear existing data from the table maybe, haven't tested
 
-  
-      // Update student object with modified values
-      String newName = nameField.getText();
-      String newSurname = surnameField.getText();
-      String newDateOfBirth = dobField.getText();
-      String newMathScore = mathScoreField.getText();
-      String newPhysicsScore = physicsScoreField.getText();
-      String newLiterraturescore= litteratureScoreField.getText();
-      String newChemistryScore = chemistryScoreField.getText();
-      String newScienceScore = scienceScoreField.getText();
-      String newHistoryScore = historyScoreField.getText();
-      String newGeographyScore = geographyScoreField.getText();
-      String newFrenchScore = geographyScoreField.getText();
-      String newGermanScore = germanScoreField.getText();
-      String newEnglishScore = englishScoreField.getText();
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-      if (newName != null) {
-        selectedEtudiant.setNom(newName);
-      }
-      if (newSurname != null) {
-        selectedEtudiant.setPrenom(newSurname);
-      }
-      if (newDateOfBirth != null && formatter.parse(newDateOfBirth, LocalDate::from) != null) {
-        selectedEtudiant.setDateDeNaiss(newDateOfBirth);
-      } else {
-        Dialogs.writeErr("Error", "Invalid Date of Birth format (YYYY-MM-DD)");
-      }
+            while (resultSet.next()) {
+                int id = resultSet.getInt("idEtudiant");
+                String name = resultSet.getString("nom");
+                String surname = resultSet.getString("prenom");
+                String dob = resultSet.getString("dateDeNaissance");
+                double mathScore = resultSet.getDouble("noteMath");
+                double physicsScore = resultSet.getDouble("notePhysique");
+                double litteraturescore = resultSet.getDouble("noteLitterature");
+                double chemistryScore = resultSet.getDouble("noteChimie");
+                double scienceScore = resultSet.getDouble("noteSVT");
+                double historyScore = resultSet.getDouble("noteHistoire");
+                double geographyScore = resultSet.getDouble("noteGeographie");
+                double frenchScore = resultSet.getDouble("noteFrancais");
+                double englishScore = resultSet.getDouble("noteAnglais");
+                double germanScore = resultSet.getDouble("noteAllemand");
+                double Moyenne = resultSet.getDouble("Moyenne");
+                String Mention = resultSet.getString("Mention");
+                System.out.println(id + " " + name + " " + surname + " " + dob + " " + mathScore + " " + physicsScore
+                        + " " + litteraturescore + " " + chemistryScore + " " + scienceScore + " " + historyScore + " "
+                        + geographyScore + " " + frenchScore + " " + englishScore + " " + germanScore + " " + Moyenne
+                        + " " + Mention);
 
-      // Validate and update scores
-      if (UserMode.isvalidScore(newMathScore)) {
-        selectedEtudiant.setNoteMath(Double.parseDouble(newMathScore));
-      }
-      if (UserMode.isvalidScore(newPhysicsScore)) {
-        selectedEtudiant.setNotePhysique(Double.parseDouble(newPhysicsScore));
-      }
-      if (UserMode.isvalidScore(newLiterraturescore)) {
-        selectedEtudiant.setNoteLitterature(Double.parseDouble(newLiterraturescore));
-      }
-      if (UserMode.isvalidScore(newChemistryScore)) {
-        selectedEtudiant.setNoteChimie(Double.parseDouble(newChemistryScore));
-      }
-      if (UserMode.isvalidScore(newScienceScore)) {
-        selectedEtudiant.setNotePhysique(Double.parseDouble(newScienceScore));
-      }
-      if (UserMode.isvalidScore(newHistoryScore)) {
-        selectedEtudiant.setNoteHistoire(Double.parseDouble(newHistoryScore));
-      }
-      if (UserMode.isvalidScore(newGeographyScore)) {
-        selectedEtudiant.setNoteGeographie(Double.parseDouble(newGeographyScore));
-      }
-      if (UserMode.isvalidScore(newFrenchScore)) {
-        selectedEtudiant.setNoteFrancais(Double.parseDouble(newFrenchScore));
-      }
-      if (UserMode.isvalidScore(newEnglishScore)) {
-        selectedEtudiant.setNoteAnglais(Double.parseDouble(newEnglishScore));
-      }
-      if (UserMode.isvalidScore(newGermanScore)) {
-        selectedEtudiant.setNoteAllemand(Double.parseDouble(newGermanScore));
-      }
-      
-     
+                Etudiant etudiant = new Etudiant(name, surname, dob);
 
-      // Update table model (you'll need to modify this based on your implementation)
-      // Update the table model with the modified data
-               //updateTableModel(selectedRow);
-               if (result == JOptionPane.OK_OPTION){
-                   // Update database (replace placeholders with actual table and column names)
-                  try (PreparedStatement ps = connection.prepareStatement("UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, noteSVT = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
+                etudiant.ajouteNotes(mathScore, physicsScore, litteraturescore, scienceScore, chemistryScore,
+                        historyScore, geographyScore, englishScore, frenchScore, germanScore);
+                etudiant.setId(id);
+
+                // Repopulate the table model with updated student data
+                etudiants.add(etudiant);
+                tableModel.addRow(new Object[] { etudiant.getId(), etudiant.getNom(), etudiant.getPrenom(),
+                        etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),
+                        etudiant.getNoteLitterature(), etudiant.getNoteChimie(), etudiant.getNoteSvt(),
+                        etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),
+                        etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), etudiant.moy.getMoy(),
+                        etudiant.moy.getMention() });
+
+                // Refresh the table
+                tableModel.fireTableDataChanged();
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static boolean isvalidScore(String score) {
+        if (score == null || score.isEmpty()) {
+            return false;
+        }
+        try {
+            double scoreValue = Double.parseDouble(score);
+            return scoreValue >= 0 && scoreValue <= 20;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {
+        int selectedRow = jTable1.getSelectedRow();
+        int error = 0;
+        String genHtml = "<html><h3>INVALID INPUT</h3><br>";
+        if (selectedRow >= 0) {
+            Etudiant selectedEtudiant = etudiants.get(selectedRow);
+
+            // Prepare data for the dialog
+            String name = selectedEtudiant.getNom();
+            String surname = selectedEtudiant.getPrenom();
+            String dob = selectedEtudiant.getDateDeNaiss();
+            String mathScore = String.valueOf(selectedEtudiant.getNoteMath());
+            String physicsScore = String.valueOf(selectedEtudiant.getNotePhysique());
+            String litteraturescore = String.valueOf(selectedEtudiant.getNoteLitterature());
+            String chemistryScore = String.valueOf(selectedEtudiant.getNoteChimie());
+            String scienceScore = String.valueOf(selectedEtudiant.getNoteSvt());
+            String historyScore = String.valueOf(selectedEtudiant.getNoteHistoire());
+            String geographyScore = String.valueOf(selectedEtudiant.getNoteGeographie());
+            String frenchScore = String.valueOf(selectedEtudiant.getNoteFrancais());
+            String englishScore = String.valueOf(selectedEtudiant.getNoteAnglais());
+            String germanScore = String.valueOf(selectedEtudiant.getNoteAllemand());
+            // Create a custom panel with text fields for editable fields
+            JPanel modifyPanel = new JPanel(new GridLayout(0, 2, 5, 5));
+            JTextField nameField = new JTextField(name, 20);
+            JTextField surnameField = new JTextField(surname, 20);
+            JTextField dobField = new JTextField(dob, 20);
+            JTextField mathScoreField = new JTextField(mathScore, 5);
+            JTextField physicsScoreField = new JTextField(physicsScore, 5);
+            JTextField litteratureScoreField = new JTextField(litteraturescore, 5);
+            JTextField chemistryScoreField = new JTextField(chemistryScore, 5);
+            JTextField scienceScoreField = new JTextField(scienceScore, 5);
+            JTextField historyScoreField = new JTextField(historyScore, 5);
+            JTextField geographyScoreField = new JTextField(geographyScore, 5);
+            JTextField frenchScoreField = new JTextField(frenchScore, 5);
+            JTextField englishScoreField = new JTextField(englishScore, 5);
+            JTextField germanScoreField = new JTextField(germanScore, 5);
+
+            modifyPanel.add(new JLabel("Name:"));
+            modifyPanel.add(nameField);
+            modifyPanel.add(new JLabel("Surname:"));
+            modifyPanel.add(surnameField);
+            modifyPanel.add(new JLabel("Date of Birth (YYYY-MM-DD):"));
+            modifyPanel.add(dobField);
+            modifyPanel.add(new JLabel("Math Score:"));
+            modifyPanel.add(mathScoreField);
+            modifyPanel.add(new JLabel("Physics Score:"));
+            modifyPanel.add(physicsScoreField);
+            modifyPanel.add(new JLabel("Litterature Score:"));
+            modifyPanel.add(litteratureScoreField);
+            modifyPanel.add(new JLabel("chemistry Score:"));
+            modifyPanel.add(chemistryScoreField);
+            modifyPanel.add(new JLabel("Science Score:"));
+            modifyPanel.add(scienceScoreField);
+            modifyPanel.add(new JLabel("history Score:"));
+            modifyPanel.add(historyScoreField);
+            modifyPanel.add(new JLabel("geography Score:"));
+            modifyPanel.add(geographyScoreField);
+            modifyPanel.add(new JLabel("french Score:"));
+            modifyPanel.add(frenchScoreField);
+            modifyPanel.add(new JLabel("english Score:"));
+            modifyPanel.add(englishScoreField);
+            modifyPanel.add(new JLabel("german Score:"));
+            modifyPanel.add(germanScoreField);
+
+            int result = JOptionPane.showConfirmDialog(this, modifyPanel, "Modify Student",
+                    JOptionPane.OK_CANCEL_OPTION);
+
+            // Update student object with modified values
+            String newName = nameField.getText();
+            String newSurname = surnameField.getText();
+            String newDateOfBirth = dobField.getText();
+            String newMathScore = mathScoreField.getText();
+            String newPhysicsScore = physicsScoreField.getText();
+            String newLiterraturescore = litteratureScoreField.getText();
+            String newChemistryScore = chemistryScoreField.getText();
+            String newScienceScore = scienceScoreField.getText();
+            String newHistoryScore = historyScoreField.getText();
+            String newGeographyScore = geographyScoreField.getText();
+            String newFrenchScore = geographyScoreField.getText();
+            String newGermanScore = germanScoreField.getText();
+            String newEnglishScore = englishScoreField.getText();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            if (newName != null) {
+                selectedEtudiant.setNom(newName);
+            }
+            if (newSurname != null) {
+                selectedEtudiant.setPrenom(newSurname);
+            }
+
+            try {
+                formatter.parse(newDateOfBirth, LocalDate::from);
+            } catch (DateTimeParseException e) {
+                error = 1;
+                genHtml += "- Date input is incorrect, it needs to follow: dd-MM-yyyy" + "<br>";
+            }
+
+            // Validate and update scores
+
+            if (!isvalidScore(newMathScore)) {
+                genHtml += "- Invalid Math Score. Please enter a score between 0 and 20. <br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteMath(Double.parseDouble(newMathScore));
+            }
+
+            if (!isvalidScore(newPhysicsScore)) {
+                genHtml += "- Invalid Physics Score. Please enter a score between 0 and 20. <br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNotePhysique(Double.parseDouble(newPhysicsScore));
+            }
+
+            if (!isvalidScore(newLiterraturescore)) {
+                genHtml += "- Invalid Literature Score. Please enter a score between 0 and 20. <br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteLitterature(Double.parseDouble(newLiterraturescore));
+            }
+
+            if (!isvalidScore(newChemistryScore)) {
+                genHtml += "Invalid Chemistry Score. Please enter a score between 0 and 20.";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteChimie(Double.parseDouble(newChemistryScore));
+            }
+
+            if (!isvalidScore(newScienceScore)) {
+                genHtml += "- Invalid Science Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteSvt(Double.parseDouble(newScienceScore)); // Assuming you have a method
+                                                                                  // setNoteScience
+            }
+
+            if (!isvalidScore(newHistoryScore)) {
+                genHtml += "Invalid History Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteHistoire(Double.parseDouble(newHistoryScore));
+            }
+
+            if (!isvalidScore(newGeographyScore)) {
+                genHtml += "- Invalid Geography Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteGeographie(Double.parseDouble(newGeographyScore));
+            }
+
+            if (!isvalidScore(newFrenchScore)) {
+                genHtml += "- Invalid French Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteFrancais(Double.parseDouble(newFrenchScore));
+            }
+
+            if (!isvalidScore(newEnglishScore)) {
+                genHtml += "- Invalid English Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteAnglais(Double.parseDouble(newEnglishScore));
+            }
+
+            if (!isvalidScore(newGermanScore)) {
+                genHtml += "- Invalid German Score. Please enter a score between 0 and 20.<br>";
+                error = 1;
+            } else {
+                selectedEtudiant.setNoteAllemand(Double.parseDouble(newGermanScore));
+            }
+
+            if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) { 
+                return; 
+            }
+
+            if (error == 1){
+                genHtml += "</html>";
+                Dialogs.writeErr("Invalid input!", genHtml);
+                return;
+            }
+
+            if (result == JOptionPane.OK_OPTION) {
+                // Update database (replace placeholders with actual table and column names)
+                try (PreparedStatement ps = connection.prepareStatement(
+                        "UPDATE etudiant SET nom = ?, prenom = ?, dateDeNaissance = ?, noteMath = ?, notePhysique = ?, noteLitterature = ?, noteChimie = ?, noteSVT = ?, noteHistoire = ?, noteGeographie = ?, noteFrancais = ?, noteAnglais = ?, noteAllemand = ? , Moyenne= ?, Mention = ? WHERE idEtudiant = ?")) {
                     ps.setString(1, newName);
                     ps.setString(2, newSurname);
                     ps.setString(3, newDateOfBirth);
@@ -614,11 +698,11 @@ public class AdminMode extends javax.swing.JFrame  {
                     double physics = Double.parseDouble(newPhysicsScore);
                     ps.setDouble(5, physics);
                     double Literature = Double.parseDouble(newLiterraturescore);
-                    ps.setDouble(6,Literature);
+                    ps.setDouble(6, Literature);
                     double chemistry = Double.parseDouble(newChemistryScore);
                     ps.setDouble(7, chemistry);
                     double science = Double.parseDouble(newScienceScore);
-                    ps.setDouble(8,science);  
+                    ps.setDouble(8, science);
                     double history = Double.parseDouble(newHistoryScore);
                     ps.setDouble(9, history);
                     double geography = Double.parseDouble(newGeographyScore);
@@ -628,35 +712,30 @@ public class AdminMode extends javax.swing.JFrame  {
                     double english = Double.parseDouble(newEnglishScore);
                     ps.setDouble(12, english);
                     double german = Double.parseDouble(newGermanScore);
-                    ps.setDouble(13, german); 
-                    ps.setDouble(14, selectedEtudiant.moy.getMoy()); 
-                    ps.setString(15, selectedEtudiant.moy.getMention()); 
-                       
-                                 
+                    ps.setDouble(13, german);
+                    ps.setDouble(14, selectedEtudiant.moy.getMoy());
+                    ps.setString(15, selectedEtudiant.moy.getMention());
 
-                  
-                 
-                  ps.setInt(16, selectedEtudiant.getId()); 
-                  ps.executeUpdate();
-                  System.out.println("Student with ID " + selectedEtudiant.getId() + " updated in database");
-                  Dialogs.SuccessDialog("Success", "Student modified successfully");
-                  } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  JOptionPane.showMessageDialog(this, "Error updating student in database", "Error", JOptionPane.ERROR_MESSAGE);
-                  }
-                  renderDatabase(connection, result);
-               }
-          
+                    ps.setInt(16, selectedEtudiant.getId());
+                    ps.executeUpdate();
+                    System.out.println("Student with ID " + selectedEtudiant.getId() + " updated in database");
+                    Dialogs.SuccessDialog("Success", "Student modified successfully");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error updating student in database", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                System.err.println("**********************************************************************************");
+                renderDatabase(connection, sortMode);
+            }
+
+        }
     }
-  }
-
-
- 
 
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete;
     private javax.swing.JButton Disconnect;
@@ -683,23 +762,3 @@ public class AdminMode extends javax.swing.JFrame  {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/db_icon.png")));
     }
 }
-
-// End of AdminMode.java
-// Reload the database: state(-1) -> Used in AdminMode.java when constructing the AdminMode Window
-// it does these things:
-// DELETE ALL ELEMENTS FROM THE JTABLE
-// Access the database
-// set label
-// Query the database: SELECT * from etudiants
-// Iterate over each element while populating the JTable
-// JTable has all elements
-//
-// Reload the database: state(1) ->
-// DELETE ALL ELEMENTS FROM THE JTABLE
-// Query the database with sorting of moyenne
-// set label
-// Populate the JTable with the sorted elements
-
-// int s = -1;
-// s *= -1;
-// Reload the database: state(s)
