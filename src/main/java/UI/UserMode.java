@@ -545,7 +545,7 @@ public class UserMode extends javax.swing.JFrame {
 
             Etudiant Person = new Etudiant(studentName, studentSurname, dobString);
             Person.ajouteNotes(mathScore, physicsScore, literatureScore, scienceScore, chemistryScore, historyScore,
-                    geographyScore, frenchScore, (englishScore), germanScore);
+                    geographyScore, frenchScore, englishScore, germanScore);
 
             // try and catch for connectivity with database
 
