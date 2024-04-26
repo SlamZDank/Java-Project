@@ -151,8 +151,8 @@ public class AdminMode extends javax.swing.JFrame {
 
                 },
                 new String[] {
-                        "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science",
-                        "Chemistry", "History", "Geography", "French", "English", "German", "Score", "Mention"
+                        "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Chemistry",
+                        "Science", "History", "Geography", "French", "English", "German", "Score", "Mention"
                 }) {
             Class[] types = new Class[] {
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -475,7 +475,7 @@ public class AdminMode extends javax.swing.JFrame {
 
                 Etudiant etudiant = new Etudiant(name, surname, dob);
 
-                etudiant.ajouteNotes(mathScore, physicsScore, litteraturescore, scienceScore, chemistryScore,
+                etudiant.ajouteNotes(mathScore, physicsScore, litteraturescore, chemistryScore,scienceScore, 
                         historyScore, geographyScore, englishScore, frenchScore, germanScore);
                 etudiant.setId(id);
 
@@ -732,15 +732,15 @@ public class AdminMode extends javax.swing.JFrame {
                     System.out.println("Math = " + math);
                     System.out.println("Physique = " + physics);
                     System.out.println("litterature = " + litterature);
-                    System.out.println("Science = " + science);
                     System.out.println("Cehemestry = " + chemistry);
+                    System.out.println("Science = " + science);
                     System.out.println("History = " + history);
                     System.out.println("Geography = " + geography);
                     System.out.println("French = " + french);
                     System.out.println("English = " + english);
                     System.out.println("German = " + german);
 
-                    selectedEtudiant.ajouteNotes(math, physics, litterature, science, chemistry, history,
+                    selectedEtudiant.ajouteNotes(math, physics, litterature,chemistry, science,  history,
                     geography, french, english, german);
 
                     ps.setDouble(14, selectedEtudiant.moy.getMoy());
