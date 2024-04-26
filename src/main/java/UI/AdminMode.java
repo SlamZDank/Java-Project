@@ -737,6 +737,10 @@ public class AdminMode extends javax.swing.JFrame {
                     ps.setDouble(12, english);
                     double german = Double.parseDouble(newGermanScore);
                     ps.setDouble(13, german);
+
+                    selectedEtudiant.ajouteNotes(math, physicsScore, Literature, science, chemistry, history,
+                    geography, french, english, german);
+
                     ps.setDouble(14, selectedEtudiant.moy.getMoy());
                     ps.setString(15, selectedEtudiant.moy.getMention());
 
