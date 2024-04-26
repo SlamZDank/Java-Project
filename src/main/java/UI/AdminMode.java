@@ -513,46 +513,43 @@ public class AdminMode extends javax.swing.JFrame {
 
     public void ModifyActionPerformed(java.awt.event.ActionEvent evt) {
         int selectedRow = jTable1.getSelectedRow();
-        int error = 0;
+        Boolean error = false;
         String genHtml = "<html><h3>INVALID INPUT</h3><br>";
-        String name=null,surname=null,dob=null,mention=null;
-        double mathScore=0,physicsScore=0,litteraturescore=0,chemistryScore=0,historyScore=0,geographyScore=0,scienceScore=0,frenchScore=0,englishScore=0,germanScore=0;
+        String name = null, surname = null, dob = null;
+        double mathScore = 0, physicsScore = 0, litteraturescore = 0, chemistryScore = 0, historyScore = 0,
+                geographyScore = 0, scienceScore = 0, frenchScore = 0, englishScore = 0, germanScore = 0;
 
         if (selectedRow >= 0) {
             // Prepare data for the dialog
             Etudiant selectedEtudiant = etudiants.get(selectedRow);
             String selectedStudentId = jTable1.getValueAt(selectedRow, 0).toString();
-            //System.out.println(selectedStudentId);
+            // System.out.println(selectedStudentId);
             String sql = "SELECT * FROM Etudiant WHERE idEtudiant = ?";
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
                 pstmt.setString(1, selectedStudentId);
                 ResultSet resultSet = pstmt.executeQuery();
-                
+
                 if (resultSet.next()) {
-                     name = resultSet.getString("nom");
-                     surname = resultSet.getString("prenom");
-                     dob = resultSet.getString("dateDeNaissance");
-                     mathScore = resultSet.getDouble("noteMath");
-                     physicsScore = resultSet.getDouble("notePhysique");
-                     litteraturescore = resultSet.getDouble("noteLitterature");
-                     chemistryScore = resultSet.getDouble("noteChimie");
-                     scienceScore = resultSet.getDouble("noteSVT");
-                     historyScore = resultSet.getDouble("noteHistoire");
-                     geographyScore = resultSet.getDouble("noteGeographie");
-                     frenchScore = resultSet.getDouble("noteFrancais");
-                     englishScore = resultSet.getDouble("noteAnglais");
-                     germanScore = resultSet.getDouble("noteAllemand");
-        
-                }     
-                
+                    name = resultSet.getString("nom");
+                    surname = resultSet.getString("prenom");
+                    dob = resultSet.getString("dateDeNaissance");
+                    mathScore = resultSet.getDouble("noteMath");
+                    physicsScore = resultSet.getDouble("notePhysique");
+                    litteraturescore = resultSet.getDouble("noteLitterature");
+                    chemistryScore = resultSet.getDouble("noteChimie");
+                    scienceScore = resultSet.getDouble("noteSVT");
+                    historyScore = resultSet.getDouble("noteHistoire");
+                    geographyScore = resultSet.getDouble("noteGeographie");
+                    frenchScore = resultSet.getDouble("noteFrancais");
+                    englishScore = resultSet.getDouble("noteAnglais");
+                    germanScore = resultSet.getDouble("noteAllemand");
+
+                }
+
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
 
-
-
-
-            
             JPanel modifyPanel = new JPanel(new GridLayout(0, 2, 5, 5));
             JTextField nameField = new JTextField(name, 20);
             JTextField surnameField = new JTextField(surname, 20);
@@ -560,8 +557,8 @@ public class AdminMode extends javax.swing.JFrame {
             JTextField mathScoreField = new JTextField(String.valueOf(mathScore), 5);
             JTextField physicsScoreField = new JTextField(String.valueOf(physicsScore), 5);
             JTextField litteratureScoreField = new JTextField(String.valueOf(litteraturescore), 5);
-            JTextField chemistryScoreField = new JTextField(String.valueOf(chemistryScore), 5);
             JTextField scienceScoreField = new JTextField(String.valueOf(scienceScore), 5);
+            JTextField chemistryScoreField = new JTextField(String.valueOf(chemistryScore), 5);
             JTextField historyScoreField = new JTextField(String.valueOf(historyScore), 5);
             JTextField geographyScoreField = new JTextField(String.valueOf(geographyScore), 5);
             JTextField frenchScoreField = new JTextField(String.valueOf(frenchScore), 5);
@@ -580,10 +577,10 @@ public class AdminMode extends javax.swing.JFrame {
             modifyPanel.add(physicsScoreField);
             modifyPanel.add(new JLabel("Litterature Score:"));
             modifyPanel.add(litteratureScoreField);
-            modifyPanel.add(new JLabel("Chemistry Score:"));
-            modifyPanel.add(chemistryScoreField);
             modifyPanel.add(new JLabel("Science Score:"));
             modifyPanel.add(scienceScoreField);
+            modifyPanel.add(new JLabel("Chemistry Score:"));
+            modifyPanel.add(chemistryScoreField);
             modifyPanel.add(new JLabel("History Score:"));
             modifyPanel.add(historyScoreField);
             modifyPanel.add(new JLabel("Geography Score:"));
@@ -604,15 +601,16 @@ public class AdminMode extends javax.swing.JFrame {
             String newDateOfBirth = dobField.getText();
             String newMathScore = mathScoreField.getText();
             String newPhysicsScore = physicsScoreField.getText();
-            String newLiterraturescore = litteratureScoreField.getText();
-            String newChemistryScore = chemistryScoreField.getText();
+            String newLiterratureScore = litteratureScoreField.getText();
             String newScienceScore = scienceScoreField.getText();
+            String newChemistryScore = chemistryScoreField.getText();
             String newHistoryScore = historyScoreField.getText();
             String newGeographyScore = geographyScoreField.getText();
             String newFrenchScore = frenchScoreField.getText();
             String newGermanScore = germanScoreField.getText();
             String newEnglishScore = englishScoreField.getText();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
             if (newName != null) {
                 selectedEtudiant.setNom(newName);
             }
@@ -623,80 +621,81 @@ public class AdminMode extends javax.swing.JFrame {
             try {
                 formatter.parse(newDateOfBirth, LocalDate::from);
             } catch (DateTimeParseException e) {
-                error = 1;
+                error = true;
                 genHtml += "- Date input is incorrect, it needs to follow: dd-MM-yyyy" + "<br>";
             }
 
             // Validate and update scores
 
-            double math = 0, physics = 0, litterature = 0, chemistry = 0, science = 0, history = 0, geography = 0, french = 0, english = 0, german = 0;
+            double math = 0, physics = 0, litterature = 0, chemistry = 0, science = 0, history = 0, geography = 0,
+                    french = 0, english = 0, german = 0;
 
             if (!isvalidScore(newMathScore)) {
                 genHtml += "- Invalid Math Score. Please enter a score between 0 and 20. <br>";
-                error = 1;
+                error = true;
             } else {
                 math = Double.parseDouble(newMathScore);
             }
 
             if (!isvalidScore(newPhysicsScore)) {
                 genHtml += "- Invalid Physics Score. Please enter a score between 0 and 20. <br>";
-                error = 1;
+                error = true;
             } else {
                 physics = Double.parseDouble(newPhysicsScore);
             }
 
-            if (!isvalidScore(newLiterraturescore)) {
+            if (!isvalidScore(newLiterratureScore)) {
                 genHtml += "- Invalid Literature Score. Please enter a score between 0 and 20. <br>";
-                error = 1;
+                error = true;
             } else {
-                litterature=Double.parseDouble(newLiterraturescore);
-            }
-
-            if (!isvalidScore(newChemistryScore)) {
-                genHtml += "Invalid Chemistry Score. Please enter a score between 0 and 20.";
-                error = 1;
-            } else {
-                chemistry = Double.parseDouble(newChemistryScore);
+                litterature = Double.parseDouble(newLiterratureScore);
             }
 
             if (!isvalidScore(newScienceScore)) {
                 genHtml += "- Invalid Science Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 science = Double.parseDouble(newScienceScore);
             }
 
+            if (!isvalidScore(newChemistryScore)) {
+                genHtml += "Invalid Chemistry Score. Please enter a score between 0 and 20.";
+                error = true;
+            } else {
+                chemistry = Double.parseDouble(newChemistryScore);
+            }
+
             if (!isvalidScore(newHistoryScore)) {
                 genHtml += "Invalid History Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 history = Double.parseDouble(newHistoryScore);
             }
 
             if (!isvalidScore(newGeographyScore)) {
                 genHtml += "- Invalid Geography Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 geography = Double.parseDouble(newGeographyScore);
             }
 
             if (!isvalidScore(newFrenchScore)) {
                 genHtml += "- Invalid French Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 french = Double.parseDouble(newFrenchScore);
             }
 
             if (!isvalidScore(newEnglishScore)) {
                 genHtml += "- Invalid English Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 english = Double.parseDouble(newEnglishScore);
             }
 
             if (!isvalidScore(newGermanScore)) {
                 genHtml += "- Invalid German Score. Please enter a score between 0 and 20.<br>";
-                error = 1;
+                error = true;
             } else {
                 german = Double.parseDouble(newGermanScore);
             }
@@ -705,7 +704,7 @@ public class AdminMode extends javax.swing.JFrame {
                 return;
             }
 
-            if (error == 1) {
+            if (error) {
                 genHtml += "</html>";
                 Dialogs.writeErr("Invalid input!", genHtml);
                 return;
@@ -732,8 +731,8 @@ public class AdminMode extends javax.swing.JFrame {
                     System.out.println("Math = " + math);
                     System.out.println("Physique = " + physics);
                     System.out.println("litterature = " + litterature);
-                    System.out.println("Science = " + science);
-                    System.out.println("Cehemestry = " + chemistry);
+                    System.out.println("Science = " + science); // MARK: TO TEST TOMORROW
+                    System.out.println("Chemistry = " + chemistry); // MARK: TO TEST TOMORROW
                     System.out.println("History = " + history);
                     System.out.println("Geography = " + geography);
                     System.out.println("French = " + french);
@@ -741,7 +740,7 @@ public class AdminMode extends javax.swing.JFrame {
                     System.out.println("German = " + german);
 
                     selectedEtudiant.ajouteNotes(math, physics, litterature, science, chemistry, history,
-                    geography, french, english, german);
+                            geography, french, english, german);
 
                     ps.setDouble(14, selectedEtudiant.moy.getMoy());
                     ps.setString(15, selectedEtudiant.moy.getMention());
