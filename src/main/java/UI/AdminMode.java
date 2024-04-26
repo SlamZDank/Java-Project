@@ -609,7 +609,7 @@ public class AdminMode extends javax.swing.JFrame {
             String newScienceScore = scienceScoreField.getText();
             String newHistoryScore = historyScoreField.getText();
             String newGeographyScore = geographyScoreField.getText();
-            String newFrenchScore = geographyScoreField.getText();
+            String newFrenchScore = frenchScoreField.getText();
             String newGermanScore = germanScoreField.getText();
             String newEnglishScore = englishScoreField.getText();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
