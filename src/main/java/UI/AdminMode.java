@@ -729,6 +729,17 @@ public class AdminMode extends javax.swing.JFrame {
                     ps.setDouble(12, english);
                     ps.setDouble(13, german);
 
+                    System.out.println("Math = " + math);
+                    System.out.println("Physique = " + physics);
+                    System.out.println("litterature = " + litterature);
+                    System.out.println("Science = " + science);
+                    System.out.println("Cehemestry = " + chemistry);
+                    System.out.println("History = " + history);
+                    System.out.println("Geography = " + geography);
+                    System.out.println("French = " + french);
+                    System.out.println("English = " + english);
+                    System.out.println("German = " + german);
+
                     selectedEtudiant.ajouteNotes(math, physics, litterature, science, chemistry, history,
                     geography, french, english, german);
 
