@@ -43,7 +43,7 @@ public class Etudiant {
         this.nom = nom;
         this.prenom = prenom;
         this.dateDeNaiss = dateDeNaiss;
-        ajouteNotes(m, p, l, c, s, h, g, fr, en, ger);
+        ajouteNotes(m, p, l, s, c, h, g, fr, en, ger);
         // It is going to be garbage collected anyway.
     }
 
