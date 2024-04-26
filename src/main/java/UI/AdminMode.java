@@ -629,75 +629,76 @@ public class AdminMode extends javax.swing.JFrame {
 
             // Validate and update scores
 
+            double math = 0, physics = 0, litterature = 0, chemistry = 0, science = 0, history = 0, geography = 0, french = 0, english = 0, german = 0;
+
             if (!isvalidScore(newMathScore)) {
                 genHtml += "- Invalid Math Score. Please enter a score between 0 and 20. <br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteMath(Double.parseDouble(newMathScore));
+                math = Double.parseDouble(newMathScore);
             }
 
             if (!isvalidScore(newPhysicsScore)) {
                 genHtml += "- Invalid Physics Score. Please enter a score between 0 and 20. <br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNotePhysique(Double.parseDouble(newPhysicsScore));
+                physics = Double.parseDouble(newPhysicsScore);
             }
 
             if (!isvalidScore(newLiterraturescore)) {
                 genHtml += "- Invalid Literature Score. Please enter a score between 0 and 20. <br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteLitterature(Double.parseDouble(newLiterraturescore));
+                litterature=Double.parseDouble(newLiterraturescore);
             }
 
             if (!isvalidScore(newChemistryScore)) {
                 genHtml += "Invalid Chemistry Score. Please enter a score between 0 and 20.";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteChimie(Double.parseDouble(newChemistryScore));
+                chemistry = Double.parseDouble(newChemistryScore);
             }
 
             if (!isvalidScore(newScienceScore)) {
                 genHtml += "- Invalid Science Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteSvt(Double.parseDouble(newScienceScore)); // Assuming you have a method
-                                                                                  // setNoteScience
+                science = Double.parseDouble(newScienceScore);
             }
 
             if (!isvalidScore(newHistoryScore)) {
                 genHtml += "Invalid History Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteHistoire(Double.parseDouble(newHistoryScore));
+                history = Double.parseDouble(newHistoryScore);
             }
 
             if (!isvalidScore(newGeographyScore)) {
                 genHtml += "- Invalid Geography Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteGeographie(Double.parseDouble(newGeographyScore));
+                geography = Double.parseDouble(newGeographyScore);
             }
 
             if (!isvalidScore(newFrenchScore)) {
                 genHtml += "- Invalid French Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteFrancais(Double.parseDouble(newFrenchScore));
+                french = Double.parseDouble(newFrenchScore);
             }
 
             if (!isvalidScore(newEnglishScore)) {
                 genHtml += "- Invalid English Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteAnglais(Double.parseDouble(newEnglishScore));
+                english = Double.parseDouble(newEnglishScore);
             }
 
             if (!isvalidScore(newGermanScore)) {
                 genHtml += "- Invalid German Score. Please enter a score between 0 and 20.<br>";
                 error = 1;
             } else {
-                selectedEtudiant.setNoteAllemand(Double.parseDouble(newGermanScore));
+                german = Double.parseDouble(newGermanScore);
             }
 
             if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
@@ -717,28 +718,18 @@ public class AdminMode extends javax.swing.JFrame {
                     ps.setString(1, newName);
                     ps.setString(2, newSurname);
                     ps.setString(3, newDateOfBirth);
-                    double math = Double.parseDouble(newMathScore);
                     ps.setDouble(4, math);
-                    double physics = Double.parseDouble(newPhysicsScore);
                     ps.setDouble(5, physics);
-                    double Literature = Double.parseDouble(newLiterraturescore);
-                    ps.setDouble(6, Literature);
-                    double chemistry = Double.parseDouble(newChemistryScore);
+                    ps.setDouble(6, litterature);
                     ps.setDouble(7, chemistry);
-                    double science = Double.parseDouble(newScienceScore);
                     ps.setDouble(8, science);
-                    double history = Double.parseDouble(newHistoryScore);
                     ps.setDouble(9, history);
-                    double geography = Double.parseDouble(newGeographyScore);
                     ps.setDouble(10, geography);
-                    double french = Double.parseDouble(newFrenchScore);
                     ps.setDouble(11, french);
-                    double english = Double.parseDouble(newEnglishScore);
                     ps.setDouble(12, english);
-                    double german = Double.parseDouble(newGermanScore);
                     ps.setDouble(13, german);
 
-                    selectedEtudiant.ajouteNotes(math, physics, Literature, science, chemistry, history,
+                    selectedEtudiant.ajouteNotes(math, physics, litterature, science, chemistry, history,
                     geography, french, english, german);
 
                     ps.setDouble(14, selectedEtudiant.moy.getMoy());
