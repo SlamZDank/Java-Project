@@ -151,7 +151,7 @@ public class AdminMode extends javax.swing.JFrame {
 
                 },
                 new String[] {
-                        "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature","Chemistry", "Science","History", "Geography", "French", "English", "German", "Score", "Mention"
+                        "Id", "Name", "Surname", "Date Of Birth", "Math", "Physics", "Literrature", "Science","Chemistry","History", "Geography", "French", "English", "German", "Score", "Mention"
                 }) {
             Class[] types = new Class[] {
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
@@ -482,7 +482,7 @@ public class AdminMode extends javax.swing.JFrame {
                 etudiants.add(etudiant);
                 tableModel.addRow(new Object[] { etudiant.getId(), etudiant.getNom(), etudiant.getPrenom(),
                         etudiant.getDateDeNaiss(), etudiant.getNoteMath(), etudiant.getNotePhysique(),
-                        etudiant.getNoteLitterature(), etudiant.getNoteChimie(), etudiant.getNoteSvt(),
+                        etudiant.getNoteLitterature(),etudiant.getNoteSvt(), etudiant.getNoteChimie(), 
                         etudiant.getNoteHistoire(), etudiant.getNoteGeographie(), etudiant.getNoteFrancais(),
                         etudiant.getNoteAnglais(), etudiant.getNoteAllemand(), Moyenne,
                         Mention });
