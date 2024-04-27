@@ -268,7 +268,7 @@ public class AdminMode extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("V1.0.4");
+        jLabel9.setText("V1.0.5");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 37, 15);
 
