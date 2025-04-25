@@ -1,11 +1,14 @@
 package UI;
 
 import elements.Etudiant;
-import elements.DB;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.Toolkit;
 import java.time.LocalDate;
@@ -14,9 +17,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
-
-public class UserMode extends javax.swing.JFrame {
+public class UserMode extends JFrame implements Disconnectable {
     Etudiant Person = null;
     String ID_Person;
     Connection connection = null;
@@ -24,6 +25,8 @@ public class UserMode extends javax.swing.JFrame {
     public UserMode(Connection con, String ID) {
         initComponents();
         setIconImage();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowDisconnectListener(this));
         ID_Person = ID;
         ID_Field.setText("ID: " + ID_Person);
         try {
@@ -125,7 +128,7 @@ public class UserMode extends javax.swing.JFrame {
         Disconnect.setText("<<    Disconnect");
         Disconnect.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(153, 0, 153)));
         Disconnect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 DisconnectActionPerformed(evt);
             }
         });
@@ -407,7 +410,7 @@ public class UserMode extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("V1.0.5");
+        jLabel10.setText("V1.0.6");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(1170, 20, 37, 15);
 
@@ -423,7 +426,7 @@ public class UserMode extends javax.swing.JFrame {
                                 javax.swing.GroupLayout.PREFERRED_SIZE));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     // Makes a detailed report if false using the dialogs
     public boolean validateData() {
@@ -549,8 +552,10 @@ public class UserMode extends javax.swing.JFrame {
 
             // try and catch for connectivity with database
 
+            System.out.println(studentId);
+
             // define the insert query
-            String query = "INSERT INTO etudiant (idEtudiant, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+            String query = "INSERT INTO etudiant (studentId, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
             // Statement help run the query using parameters in this case ? <- variable name
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -599,12 +604,13 @@ public class UserMode extends javax.swing.JFrame {
         Report_Score.setText(Person.moy.toString());
     }// GEN-LAST:event_reveal_moyenneActionPerformed
 
-    public void DisconnectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_DisconnectActionPerformed
+    public void DisconnectActionPerformed(ActionEvent evt) {// GEN-FIRST:event_DisconnectActionPerformed
         this.dispose();
-        Login l = new Login(connection);
-        l.setVisible(true);
-        l.pack();
-        l.setLocationRelativeTo(null);
+        // we will not generate a new login
+        // Login l = new Login(connection);
+        // l.setVisible(true);
+        // l.pack();
+        // l.setLocationRelativeTo(null);
     }// GEN-LAST:event_DisconnectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

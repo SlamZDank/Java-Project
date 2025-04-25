@@ -5,7 +5,7 @@ import UI.Dialogs;
 
 /*
  * The implementation of DB using JDBC (Java Database Connectivity)
- * Hope its not that hard.
+ * Hope it's not that hard.
  */
 
 // There is a method on a db to export to CSV idk about pdf
@@ -39,7 +39,7 @@ public class DB {
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/etudiant", "sqluser", "password");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaProject", "root", "");
                 System.out.println("Connected to MySQL database");
             } catch (SQLException e) {
                 e.printStackTrace(); // Handle the exception appropriately
@@ -49,5 +49,4 @@ public class DB {
         }
         return connection;
     }
-
 }

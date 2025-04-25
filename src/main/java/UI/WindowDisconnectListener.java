@@ -3,14 +3,14 @@ package UI;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class WindowUserListener extends WindowAdapter {
-    UserMode frame;
+public class WindowDisconnectListener extends WindowAdapter {
+    Disconnectable frame;
 
-    public WindowUserListener(UserMode frame) {
+    public WindowDisconnectListener(Disconnectable frame) {
         this.frame = frame;
     }
 
     public void windowClosing(WindowEvent e) {
-        frame.DisconnectActionPerformed();
+        frame.DisconnectActionPerformed(null);
     }
 }
