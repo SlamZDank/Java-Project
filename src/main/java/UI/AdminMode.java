@@ -1,6 +1,8 @@
 package UI;
 
 
+import ThreadGeneration.Server;
+import ThreadGeneration.ThreadUpdateHandler;
 import elements.Etudiant;
 
 import java.awt.Toolkit;
@@ -33,17 +35,23 @@ public class AdminMode extends JFrame implements Disconnectable {
     private ArrayList<Etudiant> etudiants; // Stores student data
     int sortMode = -1;
     Connection connection = null;
+    Server server;
 
-    public AdminMode(Connection con) {
+    public AdminMode(Connection con, Server server) {
         initComponents();
         setIconImage();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowDisconnectListener(this));
+        this.server = server;
+
+        ThreadUpdateHandler threadUpdateHandler = new ThreadUpdateHandler(this);
+        threadUpdateHandler.start();
+
         etudiants = new ArrayList<>();
         try {
             connection = con;
             System.err.println("**********************************************************************************");
-            renderDatabase(con, sortMode);
+            renderDatabase();
         } catch (Exception e) {
             return;
         }
@@ -265,7 +273,7 @@ public class AdminMode extends JFrame implements Disconnectable {
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("V1.0.6");
+        jLabel9.setText("1.1.0");
         jPanel1.add(jLabel9);
         jLabel9.setBounds(1420, 20, 37, 15);
 
@@ -335,7 +343,7 @@ public class AdminMode extends JFrame implements Disconnectable {
         // Collections.sort((List<T>) etudiants);
         System.err.println("**********************************************************************************");
         sortMode *= -1;
-        renderDatabase(connection, sortMode);
+        renderDatabase();
         // Sorting button will not change state Unless the connection to MySql is
         // established
         String text = (sortMode == 1) ? "Unsort the list" : "Sort by Highest Score";
@@ -433,7 +441,7 @@ public class AdminMode extends JFrame implements Disconnectable {
     }
 
     // -----------work with this method to render the database-----
-    public void renderDatabase(Connection connection, int sortMode) {
+    public void renderDatabase() {
         // Clear existing data from the table model
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
@@ -448,7 +456,7 @@ public class AdminMode extends JFrame implements Disconnectable {
             tableModel.setRowCount(0); // Clear existing data from the table maybe, tested and big works
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("studentId");
+                int id = resultSet.getInt("idEtudiant");
                 String name = resultSet.getString("nom");
                 String surname = resultSet.getString("prenom");
                 String dob = resultSet.getString("dateDeNaissance");
@@ -752,7 +760,7 @@ public class AdminMode extends JFrame implements Disconnectable {
                 }
                 System.err
                         .println("**********************************************************************************");
-                renderDatabase(connection, sortMode);
+                renderDatabase();
             }
 
         } else {

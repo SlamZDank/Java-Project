@@ -1,5 +1,7 @@
 package UI;
 
+import ThreadGeneration.Server;
+import ThreadGeneration.ThreadUpdater;
 import elements.Etudiant;
 
 import java.sql.Connection;
@@ -21,12 +23,18 @@ public class UserMode extends JFrame implements Disconnectable {
     Etudiant Person = null;
     String ID_Person;
     Connection connection = null;
+    Server server;
+    ThreadUpdater threadUpdater;
 
-    public UserMode(Connection con, String ID) {
+    public UserMode(Connection con, String ID, Server server) {
         initComponents();
         setIconImage();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowDisconnectListener(this));
+        this.server = server;
+
+        threadUpdater = new ThreadUpdater();
+
         ID_Person = ID;
         ID_Field.setText("ID: " + ID_Person);
         try {
@@ -410,7 +418,7 @@ public class UserMode extends JFrame implements Disconnectable {
         jLabel10.setFont(new java.awt.Font("SF Pro Display", 2, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("V1.0.6");
+        jLabel10.setText("V1.1.0");
         jPanel2.add(jLabel10);
         jLabel10.setBounds(1170, 20, 37, 15);
 
@@ -555,7 +563,7 @@ public class UserMode extends JFrame implements Disconnectable {
             System.out.println(studentId);
 
             // define the insert query
-            String query = "INSERT INTO etudiant (studentId, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+            String query = "INSERT INTO etudiant (idEtudiant, nom, prenom, dateDeNaissance, noteMath, notePhysique, noteLitterature, noteChimie, noteSVT,noteHistoire,noteGeographie, noteFrancais, noteAnglais, noteAllemand, Moyenne , Mention) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
             // Statement help run the query using parameters in this case ? <- variable name
             try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -579,6 +587,7 @@ public class UserMode extends JFrame implements Disconnectable {
                 statement.setString(index++, Person.moy.getMention());
                 statement.executeUpdate();
 
+                this.threadUpdater.triggerRefresh();
                 Dialogs.SuccessDialog("Success", "Data inserted into the database!");
             } catch (SQLException ex) {
                 Dialogs.writeErr("Error",

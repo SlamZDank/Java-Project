@@ -1,4 +1,6 @@
 package UI;
+import ThreadGeneration.Server;
+
 import java.awt.Toolkit;
 
 import java.sql.Connection;
@@ -7,10 +9,12 @@ import javax.swing.JFrame;
 
 public class Login extends JFrame {
     Connection connection = null;
+    Server server = new Server();
     public Login(Connection connection) {
         initComponents();
         setIconImage();
         this.connection = connection;
+        server.start();
     }
     
     public static boolean isNumeric(String strNum) {
@@ -86,7 +90,7 @@ public class Login extends JFrame {
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 3, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("V1.0.6");
+        jLabel7.setText("1.1.0");
 
         jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,14 +190,14 @@ public class Login extends JFrame {
         //! Login using ID: XXXXXX
         if (input.length() == 6 && isNumeric(input)) {
             // this.dispose(); // We will not destroy the window of the login for the user
-            UserMode userMode = new UserMode(connection, input);
+            UserMode userMode = new UserMode(connection, input, this.server);
             userMode.setVisible(true);
             userMode.pack();
             userMode.setLocationRelativeTo(null);
 
         } else if (input.equals("root") || input.equals("admin") || input.equals("sudo")) {
             this.dispose();
-            AdminMode AM = new AdminMode(connection);
+            AdminMode AM = new AdminMode(connection, this.server);
             AM.setVisible(true);
             AM.pack();
             AM.setLocationRelativeTo(null);
