@@ -39,7 +39,7 @@ public class DB {
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaProject", "root", "");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "");
                 System.out.println("Connected to MySQL database");
             } catch (SQLException e) {
                 e.printStackTrace(); // Handle the exception appropriately
